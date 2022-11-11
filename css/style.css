@@ -5,6 +5,7 @@
     box-sizing: border-box;
     scroll-behavior: smooth;
     color: white;
+    scroll-snap-align: center;
 }
 
 .section-tan{
@@ -12,23 +13,24 @@
 }
 
 .section-green{
-    background: #a0ffa1;
+    background: #83f23f;
 }
 
 body {
     font-family: "Avenir Next";
     scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
 }
 
 .button-section{
     position: fixed;
-    top: 50%;
+    top: 45%;
     left: 2%;
 }
 
 .circle-button{
     width: 5px;
-    height: 15px;
+    height: 12px;
     border-radius: 50%;
     background: white;
     display: flex;
@@ -37,12 +39,6 @@ body {
     border: none;
 }
 
-.scroller {
-    height: 300px;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-}
-
-.scroller section {
-    scroll-snap-align: start;
+.circle-button:active {
+    transform: scale(1.2);
 }

@@ -10,29 +10,35 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="scroller">
+<body>
+    <div id="fullpage">
+        <div class="button-section">
+            <input type="button" class="circle-button" id="top-button"
+                   onClick="document.getElementById('top-section').scrollIntoView();"/>
+            <input type="button" class="circle-button" id="middle-button"
+                   onClick="document.getElementById('middle-section').scrollIntoView();"/>
+            <input type="button" class="circle-button" id="bottom-button"
+                   onClick="document.getElementById('bottom-section').scrollIntoView();"/>
+        </div>
 
-    <div class="button-section">
-        <input type="button" class="circle-button" id="top-button"
-               onClick="document.getElementById('top-section').scrollIntoView();"/>
-        <input type="button" class="circle-button" id="middle-button"
-               onClick="document.getElementById('middle-section').scrollIntoView();"/>
-        <input type="button" class="circle-button" id="bottom-button"
-                onClick="document.getElementById('bottom-section').scrollIntoView();"/>
+        <section class="section-slide" id="top-section">
+            <h1>Farm to Failure</h1>
+            <div class="intro-chart">
+                <h2>Do Happy Meals really make people happy?</h2>
+            </div>
 
+            <div id="happy-meal-graph">
+            </div>
+        </section>
+
+        <section class="section-slide section-tan" id="middle-section">
+            <h1>Section 2</h1>
+        </section>
+
+        <section class="section-slide section-green" id="bottom-section">
+            <h1>Section 3</h1>
+        </section>
     </div>
-
-    <section class="section-slide" id="top-section">
-        <h1>Farm to Failure</h1>
-    </section>
-
-    <section class="section-slide section-tan" id="middle-section">
-        <h1>Section 2</h1>
-    </section>
-
-    <section class="section-slide section-green" id="bottom-section">
-        <h1>Section 3</h1>
-    </section>
 
 
     <!-- embedding JS libraries -->
@@ -40,7 +46,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
     <!-- d3 -->
     <script src="https://d3js.org/d3.v6.min.js"></script>
 

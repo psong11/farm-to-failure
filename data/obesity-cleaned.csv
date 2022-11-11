@@ -1,4 +1,4 @@
-,Country,Year,Obesity (%),Sex
+,Country,Year,Obesity,Sex
 0,Afghanistan,1975,0.5 [0.2-1.1],Both sexes
 1,Afghanistan,1975,0.2 [0.0-0.6],Male
 2,Afghanistan,1975,0.8 [0.2-2.0],Female
