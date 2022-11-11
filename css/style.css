@@ -6,10 +6,43 @@
     scroll-behavior: smooth;
     color: white;
 }
+
 .section-tan{
     background: #fcbc8c;
 }
 
+.section-green{
+    background: #a0ffa1;
+}
+
 body {
-   font-family: "Avenir Next";
+    font-family: "Avenir Next";
+    scroll-behavior: smooth;
+}
+
+.button-section{
+    position: fixed;
+    top: 50%;
+    left: 2%;
+}
+
+.circle-button{
+    width: 5px;
+    height: 15px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    border: none;
+}
+
+.scroller {
+    height: 300px;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+}
+
+.scroller section {
+    scroll-snap-align: start;
 }

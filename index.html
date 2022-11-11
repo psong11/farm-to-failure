@@ -10,21 +10,29 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-    <section class="section-slide">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1>Farm to Failure</h1>
-                </div>
-            </div>
-        </div>
+<body class="scroller">
+
+    <div class="button-section">
+        <input type="button" class="circle-button" id="top-button"
+               onClick="document.getElementById('top-section').scrollIntoView();"/>
+        <input type="button" class="circle-button" id="middle-button"
+               onClick="document.getElementById('middle-section').scrollIntoView();"/>
+        <input type="button" class="circle-button" id="bottom-button"
+                onClick="document.getElementById('bottom-section').scrollIntoView();"/>
+
+    </div>
+
+    <section class="section-slide" id="top-section">
+        <h1>Farm to Failure</h1>
     </section>
 
-    <section class="section-slide section-tan">
-        <p>lsknveqvnqel'knvlqeknv</p>
+    <section class="section-slide section-tan" id="middle-section">
+        <h1>Section 2</h1>
     </section>
 
+    <section class="section-slide section-green" id="bottom-section">
+        <h1>Section 3</h1>
+    </section>
 
 
     <!-- embedding JS libraries -->
