@@ -1,0 +1,15 @@
+.section-slide{
+    height: 100vh;
+    background:#ffa0a1;
+    padding: 10vh;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    color: white;
+}
+.section-tan{
+    background: #fcbc8c;
+}
+
+body {
+   font-family: "Avenir Next";
+}
