@@ -130,7 +130,18 @@ class BarChart {
             .attr("y", d => y(useData[d]) - 50)
             .attr("width", x.bandwidth())
             .attr("height", d => 600 - y(useData[d]))
-            .attr("fill", "white");
+            .attr("fill", "white")
+            .on("mouseover", function (d) {
+                d3.select(this)
+                    .attr("fill", "red")
+                    .attr("opacity", 0.5);
+
+            })
+            .on("mouseout", function (d) {
+                d3.select(this)
+                    .attr("fill", "white")
+                    .attr("opacity", 1);
+            });
 
         // add title
         svg.append("text")
@@ -224,7 +235,19 @@ class BarChart {
             .attr("y", d => y(newData[d]) - 50)
             .attr("width", x.bandwidth())
             .attr("height", d => 600 - y(newData[d]))
-            .attr("fill", "white");
+            .attr("fill", "white")
+            .on("mouseover", function (d) {
+                d3.select(this)
+                    .attr("fill", "red")
+                    .attr("opacity", 0.5);
+
+            })
+            .on("mouseout", function (d) {
+                d3.select(this)
+                    .attr("fill", "white")
+                    .attr("opacity", 1);
+            });
+
 
         // update title
         svg.select(".title")
@@ -311,7 +334,7 @@ class BarChart {
                 let className = d3.select(this).attr("class");
 
                 d3.select("#country-name")
-                    .text("Name: " + className);
+                    .text(className);
 
                 d3.select("#country-obesity")
                     .text("Obesity Level in 2016: " + dataDict[className][dataDict[className].length - 1]);
