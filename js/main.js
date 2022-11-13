@@ -41,10 +41,11 @@ class BarChart {
                 });
                 displayData.push(yearData);
             });
-            console.log(displayData);
+            console.log("data here", displayData);
             this.data = displayData;
 
             this.createBarChart(displayData, year);
+            this.createAreaChart(displayData);
 
         });
     }
@@ -133,7 +134,7 @@ class BarChart {
             .attr("y", d => y(useData[d]) - 50)
             .attr("width", x.bandwidth())
             .attr("height", d => 600 - y(useData[d]))
-            .attr("fill", "steelblue");
+            .attr("fill", "white");
 
         // add title
         svg.append("text")
@@ -227,11 +228,114 @@ class BarChart {
                 .attr("y", d => y(newData[d]) - 50)
                 .attr("width", x.bandwidth())
                 .attr("height", d => 600 - y(newData[d]))
-                .attr("fill", "steelblue");
+                .attr("fill", "white");
 
             // update title
             svg.select(".title")
                 .text("Top Ten Countries by Obesity Rate in " + this.year);
+    }
+
+    createAreaChart(data) {
+        console.log(data);
+        // create a new svg
+        let svg = d3.select("#happy-area-graph")
+            .append("svg")
+            .attr("width", 600)
+            .attr("height", 400);
+
+        // make x axis by year
+        let x = d3.scaleLinear()
+            .domain([1975, 2016])
+            .range([0, 550]);
+
+        // make y axis by values of data
+        let y = d3.scaleLinear()
+            .domain([0, 60])
+            .range([350, 0]);
+
+        // make x axis
+        let xAxis = d3.axisBottom(x);
+        svg.append("g")
+            .attr('class', 'x-axis')
+            .attr("transform", "translate(50, 380)")
+            .call(xAxis);
+
+        // make y axis
+        let yAxis = d3.axisLeft(y);
+        svg.append("g")
+            .attr('class', 'y-axis')
+            .attr("transform", "translate(50, 30)")
+            .call(yAxis);
+
+        // iterate through data[0]
+        let keys = Object.keys(data[0]).filter(d => d !== "Year");
+        console.log(keys);
+
+        // for each key make a dictionary of value
+        let dataDict = {};
+        for (let i = 0; i < keys.length; i++) {
+            dataDict[keys[i]] = data.map(d => d[keys[i]]);
+        };
+        console.log(dataDict);
+
+        // for each key in dataDict make a line
+        let line = d3.line()
+            .x((d, i) => x(i+1975))
+            .y(d => y(d));
+
+        // make a path for each line
+        svg.selectAll("path")
+            .data(Object.keys(dataDict))
+            .enter()
+            .append("path")
+            .attr("d", d => line(dataDict[d]))
+            .attr("stroke", "white")
+            .attr("fill", "none")
+            .attr("stroke-width", 2)
+            .attr("transform", "translate(50, 30)")
+            .attr("class", d => d)
+            .attr("id", "country-path");
+
+        // add title
+        svg.append("text")
+            .attr('class', 'title')
+            .attr("x", 50)
+            .attr("y", 20)
+            .attr("font-size", "24px")
+            .attr("font-weight", "bold")
+            .attr("fill", "white")
+            .text("Obesity Rate by Country");
+
+
+        // add a tooltip to each line
+        svg.selectAll("#country-path")
+            .on("mouseover", function(d) {
+                d3.select(this).style("stroke", "red");
+                d3.select(this).attr("stroke-width", 5);
+                let className = d3.select(this).attr("class");
+
+                d3.select("#country-name")
+                    .text("Name: " + className);
+
+                d3.select("#country-obesity")
+                    .text("Obesity Level in 2016: " + dataDict[className][dataDict[className].length - 1]);
+
+                d3.select("#country-initial")
+                    .text("Obesity Level in 1975: " + dataDict[className][0]);
+
+                d3.select("#country-change")
+                    .text("Change in Obesity Level: " + (dataDict[className][dataDict[className].length - 1] - dataDict[className][0]).toFixed(2));
+
+                d3.select("#country-percent")
+                    .text("Percent Change in Obesity Level: " + ((dataDict[className][dataDict[className].length - 1] - dataDict[className][0]) / dataDict[className][0] * 100).toFixed(2) + "%");
+
+
+            })
+            .on("mouseout", function() {
+                d3.select(this).style("stroke", "white");
+                d3.select(this).attr("stroke-width", 2);
+            });
+
     }
 
 }

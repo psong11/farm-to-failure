@@ -15,6 +15,8 @@
         <div class="button-section">
             <input type="button" class="circle-button" id="top-button"
                    onClick="document.getElementById('top-section').scrollIntoView();"/>
+            <input type="button" class="circle-button" id="second-button"
+                   onClick="document.getElementById('second-section').scrollIntoView();"/>
             <input type="button" class="circle-button" id="middle-button"
                    onClick="document.getElementById('middle-section').scrollIntoView();"/>
             <input type="button" class="circle-button" id="bottom-button"
@@ -26,11 +28,36 @@
             <div class="intro-chart">
                 <h2>Do Happy Meals really make people happy?</h2>
             </div>
-            <div class="slide-container">
-                <input type="range" min="1975" max="2016" value="2000" class="slider" id="myRange">
-                <p id="yearId">2000</p>
+            <p>
+                Some introduction here ...
+            </p>
+
+        </section>
+
+        <section class="section-slide section-blue row" id="second-section">
+            <div class="col-4">
+                <div class="slide-container">
+                    <input type="range" min="1975" max="2016" value="2000" class="slider" id="myRange">
+                    <p id="yearId">2000</p>
+                </div>
+                <div id="happy-meal-graph">
+                </div>
             </div>
-            <div id="happy-meal-graph">
+            <div class="col-2">
+
+            </div>
+            <div class="col-4">
+                <div id="happy-area-graph">
+                </div>
+                <div id="country-info">
+                    <p>
+                        <li id="country-name">Name: </li>
+                        <li id="country-obesity">Obesity Level in 2016: </li>
+                        <li id="country-initial">Obesity Level in 1975: </li>
+                        <li id="country-change">Change in Obesity Level: </li>
+                        <li id="country-percent">Percent Change in Obesity Level: </li>
+                    </p>
+                </div>
             </div>
         </section>
 
