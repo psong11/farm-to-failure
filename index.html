@@ -13,42 +13,8 @@
 
 <body>
     <div id="fullpage">
-        <!--
-        <div class="button-section">
-            <input type="button" class="circle-button" id="top-button"
-                   onClick="document.getElementById('top-section').scrollIntoView();"/>
-            <input type="button" class="circle-button" id="middle-button"
-                   onClick="document.getElementById('middle-section').scrollIntoView();"/>
-            <input type="button" class="circle-button" id="bottom-button"
-                   onClick="document.getElementById('bottom-section').scrollIntoView();"/>
-        </div>
 
-        <section class="section-slide" id="top-section">
-            <h1>Farm to Failure</h1>
-            <div class="intro-chart">
-                <h2>Do Happy Meals really make people happy?</h2>
-            </div>
-            <div class="slide-container">
-                <input type="range" min="1975" max="2016" value="2000" class="slider" id="myRange">
-                <p id="yearId">2000</p>
-            </div>
-            <div id="happy-meal-graph">
-            </div>
-        </section>
-
-
-        <section class="section-slide section-tan" id="middle-section">
-            <h1>Section 2</h1>
-            <div id="mental-health-chart">
-            </div>
-        </section>
-
-        <section class="section-slide section-green" id="bottom-section">
-            <h1>Section 3</h1>
-        </section>
-        -->
-
-        <div class="section s1">
+        <div class="section s1 section-slide">
             <h1>Farm to Failure</h1>
             <div class="intro-chart">
                 <h2>Do Happy Meals really make people happy?</h2>
@@ -61,11 +27,11 @@
             </div>
         </div>
 
-        <div class="section s2">
+        <div class="section s2 section-tan">
             section 2
         </div>
 
-        <div class="section s3">
+        <div class="section s3 section-green">
             section 3
         </div>
 
@@ -84,7 +50,8 @@
         new fullpage('#fullpage', {
             //options here
             autoScrolling:true,
-            scrollHorizontally: true
+            scrollHorizontally: true,
+            navigation: true
         });
     </script>
 
