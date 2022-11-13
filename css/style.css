@@ -16,6 +16,10 @@
     background: #83f23f;
 }
 
+.section-blue{
+    background: #3f9bf2;
+}
+
 body {
     font-family: "Avenir Next";
     scroll-behavior: smooth;
