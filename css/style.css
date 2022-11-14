@@ -71,3 +71,12 @@ li{
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+
+.fp-controlArrow.fp-prev {
+    margin-left: 15px;
+}
+
+.fp-controlArrow.fp-next {
+    margin-right: 50px;
+}
