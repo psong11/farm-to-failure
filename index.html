@@ -7,11 +7,13 @@
     <title>Farm to Failure</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.14/fullpage.min.css" integrity="sha512-z2+oYjosHRlDdadmvXuK8Qk/P+30b0pkhrdvMqWgml3yx9YDnWQYhqswJ04+U+sE8ZBi8zTvr1lpx9S2+7Uwzw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <div id="fullpage">
+        <!--
         <div class="button-section">
             <input type="button" class="circle-button" id="top-button"
                    onClick="document.getElementById('top-section').scrollIntoView();"/>
@@ -61,21 +63,26 @@
             </div>
         </section>
 
+
         <section class="section-slide section-tan" id="middle-section">
             <h1>Section 2</h1>
+            <div id="mental-health-chart">
+            </div>
         </section>
 
         <section class="section-slide section-green" id="bottom-section">
             <h1>Section 3</h1>
         </section>
-<<<<<<< Updated upstream
-=======
+
         -->
+        -->
+
         <div class="section s1 section-slide">
             <h1>Farm to Failure</h1>
             <div class="intro-chart">
                 <h2>Do Happy Meals really make people happy?</h2>
             </div>
+
             <p>
                 Some introduction here ...
             </p>
@@ -117,8 +124,6 @@
         <div class="section s4 section-green">
             section 3
         </div>
-
->>>>>>> Stashed changes
     </div>
 
 
@@ -127,6 +132,18 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- fullpage.js implementation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.14/fullpage.min.js" integrity="sha512-JEyqsBTR2woLAr79cq9g77k5aviE4ffJUwQ52NRRIsXQz5Xp2Am7vJD99hhc2q7lhvG0XCYs1cDGvl8d/t669Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        new fullpage('#fullpage', {
+            //options here
+            autoScrolling:true,
+            scrollHorizontally: true,
+            navigation: true
+        });
+    </script>
+
     <!-- d3 -->
     <script src="https://d3js.org/d3.v6.min.js"></script>
 
