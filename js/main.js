@@ -1,13 +1,26 @@
-let barChart, bar2, displayData;
+let barChart, bar2, mentalHealthMap, displayData;
+
+let selectedTime = 1990;
+let selectedState = '';
+
+let selectedCategory =  document.getElementById('categorySelector').value;
 
 var slider = document.getElementById("myRange");
 
-function initMainPage() {
+// load data using promises
+let promises = [
+    d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
+];
+
+Promise.all(promises)
+    .then( function(data){ initMainPage(data) })
+    .catch( function (err){console.log(err)} );
+
+function initMainPage(dataArray) {
     barChart = new BarChart();
     bar2 = new BarChart2();
+    mentalHealthMap = new MentalHealthMap('mental-health-div', dataArray[0]);
 }
-
-initMainPage();
 
 // on slider change, update the bar chart
 slider.oninput = function() {
