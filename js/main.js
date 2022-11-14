@@ -51,3 +51,16 @@ function selectUS () {
             .text("United States of America");
     }
 }
+
+// select #us-map and make a 500x500 svg
+let usMap = d3.selectAll("#us-map")
+    .append("svg")
+    .attr("width", 500)
+    .attr("height", 500);
+
+// color it white
+usMap.append("rect")
+    .attr("width", 500)
+    .attr("height", 500)
+    .attr("fill", "white");
+
