@@ -1,0 +1,44 @@
+.section-slide{
+    height: 100vh;
+    background:#ffa0a1;
+    padding: 10vh;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    color: white;
+    scroll-snap-align: center;
+}
+
+.section-tan{
+    background: #fcbc8c;
+}
+
+.section-green{
+    background: #83f23f;
+}
+
+body {
+    font-family: "Avenir Next";
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+}
+
+.button-section{
+    position: fixed;
+    top: 45%;
+    left: 2%;
+}
+
+.circle-button{
+    width: 5px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    border: none;
+}
+
+.circle-button:active {
+    transform: scale(1.2);
+}
