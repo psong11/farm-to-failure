@@ -381,6 +381,8 @@ class BarChart {
             .text("Obesity Rate by Country");
 
 
+
+
         // add a tooltip to each line
         svg.selectAll("#country-path")
             .on("mouseover", function(d) {
@@ -410,6 +412,8 @@ class BarChart {
                 d3.select(this).attr("stroke-width", 2);
             });
 
+
     }
+
 
 }
