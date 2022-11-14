@@ -78,7 +78,7 @@ class BarChart {
         let svg = d3.select("#happy-meal-graph")
             .append("svg")
             .attr("width", 600)
-            .attr("height", 700);
+            .attr("height", 500);
 
         // make x axis by country
         let x = d3.scaleBand()
@@ -92,7 +92,7 @@ class BarChart {
         // make y axis by obesity
         let y = d3.scaleLinear()
             .domain([0, max])
-            .range([600, 200]);
+            .range([500, 200]);
 
         // make x axis with maximum of 30 ticks
         let xAxis = d3.axisBottom(x);
@@ -103,7 +103,7 @@ class BarChart {
         // make x axis
         svg.append("g")
             .attr('class', 'x-axis')
-            .attr("transform", "translate(50, 550)")
+            .attr("transform", "translate(50, 350)")
             .call(xAxis);
 
         // rotate x axis labels
@@ -117,7 +117,7 @@ class BarChart {
         // make y axis
         svg.append("g")
             .attr('class', 'y-axis')
-            .attr("transform", "translate(50, -50)")
+            .attr("transform", "translate(50, -150)")
             .call(yAxis);
 
 
@@ -127,27 +127,16 @@ class BarChart {
             .enter()
             .append("rect")
             .attr("x", d => x(d) + 50)
-            .attr("y", d => y(useData[d]) - 50)
+            .attr("y", d => y(useData[d]) - 150)
             .attr("width", x.bandwidth())
-            .attr("height", d => 600 - y(useData[d]))
-            .attr("fill", "white")
-            .on("mouseover", function (d) {
-                d3.select(this)
-                    .attr("fill", "red")
-                    .attr("opacity", 0.5);
-
-            })
-            .on("mouseout", function (d) {
-                d3.select(this)
-                    .attr("fill", "white")
-                    .attr("opacity", 1);
-            });
+            .attr("height", d => 500 - y(useData[d]))
+            .attr("fill", "white");
 
         // add title
         svg.append("text")
             .attr('class', 'title')
             .attr("x", 50)
-            .attr("y", 100)
+            .attr("y", 20)
             .attr("font-size", "24px")
             .attr("font-weight", "bold")
             .attr("fill", "white")
@@ -204,7 +193,7 @@ class BarChart {
         // make y axis by obesity
         let y = d3.scaleLinear()
             .domain([0, max])
-            .range([600, 200]);
+            .range([500, 200]);
 
         // make x axis with transistion
         let xAxis = d3.axisBottom(x);
@@ -232,24 +221,14 @@ class BarChart {
             .transition()
             .duration(1000)
             .attr("x", d => x(d) + 50)
-            .attr("y", d => y(newData[d]) - 50)
+            .attr("y", d => y(newData[d]) - 150)
             .attr("width", x.bandwidth())
-            .attr("height", d => 600 - y(newData[d]))
-            .attr("fill", "white")
-            .on("mouseover", function (d) {
-                d3.select(this)
-                    .attr("fill", "red")
-                    .attr("opacity", 0.5);
-
-            })
-            .on("mouseout", function (d) {
-                d3.select(this)
-                    .attr("fill", "white")
-                    .attr("opacity", 1);
-            });
+            .attr("height", d => 500 - y(newData[d]))
+            .attr("fill", "white");
 
 
         // update title
+        console.log(this.year);
         svg.select(".title")
             .text("Top Ten Countries by Obesity Rate in " + this.year);
     }
