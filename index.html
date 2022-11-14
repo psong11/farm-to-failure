@@ -89,7 +89,26 @@
         </div>
 
         <div class="section s3 section-tan">
-            section 2
+            <div style="height: 100vh">
+                <h1 style="text-align: center">Mental Health in Global Countries by Different Metrics</h1>
+                <p style="text-align: center">
+                    Let us examine different mental health measurements globally to identify regional trends that will help us make conclusions down the road.
+                </p>
+                <div class="row">
+                    <div class="col-7">
+                        <div id="mental-health-div" style="height: 80vh; width: 100%;background-color: magenta"></div>
+                    </div>
+                    <div class="col-5" style="justify-content: center">
+                        <h5>Select A Mental Health Measurement</h5>
+                        <select id='categorySelector' class="custom-select align-self-center" style="width: 50%" onchange="categoryChange()">
+                            <option value="PrevalenceAnxietydisorders" selected>Anxiety Disorders (% of pop)</option>
+                            <option value="PrevalenceDepressivedisorders">Depressive Disorders (% of pop)</option>
+                            <option value="PrevalenceAlcoholusedisorders">Alcohol Use Disorders (% of pop)</option>
+                        </select>
+                        <div id="brushDiv" style="height: 100%; width:100%;">Brush Div to Select Time Goes Here</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="section s4 section-green">
@@ -119,10 +138,14 @@
 
     <!-- d3 -->
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v1.min.js"></script>
 
     <!-- Your implementation -->
     <script src="js/bar2.js"></script>
     <script src="js/barChart.js"></script>
+    <script src="js/mentalHealthMap.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
