@@ -20,6 +20,10 @@
     background: #3f9bf2;
 }
 
+.section-brown{
+    background: rosybrown;
+}
+
 body {
     font-family: "Avenir Next";
     scroll-behavior: smooth;
