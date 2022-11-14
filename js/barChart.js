@@ -80,6 +80,46 @@ class BarChart {
             .attr("width", 600)
             .attr("height", 500);
 
+
+        // add rectangle in back
+        svg.append("rect")
+            .attr("x", 50)
+            .attr("y", 40)
+            .attr("width", 500)
+            .attr("height", 600)
+            .attr("fill", "red")
+            .attr("opacity", 1);
+
+        svg.append("rect")
+            .attr("x", 70)
+            .attr("y", 60)
+            .attr("width", 460)
+            .attr("height", 560)
+            .attr("fill", "white")
+            .attr("opacity", 1);
+
+        // add 30 red vertical lines to the rectangle above
+        for (let i = 0; i < 30; i++) {
+            svg.append("line")
+                .attr("x1", 70 + i * 15)
+                .attr("y1", 60)
+                .attr("x2", 70 + i * 15)
+                .attr("y2", 620)
+                .attr("stroke", "red")
+                .attr("stroke-width", 2);
+        }
+
+        // add rectangle
+        svg.append("rect")
+            .attr("class", "fry-box")
+            .attr("x", 50)
+            .attr("y", 350)
+            .attr("width", 500)
+            .attr("height", 150)
+            .attr("fill", "red")
+
+
+
         // make x axis by country
         let x = d3.scaleBand()
             .domain(Object.keys(useData))
@@ -122,15 +162,32 @@ class BarChart {
 
 
         // draw bars by country value
-        svg.selectAll("rect")
+        svg.selectAll("rect.fry")
             .data(Object.keys(useData).filter(d => d !== "Year"))
             .enter()
             .append("rect")
+            .attr("class", "fry")
             .attr("x", d => x(d) + 50)
             .attr("y", d => y(useData[d]) - 150)
             .attr("width", x.bandwidth())
             .attr("height", d => 500 - y(useData[d]))
-            .attr("fill", "white");
+            .attr("fill", "#f5b51e");
+
+        svg.selectAll("rect.fry")
+            .on("mouseover", function (d) {
+                d3.select(this)
+                    .transition()
+                    .duration(500)
+                    .attr("height", d => 500 - y(useData[d]) + 150)
+                    .attr("y", d => y(useData[d]) - 300);
+            })
+            .on("mouseout", function (d) {
+                d3.select(this)
+                    .transition()
+                    .duration(500)
+                    .attr("height", d => 500 - y(useData[d]))
+                    .attr("y", d => y(useData[d]) - 150);
+            });
 
         // add title
         svg.append("text")
@@ -216,15 +273,34 @@ class BarChart {
             .call(yAxis);
 
         // make bars with transistion
-        svg.selectAll("rect")
+        svg.selectAll("rect.fry")
             .data(Object.keys(newData).filter(d => d !== "Year"))
             .transition()
             .duration(1000)
+            .attr("class", "fry")
             .attr("x", d => x(d) + 50)
             .attr("y", d => y(newData[d]) - 150)
             .attr("width", x.bandwidth())
             .attr("height", d => 500 - y(newData[d]))
-            .attr("fill", "white");
+            .attr("fill", "#f5b51e");
+
+        // on hover make the bar longer
+        svg.selectAll("rect.fry")
+            .on("mouseover", function (d) {
+                d3.select(this)
+                    .transition()
+                    .duration(1000)
+                    .attr("height", d => 500 - y(newData[d]) + 150)
+                    .attr("y", d => y(newData[d]) - 300);
+
+            })
+            .on("mouseout", function (d) {
+                d3.select(this)
+                    .transition()
+                    .duration(1000)
+                    .attr("height", d => 500 - y(newData[d]))
+                    .attr("y", d => y(newData[d]) - 150);
+            });
 
 
         // update title
