@@ -13,83 +13,19 @@
 
 <body>
     <div id="fullpage">
-        <!--
-        <div class="button-section">
-            <input type="button" class="circle-button" id="top-button"
-                   onClick="document.getElementById('top-section').scrollIntoView();"/>
-            <input type="button" class="circle-button" id="second-button"
-                   onClick="document.getElementById('second-section').scrollIntoView();"/>
-            <input type="button" class="circle-button" id="middle-button"
-                   onClick="document.getElementById('middle-section').scrollIntoView();"/>
-            <input type="button" class="circle-button" id="bottom-button"
-                   onClick="document.getElementById('bottom-section').scrollIntoView();"/>
-        </div>
-
-        <section class="section-slide" id="top-section">
+        <div class="section s3 section-slide section-blue" style="background: #3f9bf2">
             <h1>Farm to Failure</h1>
             <div class="intro-chart">
-                <h2>Do Happy Meals really make people happy?</h2>
-            </div>
-            <p>
-                Some introduction here ...
-            </p>
-
-        </section>
-
-        <section class="section-slide section-blue row" id="second-section">
-            <div class="col-4">
-                <div class="slide-container">
-                    <input type="range" min="1975" max="2016" value="2000" class="slider" id="myRange">
-                    <p id="yearId">2000</p>
-                </div>
-                <div id="happy-meal-graph">
-                </div>
-            </div>
-            <div class="col-2">
-
-            </div>
-            <div class="col-4">
-                <div id="happy-area-graph">
-                </div>
-                <div id="country-info">
-                    <p>
-                        <li id="country-name"></li></li>
-                        <li id="country-obesity">Obesity Level in 2016: </li>
-                        <li id="country-initial">Obesity Level in 1975: </li>
-                        <li id="country-change">Change in Obesity Level: </li>
-                        <li id="country-percent">Percent Change in Obesity Level: </li>
-                    </p>
-                </div>
-            </div>
-        </section>
-
-
-        <section class="section-slide section-tan" id="middle-section">
-            <h1>Section 2</h1>
-            <div id="mental-health-chart">
-            </div>
-        </section>
-
-        <section class="section-slide section-green" id="bottom-section">
-            <h1>Section 3</h1>
-        </section>
-
-        -->
-        -->
-
-        <div class="section s1 section-slide">
-            <h1>Farm to Failure</h1>
-            <div class="intro-chart">
-                <h2>Do Happy Meals really make people happy?</h2>
+                <h2>A look into the relationship between the food we eat and our health</h2>
             </div>
 
             <p>
-                Some introduction here ...
+                Prototype V1. Members: Bristol Fales-Hill, Noah List, Paul Song
             </p>
         </div>
 
-        <div class="section s2 section-slide row">
-                <div class="slide row">
+        <div class="section s2 section-slide">
+                <div class="slide">
                     <div class="col-6" style="float:left">
                         <div class="slide-container">
                             <input type="range" min="1975" max="2016" value="2000" class="slider" id="myRange">
@@ -149,7 +85,9 @@
         </div>
 
         <div class="section s4 section-green">
-            section 3
+            <h1>Section 3</h1>
+            <div id="fried-food-consumption">
+            </div>
         </div>
     </div>
 
@@ -175,6 +113,7 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
 
     <!-- Your implementation -->
+    <script src="js/bar2.js"></script>
     <script src="js/barChart.js"></script>
     <script src="js/main.js"></script>
 </body>

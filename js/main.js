@@ -1,10 +1,12 @@
 let barChart,
+    bar2,
 displayData;
 
 var slider = document.getElementById("myRange");
 
 function initMainPage() {
     barChart = new BarChart();
+    bar2 = new BarChart2();
 }
 
 initMainPage();
