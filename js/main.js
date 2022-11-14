@@ -1,6 +1,4 @@
-let barChart,
-    bar2,
-displayData;
+let barChart, bar2, displayData;
 
 var slider = document.getElementById("myRange");
 
@@ -16,9 +14,13 @@ slider.oninput = function() {
     barChart.updateBarChart(this.value);
     // change html to display the year
     document.getElementById("yearId").innerHTML = this.value;
-
 }
 
+// hide .fp-watermark div
+d3.select(".fp-watermark").style("display", "none");
+
+
+// select US button behavior
 function selectUS () {
     // if the stroke is red, then change it
     if (d3.select(".United.States.of.America").style("stroke") == "red") {
@@ -35,5 +37,4 @@ function selectUS () {
         d3.select("#country-name")
             .text("United States of America");
     }
-
 }
