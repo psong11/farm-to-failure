@@ -79,10 +79,22 @@ li{
 
 .fp-controlArrow.fp-prev {
     margin-left: 15px;
+    margin-top: 60px;
 }
 
 .fp-controlArrow.fp-next {
     margin-right: 50px;
+    margin-top: 60px;
+}
+
+.fp-controlArrow.fp-next:hover{
+    opacity: 0.3;
+    translate: 2px;
+}
+
+.fp-controlArrow.fp-prev:hover{
+    opacity: 0.3;
+    translate: -2px;
 }
 
 .slide-container{
@@ -107,3 +119,14 @@ li{
     justify-content: center;
     align-items: center;
 }
+
+/* change color of content in #fp-nav to white */
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span{
+    background: white;
+}
+
+#fp-nav ul li .fp-tooltip{
+    font-family: "Avenir Next";
+}
+

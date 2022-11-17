@@ -19,17 +19,6 @@
                 <h2>A look into the relationship between the food we eat and our health</h2>
             </div>
 
-            <p>
-                Prototype V1. Members: Bristol Fales-Hill, Noah List, Paul Song
-            </p>
-            <p>
-                <h3>Outline</h3>
-                A glimpse at obesity statistics in the world (in the world and in the US) <br>
-                Mental Health Statistics From Around The World <br>
-                Fried food consumption/fast food location and correlation with poverty/bad health in the us <br>
-                Generalizing towards the rest of the world <br>
-                Discussion
-            </p>
         </div>
 
         <div class="section s2 section-slide">
@@ -44,16 +33,14 @@
                     </div>
                     <div class="col-6" style="float:right">
                         <h1>
-                            Where is obesity the biggest problem?
+                            Where in the world is obesity the biggest problem? [Add Axes]
                         </h1>
                         <p>
-                            [EXAMPLE] [Outline the obesity problem in the world] Obesity is one of the world’s largest health problems – one that has shifted from being a problem in rich countries, to one that spans all income levels.
-
-                            The Global Burden of Disease is a major global study on the causes and risk factors for death and disease published in the medical journal The Lancet.3 These estimates of the annual number of deaths attributed to a wide range of risk factors are shown here. This chart is shown for the global total, but can be explored for any country or region using the “change country” toggle.
-
-                            Obesity – defined as having a high body-mass index – is a risk factor for several of the world’s leading causes of death, including heart disease, stroke, diabetes and various types of cancer.4 Obesity does not directly cause of any of these health impacts but can increase their likelihood of occurring. In the chart we see that it is one of the leading risk factors for death globally.
-
-                            According to the Global Burden of Disease study 4.7 million people died prematurely in 2017 as a result of obesity. To put this into context: this was close to four times the number that died in road accidents, and close to five times the number that died from HIV/AIDS in 2017.
+                            By using the slider to the left, you will see that the Oceanian country Nauru maintains the highest
+                            obesity rate in the world from 1975 to 2016. Most of the other top 10 countries are also in Oceania.
+                            [History about persistent obesity in Oceania and why]
+                            <br>
+                            [Transition to change over time]
                         </p>
                     </div>
                 </div>
@@ -74,16 +61,13 @@
                     </div>
                     <div class="col-6" style="float:right">
                         <h1>
-                            How has obesity changed over time?
+                            How has obesity changed over time? [Add axes]
                         </h1>
                         <p>
-                            [EXAMPLE] [Outline the obesity problem in the world] Obesity is one of the world’s largest health problems – one that has shifted from being a problem in rich countries, to one that spans all income levels.
+                            [On US button click change text div to be about the US]
 
-                            The Global Burden of Disease is a major global study on the causes and risk factors for death and disease published in the medical journal The Lancet.3 These estimates of the annual number of deaths attributed to a wide range of risk factors are shown here. This chart is shown for the global total, but can be explored for any country or region using the “change country” toggle.
-
-                            Obesity – defined as having a high body-mass index – is a risk factor for several of the world’s leading causes of death, including heart disease, stroke, diabetes and various types of cancer.4 Obesity does not directly cause of any of these health impacts but can increase their likelihood of occurring. In the chart we see that it is one of the leading risk factors for death globally.
-
-                            According to the Global Burden of Disease study 4.7 million people died prematurely in 2017 as a result of obesity. To put this into context: this was close to four times the number that died in road accidents, and close to five times the number that died from HIV/AIDS in 2017.
+                            <br>
+                            [Transition to discussion of correlation with mental health, begin talking about fast food/fried food]
                         </p>
                     </div>
                 </div>
@@ -111,7 +95,7 @@
 
         <div class="section s4 section-slide section-green">
             <div class="slide">
-                <h1>Section 4</h1>
+                <h1>Influence of Fast food</h1>
                 <p>In this section we will analyze fast/fried food consumption by country, its correlation with various health rates in the world</p>
                 <div id="fried-food-consumption">
                     Spot for fried food consumption graph
@@ -158,6 +142,17 @@
             <p>In the end, we just want to reiterate our message that fast food has negative effects on society, albeit very tasty to eat once in a while. It is important that society is aware of the effects that it has and the correlations it implies with other health factors like mental health. Long story short, if we care about our future generations, we need to change the way we look at fast food.</p>
             <p>All visualization designs are located in the Process Book</p>
         </div>
+
+        <div class="section s8 section-slide section-blue">
+            <div class="slide">
+            <h1>Team Members</h1>
+            [Add team members, maybe a piece of fast food for each member]
+            </div>
+            <div class="slide">
+                <h1>Data credit</h1>
+                [Add sources]
+            </div>
+        </div>
     </div>
 
 
@@ -174,7 +169,11 @@
             //options here
             autoScrolling:true,
             scrollHorizontally: true,
-            navigation: true
+            navigation: true,
+            navigationPosition: 'right',
+            navigationTooltips: ['Introduction', 'Obesity', 'Mental Health', 'Fast and Fried Food', 'America',
+                'What to Do?', 'Conclusion', 'Team Members'],
+            showActiveTooltip: true,
         });
     </script>
 
