@@ -150,7 +150,8 @@ class BarChart {
         svg.selectAll(".x-axis text")
             .attr("transform", "translate(-10, 2) rotate(-45" +
                 ")")
-            .attr("size", 10)
+            .attr("size", 14)
+            .attr("font-weight", "bold")
             .style("text-anchor", "end");
 
 
@@ -262,7 +263,8 @@ class BarChart {
         svg.selectAll(".x-axis text")
             .attr("transform", "translate(-10, 2) rotate(-45" +
                 ")")
-            .attr("size", 10)
+            .attr("size", 14)
+            .attr("font-weight", "bold")
             .style("text-anchor", "end");
 
         // make y axis with transistion

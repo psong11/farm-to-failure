@@ -110,15 +110,29 @@ li{
 .slider {
     appearance: none;
     width: 100%;
-    height: 20px;
-    opacity: 0.7;
+    height: 30px;
     margin-right: 40px;
 }
 
 #happy-meal-graph{
-    justify-content: center;
-    align-items: center;
+    margin-left: 60px;
 }
+
+#myRange{
+    margin-top: 20px;
+    width: 500px;
+    content-align: center;
+}
+
+#myRange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    background: #f5b51e;
+    cursor: pointer;
+}
+
 
 /* change color of content in #fp-nav to white */
 #fp-nav ul li a span,
@@ -129,4 +143,3 @@ li{
 #fp-nav ul li .fp-tooltip{
     font-family: "Avenir Next";
 }
-

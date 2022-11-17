@@ -13,7 +13,7 @@ class MentalHealthMap {
         vis.margin = {top: 10, right: 10, bottom: 10, left: 10};
         console.log("Parent: ", document.getElementById(vis.parentElement).getBoundingClientRect());
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-        vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height;
+        vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
         vis.colors = d3.scaleLinear()
             .range(['white', "#136D70"]);
@@ -74,6 +74,18 @@ class MentalHealthMap {
                     d3.selectAll(".graticule").attr("d", vis.path)
                 })
         )
+
+        // set dropdown val equal to selectedCategory
+        let drop_val = d3.select("#dropdown").property("value", selectedCategory);
+        // add title to top of map
+        vis.svg.append("text")
+            .attr("x", vis.width / 2)
+            .attr("y", 40)
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .style("font-weight", "bold")
+            .text("Prevalence of Mental Health Disorders by Country");
+
 
         vis.wrangleData();
     }
@@ -140,5 +152,7 @@ class MentalHealthMap {
                     return vis.colors(country[selectedCategory]);
                 }
             })
+
+        // add tooltip, add slider for year
     }
 }
