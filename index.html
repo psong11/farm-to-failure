@@ -24,14 +24,6 @@
         <div class="section s2 section-slide">
                 <div class="slide">
                     <div class="col-6" style="float:left">
-                        <div id="happy-meal-graph">
-                        </div>
-                        <div class="slide-container">
-                            <input type="range" min="1975" max="2016" value="1996" class="slider" id="myRange">
-                            <p id="yearId">1996</p>
-                        </div>
-                    </div>
-                    <div class="col-6" style="float:right">
                         <h1>
                             Where in the world is obesity the biggest problem? [Add Axes]
                         </h1>
@@ -42,6 +34,14 @@
                             <br>
                             [Transition to change over time]
                         </p>
+                    </div>
+                    <div class="col-6" style="float:right">
+                        <div id="happy-meal-graph">
+                        </div>
+                        <div class="slide-container">
+                            <input type="range" min="1975" max="2016" value="1996" class="slider" id="myRange">
+                            <p id="yearId">1996</p>
+                        </div>
                     </div>
                 </div>
                 <div class="slide">
@@ -106,7 +106,7 @@
                 Spot for fast food location graph
                 </div>
 
-                <div id="us-map">
+                <div id="us-map-div">
                 </div>
             </div>
             <div class="slide">
@@ -182,6 +182,7 @@
     <script src="https://d3js.org/d3-geo.v1.min.js"></script>
 
     <!-- Your implementation -->
+    <script src="js/usMap.js"></script>
     <script src="js/bar2.js"></script>
     <script src="js/barChart.js"></script>
     <script src="js/mentalHealthMap.js"></script>

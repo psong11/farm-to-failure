@@ -1,4 +1,5 @@
-let barChart, bar2, mentalHealthMap, displayData;
+let barChart, bar2, mentalHealthMap, displayData,
+unsMap;
 
 let selectedTime = 1990;
 let selectedState = '';
@@ -20,6 +21,7 @@ function initMainPage(dataArray) {
     barChart = new BarChart();
     bar2 = new BarChart2();
     mentalHealthMap = new MentalHealthMap('mental-health-div', dataArray[0]);
+    unsMap = new usMap('us-map-div', dataArray[0]);
 }
 
 // on slider change, update the bar chart
@@ -53,7 +55,7 @@ function selectUS () {
 }
 
 // select #us-map and make a 500x500 svg
-let usMap = d3.selectAll("#us-map")
+d3.selectAll("#us-map")
     .append("svg")
     .attr("width", 500)
     .attr("height", 500);

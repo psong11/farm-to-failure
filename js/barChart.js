@@ -8,7 +8,7 @@ class BarChart {
     initVis() {
         let vis = this;
 
-        vis.wrangleData(2000);
+        vis.wrangleData(1996);
     }
 
     wrangleData(year) {
@@ -83,12 +83,13 @@ class BarChart {
 
         // add rectangle in back
         svg.append("rect")
-            .attr("x", 50)
-            .attr("y", 40)
-            .attr("width", 500)
-            .attr("height", 600)
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", 580)
+            .attr("height", 650)
             .attr("fill", "red")
             .attr("opacity", 1);
+        
 
         svg.append("rect")
             .attr("x", 70)
@@ -193,12 +194,22 @@ class BarChart {
         // add title
         svg.append("text")
             .attr('class', 'title')
-            .attr("x", 50)
-            .attr("y", 20)
-            .attr("font-size", "24px")
+            .attr("x", 60)
+            .attr("y", 35)
+            .attr("font-size", "22px")
             .attr("font-weight", "bold")
             .attr("fill", "white")
             .text("Top Ten Countries by Obesity Rate in " + this.year);
+
+        // add text
+        svg.append("text")
+            .attr("x", 300)
+            .attr("y", 450)
+            .attr('font-size', 20)
+            .attr('font-weight', 'bold')
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'white')
+            .text("Country")
 
     }
 
@@ -267,7 +278,7 @@ class BarChart {
             .attr("font-weight", "bold")
             .style("text-anchor", "end");
 
-        // make y axis with transistion
+
         let yAxis = d3.axisLeft(y);
         svg.select(".y-axis")
             .transition()
@@ -377,7 +388,7 @@ class BarChart {
             .attr('class', 'title')
             .attr("x", 50)
             .attr("y", 20)
-            .attr("font-size", "24px")
+            .attr("font-size", "22px")
             .attr("font-weight", "bold")
             .attr("fill", "white")
             .text("Obesity Rate by Country");
