@@ -388,6 +388,19 @@ class BarChart {
                 d3.select(this).attr("stroke-width", 5);
                 let className = d3.select(this).attr("class");
 
+                d3.select("#us-button")
+                    .text("Highlight the United States");
+
+                if (className !== "United States") {
+                    d3.select(".United.States").style("stroke", "white")
+                        .style("stroke-width", "2");
+
+                } else {
+                    d3.select(".United.States").style("stroke", "red")
+                        .style("stroke-width", "5");
+                }
+
+
                 d3.select("#country-name")
                     .text(className);
 

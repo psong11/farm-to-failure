@@ -49,8 +49,7 @@ body {
 
 #country-info{
     /* position in center */
-    margin-left: 50px;
-    background-color: white;
+    background-color: #fcbc8c;
     border-radius: 2px;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -58,7 +57,7 @@ body {
     color: #333;
     /* center */
     text-align: start;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 li{
@@ -102,4 +101,8 @@ li{
 #happy-meal-graph{
     justify-content: center;
     align-items: center;
+}
+
+.section-grey{
+    background: #a2a2a2;
 }
