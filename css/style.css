@@ -143,3 +143,11 @@ li{
 #fp-nav ul li .fp-tooltip{
     font-family: "Avenir Next";
 }
+
+select {
+    text-align-last: center;
+}
+
+#timeSelectorDiv {
+    margin-top: 10px;
+}
