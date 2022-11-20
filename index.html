@@ -83,12 +83,15 @@
                     </div>
                     <div class="col-6" style="justify-content: center; float: right">
                         <h5>Select A Mental Health Measurement</h5>
-                        <select id='categorySelector' class="custom-select align-self-center" onchange="categoryChange()">
+                        <select id='categorySelector' class="custom-select align-self-center" onchange="mentalHealthMapCategoryChange()">
                             <option value="PrevalenceAnxietydisorders" selected>Anxiety Disorders (% of pop)</option>
                             <option value="PrevalenceDepressivedisorders">Depressive Disorders (% of pop)</option>
                             <option value="PrevalenceAlcoholusedisorders">Alcohol Use Disorders (% of pop)</option>
                         </select>
-                        <div id="timeSelectorDiv">Time Selector Div to Select Time Goes Here</div>
+                        <div id="timeSelectorDiv">
+                            <input type="range" min="1990" max="2019" value="1990" class="slider" id="mentalHealthMapSlider" oninput="mentalHealthMapYearId.innerText = this.value; mentalHealthMapTimeChange()">
+                            <p id="mentalHealthMapYearId" style="text-align: center">1990</p>
+                        </div>
                         <p>There is going to be a lot of text talking about how certain countries have trends of high rates of alcohol disorders, depression, etc. Hopefully, this will help make it clear that certain regions in the world (especially the ones where fast food is incredibly prevalent) tend to have lower mental health on average.</p>
                     </div>
         </div>

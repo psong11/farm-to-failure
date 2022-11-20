@@ -84,8 +84,24 @@ class MentalHealthMap {
             .attr("text-anchor", "middle")
             .style("font-size", "16px")
             .style("font-weight", "bold")
-            .text("Prevalence of Mental Health Disorders by Country");
+            .text("Prevalence of Selected Mental Health Disorder Around The World");
 
+        // legend group
+        vis.legend = vis.svg.append("g")
+            .attr('class', 'legend')
+            .attr('transform', `translate(${vis.width * 1 / 2}, ${vis.height - 100})`)
+        vis.legendLabelMin = vis.legend.append('text')
+            .text('0')
+            .attr('x', -5)
+            .attr('y', 45);
+        vis.legendLabelMax = vis.legend.append('text')
+            .attr('x', 175)
+            .attr('y', 45);
+
+        // append tooltip
+        vis.tooltip = d3.select("body").append('div')
+            .attr('class', "tooltip")
+            .attr('id', 'mapTooltip');
 
         vis.wrangleData();
     }
@@ -105,6 +121,7 @@ class MentalHealthMap {
         vis.displayData = [];
         vis.displayDataCountryNames = [];
         console.log("loading...");
+
         d3.csv("data/prevalence-by-mental-and-substance-use-disorder.csv", d => {
             d.Year = +d.Year;
             d.PrevalenceAnxietydisorders = +d.PrevalenceAnxietydisorders;
@@ -116,8 +133,11 @@ class MentalHealthMap {
             console.log("mental health data", data);
             data.forEach(row => {
                 // and push rows with proper dates into filteredData
-                if (selectedTime === row.Year) {
+                console.log("candidate for displaydata addition: ", row);
+                console.log("selectedTime ", selectedTime);
+                if (selectedTime.toString() === row.Year.toString()) {
                     vis.displayData.push(row);
+                    console.log("MATCHED");
                 }
             });
             console.log("filtered mental health data", vis.displayData);
@@ -139,6 +159,21 @@ class MentalHealthMap {
         console.log("updating...");
         let vis = this;
 
+        vis.gradientRange = d3.range(0,
+            d3.max(vis.displayData, d => d[selectedCategory]),
+            d3.max(vis.displayData, d => d[selectedCategory])/200);
+        // Update the legend fill
+        vis.legendBar = vis.legend.selectAll(".rect")
+            .data(vis.gradientRange)
+            .enter()
+            .append("rect")
+            .attr("y", 0)
+            .attr("height", 25)
+            .attr("x", (d,i) => i*1)
+            .attr("width", 1)
+            .attr("fill", d=>vis.colors(d));
+        vis.legendLabelMax.text(d3.max(vis.displayData, d => d[selectedCategory]).toFixed(2));
+
         vis.countries
             .attr("fill", function(d){
                 console.log("what happend: ", vis.displayDataCountryNames.includes(d.properties.name));
@@ -149,10 +184,43 @@ class MentalHealthMap {
                 else {
                     let country = vis.displayData.find(c => c.Entity === d.properties.name);
                     console.log("country", country);
+                    console.log("selected category", selectedCategory);
                     return vis.colors(country[selectedCategory]);
                 }
             })
+            .on('mouseover', function(event, d) {
+                let country = vis.displayData.find(o => o.Entity === d.properties.name);
+                console.log("COUNTRY BEING TOOLTIPPED", country);
+                d3.select(this)
+                    .attr('stroke-width', '2px')
+                    .attr('stroke', 'black')
+                    .attr('fill', 'white')
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
+                <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
+                     <h3> ${country.Entity} <h3>
+                     <h4> Prevalence of Alcohol Use Disorder: ${country.PrevalenceAlcoholusedisorders}</h4>      
+                     <h4> Prevalence of Anxiety Disorder: ${country.PrevalenceAnxietydisorders}</h4>   
+                     <h4> Prevalence of Depressive Disorder: ${country.PrevalenceDepressivedisorders}</h4>   
+                     <h4> Year: ${country.Year}</h4>              
+                 </div>`)
+            })
+            .on('mouseout', function(event, d){
+                d3.select(this)
+                    .attr('stroke-width', '0px')
+                    .attr("fill", function(d){
+                        let country = vis.displayData.find(o => o.Entity === d.properties.name);
+                        return vis.colors(country[selectedCategory]);
+                    })
 
-        // add tooltip, add slider for year
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            });
     }
 }
