@@ -14,26 +14,41 @@
 <body>
     <div id="fullpage">
         <div class="section s1 section-slide section-blue" style="background: #3f9bf2">
-            <h1>Farm to Failure</h1>
-            <div class="intro-chart">
-                <h2>A look into the relationship between the food we eat and our health</h2>
+            <div class="container">
+                <div class="row" id="intro-part">
+                    <div class="col-md-12">
+                        <img src="farm-s.png" alt="Farm to Failure" class="col-md-12" id="intro-img">
+                        <h1 class="text-center">Farm to Failure</h1>
+                        <p class="text-center">A data story uncovering the relationship between food, health, and geography</p>
+                    </div>
+                </div>
             </div>
 
         </div>
 
         <div class="section s2 section-slide">
                 <div class="slide">
-                    <div class="col-6" style="float:left">
-                        <h1>
-                            Where in the world is obesity the biggest problem? [Add Axes]
-                        </h1>
-                        <p>
-                            By using the slider to the left, you will see that the Oceanian country Nauru maintains the highest
-                            obesity rate in the world from 1975 to 2016. Most of the other top 10 countries are also in Oceania.
-                            [History about persistent obesity in Oceania and why]
+                    <div class="col-6" id="first-slide">
+                        <h3>
+                            Where does obesity persist in the world?
+                        </h3>
                             <br>
-                            [Transition to change over time]
+                        <h5>
+                            Use the slider under the french fry visualization to see how obesity rates have changed over time.
+                        </h5>
+                        <br>
+                        <p>
+                            By using the slide you will see that the Oceanian country Nauru maintains the highest
+                            obesity rate in the world from 1975 to 2016. Most of the other top 10 countries are also in Oceania, which highlights
+                            the importance of geography in the obesity epidemic.
+                            <br>
+
+                            According to the World Health Organization, the advent of fast food and the rise of sedentary lifestyles are
+                            the main causes of the obesity epidemic.
                         </p>
+
+                        <br>
+                        Click the next slide button on the bottom right to continue.
                     </div>
                     <div class="col-6" style="float:right">
                         <div id="happy-meal-graph">
@@ -49,6 +64,11 @@
                         <div id="happy-area-graph">
                         </div>
                         <button id="us-button" onclick="selectUS();">Highlight the United States</button>
+                    </div>
+                    <div class="col-6" id="first-slide">
+                        <h3>
+                            Where does obesity persist in the world?
+                        </h3>
                         <div id="country-info">
                             <p>
                             <li id="country-name"></li></li>
@@ -58,17 +78,19 @@
                             <li id="country-percent">Percent Change in Obesity Level: </li>
                             </p>
                         </div>
-                    </div>
-                    <div class="col-6" style="float:right">
-                        <h1>
-                            How has obesity changed over time? [Add axes]
-                        </h1>
+                        <br>
                         <p>
-                            [On US button click change text div to be about the US]
-
+                            By using the slide you will see that the Oceanian country Nauru maintains the highest
+                            obesity rate in the world from 1975 to 2016. Most of the other top 10 countries are also in Oceania, which highlights
+                            the importance of geography in the obesity epidemic.
                             <br>
-                            [Transition to discussion of correlation with mental health, begin talking about fast food/fried food]
+
+                            According to the World Health Organization, the advent of fast food and the rise of sedentary lifestyles are
+                            the main causes of the obesity epidemic.
                         </p>
+
+                        <br>
+                        Click the next slide button on the bottom right to continue.
                     </div>
                 </div>
         </div>
@@ -146,12 +168,33 @@
 
         <div class="section s8 section-slide section-blue">
             <div class="slide">
-            <h1>Team Members</h1>
-            [Add team members, maybe a piece of fast food for each member]
+                <div class="row">
+            <div id="member" class="col-4">
+                <img src="burger.png" alt="Burger" style="width:50%">
+                <h2>Paul Song</h2>
+                <h4>paulsong@college.harvard.edu</h4>
+
+            </div>
+                <div id="member" class="col-4">
+                    <img src="french-fries.png" alt="Burger" style="width:50%">
+                    <h2>Noah List</h2>
+                    <h4>nlist@college.harvard.edu</h4>
+
+                </div>
+                <div id="member" class="col-4">
+                    <img src="soda.png" alt="Burger" style="width:50%">
+                    <h2>Bristol Fales-Hill</h2>
+                    <h4>bfaleshill@college.harvard.edu</h4>
+                </div>
+
+            </div>
             </div>
             <div class="slide">
                 <h1>Data credit</h1>
-                [Add sources]
+                <p>World Health Organization</p>
+                <p>World Bank</p>
+                <p>World Obesity Federation</p>
+                <p>World Economic Forum</p>
             </div>
         </div>
     </div>

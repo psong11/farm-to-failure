@@ -8,7 +8,10 @@ class BarChart {
     initVis() {
         let vis = this;
 
-        vis.wrangleData(1996);
+        // get year from slider
+        vis.year = d3.select("#myRange").property("value");
+
+        vis.wrangleData(vis.year);
     }
 
     wrangleData(year) {
@@ -47,7 +50,7 @@ class BarChart {
     }
 
     createBarChart(data, year) {
-
+        let vis = this;
         this.year = year;
 
         // set this.year to the year passed in casted to an integer
@@ -74,6 +77,7 @@ class BarChart {
 
         useData = topTenData;
 
+
         // make svg object
         let svg = d3.select("#happy-meal-graph")
             .append("svg")
@@ -89,7 +93,7 @@ class BarChart {
             .attr("height", 650)
             .attr("fill", "red")
             .attr("opacity", 1);
-        
+
 
         svg.append("rect")
             .attr("x", 70)
@@ -221,7 +225,6 @@ class BarChart {
 
         // set display data to the data for the first year
         let updateData = this.data.filter(d => d.Year === this.year)[0];
-        console.log(updateData);
 
         // update bar chart with new data
         let svg = d3.select("#happy-meal-graph").select("svg");
@@ -229,15 +232,12 @@ class BarChart {
         // remove the year from the display data
         let newData = Object.assign({}, updateData);
         delete newData.Year;
-        console.log(newData);
 
         // filter to only have the top ten
         let topTen = Object.keys(newData).sort((a, b) => newData[b] - newData[a]).slice(0, 10);
-        console.log(topTen);
 
         // append the values
         let topTenValues = topTen.map(d => newData[d]);
-        console.log(topTenValues);
 
         // build dictionary of country and values
         let topTenData = {};
@@ -248,7 +248,6 @@ class BarChart {
 
         newData = topTenData;
 
-        console.log(newData);
 
         // make x axis by country
         let x = d3.scaleBand()
@@ -315,9 +314,6 @@ class BarChart {
                     .attr("y", d => y(newData[d]) - 150);
             });
 
-
-        // update title
-        console.log(this.year);
         svg.select(".title")
             .text("Top Ten Countries by Obesity Rate in " + this.year);
     }

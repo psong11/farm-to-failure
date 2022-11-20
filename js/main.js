@@ -21,7 +21,7 @@ function initMainPage(dataArray) {
     barChart = new BarChart();
     bar2 = new BarChart2();
     mentalHealthMap = new MentalHealthMap('mental-health-div', dataArray[0]);
-    unsMap = new usMap('us-map-div', dataArray[0]);
+    unsMap = new usMap();
 }
 
 // on slider change, update the bar chart
@@ -65,6 +65,7 @@ usMap.append("rect")
     .attr("width", 500)
     .attr("height", 500)
     .attr("fill", "white");
+
 
 function mentalHealthMapCategoryChange() {
     selectedCategory = document.getElementById('categorySelector').value;

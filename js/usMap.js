@@ -1,9 +1,9 @@
 
 
 class usMap{
-    constructor(parentElement, geoData){
-        this.parentElement = parentElement;
-        this.geoData = geoData;
+    constructor(){
+        this.parentElement = "us-map-div";
+        this.data = null
         this.initVis();
     }
 
@@ -13,29 +13,55 @@ class usMap{
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
-        vis.colors = d3.scaleLinear()
-            .range(['white', "#136D70"]);
+        vis.wrangleData();
 
-        vis.svg = d3.select("#" + vis.parentElement).append("svg")
-            .attr("width", vis.width)
-            .attr("height", vis.height)
-            .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
-        vis.projection = d3.geoAlbersUsa()
-            .translate([vis.width / 2, vis.height / 2]);
+    }
 
-        vis.path = d3.geoPath()
-            .projection(vis.projection);
+    wrangleData() {
+        d3.csv("data/FastFoodRestaurants.csv", d => {
+            d.latitude = +d.latitude;
+            d.longitude = +d.longitude;
+            return d
 
-        vis.svg.append("path")
-            .datum({type: "Sphere"})
-            .attr("class", "graticule")
-            .attr('fill', '#ADDEFF')
-            .attr("stroke","rgba(129,129,129,0.35)")
-            .attr("d", vis.path);
+        }).then(data => {
+            console.log(data);
+            this.data = data;
+            this.updateVis();
+        })
 
-        vis.world = topojson.feature(vis.geoData, vis.geoData.objects.states).features;
+    }
 
+    updateVis() {
+        let vis = this;
+        vis.svg = d3.select("#us-map-div")
+            .append("svg")
+            .attr("width", 400)
+            .attr("height", 400)
+            .attr("transform", `translate(${vis.margin.left}, ${vis.margin.top})`);
+
+        vis.svg.append("rect")
+            .attr("width", 400)
+            .attr("height", 400)
+            .attr("fill", "white");
+
+        let us = vis.svg.append("g")
+            .attr("class", "us")
+            .attr("transform", `translate(${vis.margin.left}, ${vis.margin.top})`);
+
+
+        vis.svg.append("g")
+            .attr("class", "states")
+            .selectAll("path")
+            .data(topojson.feature(us, us.objects.states).features)
+            .enter().append("path")
+            .attr("fill", function(d) { return color(d.properties.density); })
+            .attr("d", path)
+            .attr("class", function(d) { return d.properties.name; })
+            .on("click", function(d) {
+                console.log(d.properties.name);
+
+            } )
     }
 
 
