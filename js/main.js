@@ -67,6 +67,7 @@ usMap.append("rect")
     .attr("height", 500)
     .attr("fill", "white");
 
+
 function mentalHealthMapCategoryChange() {
     selectedCategory = document.getElementById('categorySelector').value;
     mentalHealthMap.wrangleData();
