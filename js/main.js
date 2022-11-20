@@ -1,5 +1,5 @@
 let barChart, bar2, mentalHealthMap, displayData,
-unsMap;
+unsMap, mentalHealthBarChart;
 
 let selectedTime = 1990;
 let selectedState = '';
@@ -21,7 +21,8 @@ function initMainPage(dataArray) {
     barChart = new BarChart();
     bar2 = new BarChart2();
     mentalHealthMap = new MentalHealthMap('mental-health-div', dataArray[0]);
-    unsMap = new usMap();
+    mentalHealthBarChart = new MentalHealthBarChart('mentalHealthBarChart');
+    unsMap = new usMap('us-map-div', dataArray[0]);
 }
 
 // on slider change, update the bar chart
@@ -70,10 +71,12 @@ usMap.append("rect")
 function mentalHealthMapCategoryChange() {
     selectedCategory = document.getElementById('categorySelector').value;
     mentalHealthMap.wrangleData();
+    mentalHealthBarChart.wrangleData();
 }
 
 function mentalHealthMapTimeChange() {
     selectedTime = document.getElementById('mentalHealthMapSlider').value;
     document.getElementById('mentalHealthMapYearId').innerText = selectedTime;
     mentalHealthMap.wrangleData();
+    mentalHealthBarChart.wrangleData();
 }

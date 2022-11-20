@@ -18,8 +18,6 @@ class MentalHealthMap {
         vis.colors = d3.scaleLinear()
             .range(['white', "#136D70"]);
 
-        console.log("here");
-
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
@@ -84,19 +82,27 @@ class MentalHealthMap {
             .attr("text-anchor", "middle")
             .style("font-size", "16px")
             .style("font-weight", "bold")
-            .text("Prevalence of Selected Mental Health Disorder Around The World");
+            .text("Prevalence of Selected Mental Health Disorder Around The World")
+            .attr('fill', 'white');
 
         // legend group
         vis.legend = vis.svg.append("g")
             .attr('class', 'legend')
-            .attr('transform', `translate(${vis.width * 1 / 2}, ${vis.height - 100})`)
+            .attr('transform', `translate(${vis.width * 1 / 2}, ${vis.height - 80})`)
         vis.legendLabelMin = vis.legend.append('text')
-            .text('0')
+            .text('0%')
             .attr('x', -5)
-            .attr('y', 45);
+            .attr('y', 45)
+            .attr('fill', 'white');
         vis.legendLabelMax = vis.legend.append('text')
             .attr('x', 175)
-            .attr('y', 45);
+            .attr('y', 45)
+            .attr('fill', 'white');
+        vis.legendTitle = vis.legend.append('text')
+            .text('Prevalence Legend')
+            .attr('x', 0)
+            .attr('y', -10)
+            .attr('fill', 'white');
 
         // append tooltip
         vis.tooltip = d3.select("body").append('div')
@@ -130,22 +136,22 @@ class MentalHealthMap {
 
             return d;
         }).then(data => {
-            console.log("mental health data", data);
+            // console.log("mental health data", data);
             data.forEach(row => {
                 // and push rows with proper dates into filteredData
-                console.log("candidate for displaydata addition: ", row);
-                console.log("selectedTime ", selectedTime);
+                // console.log("candidate for displaydata addition: ", row);
+                // console.log("selectedTime ", selectedTime);
                 if (selectedTime.toString() === row.Year.toString()) {
                     vis.displayData.push(row);
-                    console.log("MATCHED");
+                    // console.log("MATCHED");
                 }
             });
-            console.log("filtered mental health data", vis.displayData);
+            // console.log("filtered mental health data", vis.displayData);
 
             Array.from(d3.group(vis.displayData, d=>d.Entity)).forEach(country => {
                 vis.displayDataCountryNames.push(country[0]);
             });
-            console.log("displayDataCountryNames in wrangle: ", vis.displayDataCountryNames);
+            // console.log("displayDataCountryNames in wrangle: ", vis.displayDataCountryNames);
 
             vis.colors.domain([0, d3.max(vis.displayData, d => d[selectedCategory])]);
             console.log("done loading...");
@@ -172,25 +178,25 @@ class MentalHealthMap {
             .attr("x", (d,i) => i*1)
             .attr("width", 1)
             .attr("fill", d=>vis.colors(d));
-        vis.legendLabelMax.text(d3.max(vis.displayData, d => d[selectedCategory]).toFixed(2));
+        vis.legendLabelMax.text(d3.max(vis.displayData, d => d[selectedCategory]).toFixed(2) + "%");
 
         vis.countries
             .attr("fill", function(d){
-                console.log("what happend: ", vis.displayDataCountryNames.includes(d.properties.name));
+                // console.log("what happend: ", vis.displayDataCountryNames.includes(d.properties.name));
                 if(!vis.displayDataCountryNames.includes(d.properties.name)) {
-                    console.log("in if case for ", d.properties.name);
+                    // console.log("in if case for ", d.properties.name);
                     return "black";
                 }
                 else {
                     let country = vis.displayData.find(c => c.Entity === d.properties.name);
-                    console.log("country", country);
-                    console.log("selected category", selectedCategory);
+                    // console.log("country", country);
+                    // console.log("selected category", selectedCategory);
                     return vis.colors(country[selectedCategory]);
                 }
             })
             .on('mouseover', function(event, d) {
                 let country = vis.displayData.find(o => o.Entity === d.properties.name);
-                console.log("COUNTRY BEING TOOLTIPPED", country);
+                // console.log("COUNTRY BEING TOOLTIPPED", country);
                 d3.select(this)
                     .attr('stroke-width', '2px')
                     .attr('stroke', 'black')
