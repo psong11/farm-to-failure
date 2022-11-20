@@ -10,11 +10,8 @@ class usMap{
     initVis() {
         let vis = this;
         vis.margin = {top: 10, right: 10, bottom: 10, left: 10};
-        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-        vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
         vis.wrangleData();
-
 
     }
 
@@ -41,27 +38,53 @@ class usMap{
             .attr("transform", `translate(${vis.margin.left}, ${vis.margin.top})`);
 
         vis.svg.append("rect")
-            .attr("width", 400)
+            .attr("width", 500)
             .attr("height", 400)
-            .attr("fill", "white");
+            .attr("fill", "none");
 
-        let us = vis.svg.append("g")
-            .attr("class", "us")
-            .attr("transform", `translate(${vis.margin.left}, ${vis.margin.top})`);
+        // create a projection
+        vis.projection = d3.geoAlbersUsa()
+            .translate([200, 200])
+            .scale(500);
+
+        // create a path
+        vis.path = d3.geoPath()
+            .projection(vis.projection);
 
 
-        vis.svg.append("g")
-            .attr("class", "states")
-            .selectAll("path")
-            .data(topojson.feature(us, us.objects.states).features)
-            .enter().append("path")
-            .attr("fill", function(d) { return color(d.properties.density); })
-            .attr("d", path)
-            .attr("class", function(d) { return d.properties.name; })
-            .on("click", function(d) {
-                console.log(d.properties.name);
+        let proj;
+        // use the projection to draw the points
+        for (let i = 0; i < vis.data.length; i++) {
+            proj = vis.projection([vis.data[i].longitude, vis.data[i].latitude]);
+            vis.svg.append("circle")
+                .attr("cx", proj[0])
+                .attr("cy", proj[1])
+                .attr("r", 1)
+                .attr("fill", "red")
+                .attr("opacity", 0.5);
+        };
 
-            } )
+
+        // load in the data
+        d3.json("data/us-states.json").then(function (us) {
+            // use the geometry of the states to draw
+            vis.svg.selectAll("path")
+                .data(us.features)
+                .enter()
+                .append("path")
+                .attr("fill", "white")
+                .attr("d", vis.path)
+                .attr("class", function (d) {
+                    return d.properties.name;
+                });
+        });
+
+
+
+
+
+
+
     }
 
 

@@ -19,7 +19,6 @@ Promise.all(promises)
 
 function initMainPage(dataArray) {
     barChart = new BarChart();
-    bar2 = new BarChart2();
     mentalHealthMap = new MentalHealthMap('mental-health-div', dataArray[0]);
     mentalHealthBarChart = new MentalHealthBarChart('mentalHealthBarChart');
     unsMap = new usMap('us-map-div', dataArray[0]);
@@ -47,11 +46,17 @@ function selectUS () {
         d3.select(".United.States.of.America")
             .style("stroke", "red")
             .attr("stroke-width", 7);
-
         d3.select("#us-button").text("De-highlight the United States");
-
         d3.select("#country-name")
             .text("United States of America");
+        d3.select("#country-obesity")
+            .text("Obesity Level in 2016: " + "36.2%");
+        d3.select("#country-initial")
+            .text("Obesity Level in 1975: " + "11.9%");
+        d3.select("#country-change")
+            .text("Change in Obesity Level: " + "24.3%");
+        d3.select("#country-percent")
+            .text("Percent Change in Obesity Level: " + "204.2%");
     }
 }
 
