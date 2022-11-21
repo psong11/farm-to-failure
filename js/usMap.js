@@ -179,14 +179,15 @@ class usMap{
             .attr("font-weight", "bold")
             .attr('fill', 'white')
             .attr("text-anchor", "middle");
+
     }
 
     makeScatter() {
         // create scatter plot
         let vis = this;
-        vis.margin = {top: 10, right: 10, bottom: 10, left: 10};
+        vis.margin = {top: 20, right: 10, bottom: 10, left: 20};
         vis.width = 600 - vis.margin.left - vis.margin.right;
-        vis.height = 400 - vis.margin.top - vis.margin.bottom;
+        vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
         vis.s = d3.select("#scatter-div")
             .append("svg")
@@ -197,50 +198,39 @@ class usMap{
         // create scales
         vis.xScale = d3.scaleLinear()
             .domain([20, 50])
-            .range([0, vis.width]);
+            .range([vis.margin.left, vis.width]);
 
         vis.yScale = d3.scaleLinear()
             .domain([0, 500])
-            .range([vis.height, 0]);
+            .range([vis.height-vis.margin.top, 0]);
 
         // create axes
         vis.xAxis = d3.axisBottom()
             .scale(vis.xScale);
 
-        vis.yAxis = d3.axisRight()
+        vis.yAxis = d3.axisLeft()
             .scale(vis.yScale);
 
         // add axes
         vis.s.append("g")
             .attr("class", "x-axis")
-            .attr("transform", `translate(0, ${vis.height - vis.margin.top})`)
+            .attr("transform", `translate(${vis.margin.left}, ${vis.height})`)
             .call(vis.xAxis);
 
         vis.s.append("g")
             .attr("class", "y-axis")
+            .attr("transform", `translate(${2*vis.margin.left}, ${vis.margin.top})`)
             .call(vis.yAxis);
-
-        // x value is obesity by state
-        // y value is fast food by state
-        // color is state
 
         // add title
         vis.s.append("text")
-            .attr("x", 400)
-            .attr("y", 50)
+            .attr("x", 300)
+            .attr("y", 20)
             .text("Fast Food and Obesity in the US")
-
-        // add x axis label
-        vis.s.append("text")
-            .attr("x", 400)
-            .attr("y", 580)
-            .text("Obesity Prevalence by State (%)")
-
-        // add y axis label
-        vis.s.append("text")
-            .attr("x", 0)
-            .attr("y", 0)
-            .text("Fast Food Restaurants per 100,000 People")
+            .attr("font-size", 20)
+            .attr("font-weight", "bold")
+            .attr('fill', 'white')
+            .attr("text-anchor", "middle");
 
         // count how many observations there are for each state
         let stateCount = {};
@@ -344,8 +334,8 @@ class usMap{
 
                     // draw circles for each state
                     vis.s.append("circle")
-                        .attr("cx", vis.xScale(obesity))
-                        .attr("cy", vis.yScale(stateCount[state]))
+                        .attr("cx", vis.xScale(obesity) + vis.margin.left)
+                        .attr("cy", vis.yScale(stateCount[state]) + vis.margin.top)
                         .attr("r", 5)
                         .attr("fill", "white")
                         .attr("stroke", "black")
