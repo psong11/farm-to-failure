@@ -133,6 +133,7 @@ class MentalHealthMap {
             d.PrevalenceAnxietydisorders = +d.PrevalenceAnxietydisorders;
             d.PrevalenceDepressivedisorders = +d.PrevalenceDepressivedisorders;
             d.PrevalenceAlcoholusedisorders = +d.PrevalenceAlcoholusedisorders;
+            d.PrevalenceDrugusedisorders = +d.PrevalenceDrugusedisorders;
 
             return d;
         }).then(data => {
@@ -210,7 +211,8 @@ class MentalHealthMap {
                      <h3> ${country.Entity} <h3>
                      <h4> Prevalence of Alcohol Use Disorder: ${country.PrevalenceAlcoholusedisorders}</h4>      
                      <h4> Prevalence of Anxiety Disorder: ${country.PrevalenceAnxietydisorders}</h4>   
-                     <h4> Prevalence of Depressive Disorder: ${country.PrevalenceDepressivedisorders}</h4>   
+                     <h4> Prevalence of Depressive Disorder: ${country.PrevalenceDepressivedisorders}</h4> 
+                     <h4> Prevalence of Drug Use Disorder: ${country.PrevalenceDrugusedisorders}</h4>
                      <h4> Year: ${country.Year}</h4>              
                  </div>`)
             })
