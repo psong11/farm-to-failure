@@ -379,8 +379,6 @@ class usMap{
 
 
                             d3.select("#us-obesity-div")
-                                .append("text")
-                                .attr("id", "state-obesity-text")
                                 .text("");
 
                             vis.svg.select("." + state)
