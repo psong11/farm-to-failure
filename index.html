@@ -122,7 +122,20 @@
                     </div>
         </div>
 
-        <div class="section s4 section-slide section-green">
+        <div class="section s4 section-slide section-brown">
+            <div class="container">
+                <div class="row" id="intro-part">
+                    <div class="col-md-12">
+                        <img src="farm-s.png" alt="Farm to Failure" class="col-md-12" id="intro-img">
+                        <h1 class="text-center">What can we do?</h1>
+                        <p class="text-center">[Insert some research that may incentivize healthier eating],
+                            chetty study.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section s5 section-slide section-green">
             <div>
                 <h1>Fast Food and America</h1>
                 <p>In this section, we visualize and discuss fast food restaurant by geography along with
@@ -211,10 +224,13 @@
     <script>
         new fullpage('#fullpage', {
             //options here
-            autoScrolling:true,
+            autoScrolling: true,
             scrollHorizontally: true,
             navigation: true,
             navigationPosition: 'right',
+            easing: 'linear',
+            scrollingSpeed: 1000,
+            scrollOverflow: true,
             navigationTooltips: ['Introduction', 'Obesity', 'Mental Health', 'Fast and Fried Food', 'America',
                 'What to Do?', 'Team Members'],
             showActiveTooltip: true,
