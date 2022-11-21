@@ -25,6 +25,7 @@ class usMap{
             console.log(data);
             this.data = data;
             this.updateVis();
+            this.makeScatter();
         })
 
     }
@@ -180,4 +181,215 @@ class usMap{
             .attr("text-anchor", "middle");
     }
 
-}
+    makeScatter() {
+        // create scatter plot
+        let vis = this;
+        vis.margin = {top: 10, right: 10, bottom: 10, left: 10};
+        vis.width = 600 - vis.margin.left - vis.margin.right;
+        vis.height = 400 - vis.margin.top - vis.margin.bottom;
+
+        vis.s = d3.select("#scatter-div")
+            .append("svg")
+            .attr("width", vis.width + vis.margin.left + vis.margin.right)
+            .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+            .attr("transform", `translate(50,50)`);
+
+        // create scales
+        vis.xScale = d3.scaleLinear()
+            .domain([20, 50])
+            .range([0, vis.width]);
+
+        vis.yScale = d3.scaleLinear()
+            .domain([0, 500])
+            .range([vis.height, 0]);
+
+        // create axes
+        vis.xAxis = d3.axisBottom()
+            .scale(vis.xScale);
+
+        vis.yAxis = d3.axisRight()
+            .scale(vis.yScale);
+
+        // add axes
+        vis.s.append("g")
+            .attr("class", "x-axis")
+            .attr("transform", `translate(0, ${vis.height - vis.margin.top})`)
+            .call(vis.xAxis);
+
+        vis.s.append("g")
+            .attr("class", "y-axis")
+            .call(vis.yAxis);
+
+        // x value is obesity by state
+        // y value is fast food by state
+        // color is state
+
+        // add title
+        vis.s.append("text")
+            .attr("x", 400)
+            .attr("y", 50)
+            .text("Fast Food and Obesity in the US")
+
+        // add x axis label
+        vis.s.append("text")
+            .attr("x", 400)
+            .attr("y", 580)
+            .text("Obesity Prevalence by State (%)")
+
+        // add y axis label
+        vis.s.append("text")
+            .attr("x", 0)
+            .attr("y", 0)
+            .text("Fast Food Restaurants per 100,000 People")
+
+        // count how many observations there are for each state
+        let stateCount = {};
+
+        for (let i = 0; i < vis.data.length; i++) {
+            let state = vis.data[i].province;
+            if (state in stateCount) {
+                stateCount[state]++;
+            } else {
+                stateCount[state] = 1;
+            }
+        }
+        ;
+
+        let stateNames = {
+            "AL": "Alabama",
+            "AK": "Alaska",
+            "AZ": "Arizona",
+            "AR": "Arkansas",
+            "CA": "California",
+            "CO": "Colorado",
+            "CT": "Connecticut",
+            "DE": "Delaware",
+            "DC": "District of Columbia",
+            "FL": "Florida",
+            "GA": "Georgia",
+            "HI": "Hawaii",
+            "ID": "Idaho",
+            "IL": "Illinois",
+            "IN": "Indiana",
+            "IA": "Iowa",
+            "KS": "Kansas",
+            "KY": "Kentucky",
+            "LA": "Louisiana",
+            "ME": "Maine",
+            "MD": "Maryland",
+            "MA": "Massachusetts",
+            "MI": "Michigan",
+            "MN": "Minnesota",
+            "MS": "Mississippi",
+            "MO": "Missouri",
+            "MT": "Montana",
+            "NE": "Nebraska",
+            "NV": "Nevada",
+            "NH": "New Hampshire",
+            "NJ": "New Jersey",
+            "NM": "New Mexico",
+            "NY": "New York",
+            "NC": "North Carolina",
+            "ND": "North Dakota",
+            "OH": "Ohio",
+            "OK": "Oklahoma",
+            "OR": "Oregon",
+            "PA": "Pennsylvania",
+            "RI": "Rhode Island",
+            "SC": "South Carolina",
+            "SD": "South Dakota",
+            "TN": "Tennessee",
+            "TX": "Texas",
+            "UT": "Utah",
+            "VT": "Vermont",
+            "VA": "Virginia",
+            "WA": "Washington",
+            "WV": "West Virginia",
+            "WI": "Wisconsin",
+            "WY": "Wyoming"
+        };
+
+        // iterate through stateCount and change key name to keyname in state_names.js
+        for (let key in stateCount) {
+            let newKey = stateNames[key];
+            stateCount[newKey] = stateCount[key];
+            delete stateCount[key];
+        }
+
+        // drop if key is undefined
+        for (let key in stateCount) {
+            if (key === "undefined") {
+                delete stateCount[key];
+            }
+        }
+
+
+        d3.csv("data/obesity-by-state.csv", d => {
+            d.Prevalence = +d.Prevalence;
+            return d
+
+        }).then(data => {
+            console.log(data);
+            // fill in the state by obesity level
+            for (let i = 0; i < data.length; i++) {
+                let state = data[i].State;
+                let obesity = data[i].Prevalence;
+
+                console.log(state);
+                console.log(obesity);
+                console.log(stateCount[state]);
+
+
+                if((obesity !== null) && (stateCount[state] !== null)) {
+
+                    // draw circles for each state
+                    vis.s.append("circle")
+                        .attr("cx", vis.xScale(obesity))
+                        .attr("cy", vis.yScale(stateCount[state]))
+                        .attr("r", 5)
+                        .attr("fill", "white")
+                        .attr("stroke", "black")
+                        .attr("opacity", 0.5)
+                        .attr("class", "state-circle")
+                        .attr("id", state)
+                        .on("mouseover", function (d) {
+                            d3.select(this)
+                                .attr("fill", "black")
+                                .attr("opacity", 1);
+
+                            d3.select("#us-obesity-div")
+                                .append("text")
+                                .attr("id", "state-obesity-text")
+                                .text(state + ": " + obesity + "%")
+                                .attr("x", 100)
+                                .attr("y", 100)
+                                .attr("font-size", 20)
+                                .attr("font-weight", "bold")
+                                .attr("fill", "black")
+                                .attr("opacity", 1);
+
+                            vis.svg.select("." + state)
+                                .attr("opacity", 0);
+
+                        })
+                        .on("mouseout", function (d) {
+                            d3.select(this)
+                                .attr("fill", "white")
+                                .attr("opacity", 0.5);
+
+
+                            d3.select("#us-obesity-div")
+                                .append("text")
+                                .attr("id", "state-obesity-text")
+                                .text("");
+
+                            vis.svg.select("." + state)
+                                .attr("opacity", 1);
+                        });
+                }
+
+            }});
+
+        };
+
+    }

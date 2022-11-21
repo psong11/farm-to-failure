@@ -66,12 +66,6 @@ d3.selectAll("#us-map")
     .attr("width", 500)
     .attr("height", 500);
 
-// color it white
-usMap.append("rect")
-    .attr("width", 500)
-    .attr("height", 500)
-    .attr("fill", "white");
-
 
 function mentalHealthMapCategoryChange() {
     selectedCategory = document.getElementById('categorySelector').value;

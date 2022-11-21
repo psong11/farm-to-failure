@@ -142,19 +142,28 @@
                 obesity rates by state. There is a clear positive correlation between
                     fast food and obesity within the United States.
                 </p>
-                <div id="us-map-div" style="float:left">
-                </div>
-                <!-- make a slider that changes opacity -->
-                <div class="slider-button">
-                    <!-- make a button -->
-                    <button id="us-map-button" onclick="opacSliderAnimate();">Play Animation</button>
-                </div>
-                <div class="slide-container" style="float:left">
-                    <input type="range" min="0" max="100" value="100" class="myRange2" onchange="opacSliderChange(this.value)">
+                <div class="row">
+                    <div class="col-6">
+                        <div id="us-map-div">
+                        </div>
+                    <!-- make a slider that changes opacity -->
+                        <div class="slider-button">
+                            <!-- make a button -->
+                            <button id="us-map-button" onclick="opacSliderAnimate();">Play Animation</button>
+                        </div>
+                        <div class="slide-container">
+                            <input type="range" min="0" max="100" value="100" class="myRange2" onchange="opacSliderChange(this.value)">
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div id="us-obesity-div">
+                        </div>
+                        <div id="scatter-div">
+                        </div>
+                        </div>
                 </div>
 
-                <div id="us-obesity-div" style="float:right">
-                </div>
             </div>
 
         </div>
@@ -244,6 +253,7 @@
     <script src="https://d3js.org/d3-geo.v1.min.js"></script>
 
     <!-- Your implementation -->
+    <script src="js/state_names.js"></script>
     <script src="js/usMap.js"></script>
     <script src="js/bar2.js"></script>
     <script src="js/barChart.js"></script>
