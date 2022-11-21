@@ -222,16 +222,6 @@ class usMap{
             .attr("transform", `translate(${2*vis.margin.left}, ${vis.margin.top})`)
             .call(vis.yAxis);
 
-        // add title
-        vis.s.append("text")
-            .attr("x", 300)
-            .attr("y", 20)
-            .text("Fast Food and Obesity in the US")
-            .attr("font-size", 20)
-            .attr("font-weight", "bold")
-            .attr('fill', 'white')
-            .attr("text-anchor", "middle");
-
         // count how many observations there are for each state
         let stateCount = {};
 
