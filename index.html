@@ -123,32 +123,24 @@
         </div>
 
         <div class="section s4 section-slide section-green">
-            <div class="slide">
-                <h1>Influence of Fast food</h1>
-                <p>In this section we will analyze fast/fried food consumption by country, its correlation with various health rates in the world</p>
-                <div id="fried-food-consumption">
-                    Spot for fried food consumption graph
-                </div>
-
-
-                <div id="fast-food-location">
-                Spot for fast food location graph
-                </div>
-
-                <div id="us-map-div">
+            <div>
+                <h1>Fast Food and America</h1>
+                <p>In this section, we visualize and discuss fast food restaurant by geography along with
+                obesity rates by state. There is a clear positive correlation between
+                    fast food and obesity within the United States.
+                </p>
+                <div id="us-map-div" style="float:left">
                 </div>
                 <!-- make a slider that changes opacity -->
-                <div class="slide-container">
-                    <input type="range" min="0" max="100" value="40" class="myRange2">
+                <div class="slider-button">
+                    <!-- make a button -->
+                    <button id="us-map-button" onclick="opacSliderAnimate();">Play Animation</button>
                 </div>
-            </div>
-            <div class="slide">
-                <h2>We will use the United states as proxy</h2>
-                <p>[Chart showing fast food by state]</p>
-                <p>[Chart showing obesity by state]</p>
-                The interaction will be one map where you can press a button and see that there is a lot of geographical correlation.
-                <!-- make an svg that is white -->
-                <div id="us-map">
+                <div class="slide-container" style="float:left">
+                    <input type="range" min="0" max="100" value="100" class="myRange2" onchange="opacSliderChange(this.value)">
+                </div>
+
+                <div id="us-obesity-div" style="float:right">
                 </div>
             </div>
 
@@ -160,7 +152,8 @@
                     <div class="col-md-12">
                         <img src="farm-s.png" alt="Farm to Failure" class="col-md-12" id="intro-img">
                         <h1 class="text-center">What can we do?</h1>
-                        <p class="text-center">Some words here</p>
+                        <p class="text-center">[Insert some research that may incentivize healthier eating],
+                            chetty study.</p>
                     </div>
                 </div>
             </div>

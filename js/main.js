@@ -86,11 +86,27 @@ function mentalHealthMapTimeChange() {
     mentalHealthBarChart.wrangleData();
 }
 
-// on .myRange2 change, change the opacity of the circles
-let slider2 = unsMap.select(".myRange2")
+
 
 // on slider change, update the bar chart
-slider2.oninput = function() {
-    console.log(this.value);
-    d3.selectAll("#restaurant-circle").attr("opacity", this.value / 100);
-};
+function opacSliderChange(value) {
+    console.log(value);
+    d3.selectAll("#state-fill").attr("opacity", value / 100);
+}
+
+
+// on button click, slowly move the slider value from 100 to 0
+function opacSliderAnimate() {
+    // call opacSliderChange with from 100 to 0 in 10 seconds
+    d3.transition()
+        .duration(10000)
+        .tween("slider", function() {
+            var i = d3.interpolate(100, 0);
+            return function(t) {
+                // set the slider value to the interpolated value
+                d3.select(".myRange2").property("value", i(t).toFixed(0));
+                opacSliderChange(i(t));
+            };
+        });
+}
+

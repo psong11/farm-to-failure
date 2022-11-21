@@ -34,18 +34,18 @@ class usMap{
         vis.svg = d3.select("#us-map-div")
             .append("svg")
             .attr("width", 800)
-            .attr("height", 800)
+            .attr("height", 600)
             .attr("transform", `translate(${vis.margin.left}, ${vis.margin.top})`);
 
         vis.svg.append("rect")
             .attr("width", 800)
-            .attr("height", 800)
+            .attr("height", 600)
             .attr("fill", "none");
 
         // create a projection
         vis.projection = d3.geoAlbersUsa()
-            .translate([400, 400])
-            .scale(1000);
+            .translate([400, 300])
+            .scale(800);
 
         // create a path
         vis.path = d3.geoPath()
@@ -91,13 +91,13 @@ class usMap{
                 d3.select("." + state
                 ).attr("fill", vis.colorScale(obesity)).attr("z-index", 2)
                     .attr("id", "state-fill")
-                    .attr("opacity", 0.5);
+                    .attr("opacity", 1);
             }
 
             // set georgia color
             vis.svg.select(".Georgia").attr("fill", vis.colorScale(33.9)).attr("z-index", 2)
                 .attr("id", "state-fill")
-                .attr("opacity", 0.5);
+                .attr("opacity", 1);
         });
 
         // add legend
@@ -155,19 +155,16 @@ class usMap{
             proj = vis.projection([vis.data[i].longitude, vis.data[i].latitude]);
             // if lat and long are not null
             if (proj !== null) {
-
                 vis.svg.insert("circle")
                     .attr("id", "restaurant-circle")
                     .attr("cx", proj[0])
                     .attr("cy", proj[1])
                     .attr("r", 1.5)
                     .attr("fill", "red")
-                    .attr("opacity", 0.5)
+                    .attr("opacity", 1)
                     .attr("z-index", 99);
             }
-
-        }
-        ;
+        };
 
         // put circles on top of states
         vis.svg.select("#state-fill").attr("z-index", 1);
@@ -181,11 +178,6 @@ class usMap{
             .attr("font-weight", "bold")
             .attr('fill', 'white')
             .attr("text-anchor", "middle");
-
-
-
-
-
     }
 
 }
