@@ -131,6 +131,15 @@ li{
     cursor: pointer;
 }
 
+#mentalHealthMapSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    background: rgb(19, 109, 112);
+    cursor: pointer;
+}
+
 
 /* change color of content in #fp-nav to white */
 #fp-nav ul li a span,
