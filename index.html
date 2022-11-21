@@ -96,30 +96,42 @@
         </div>
 
         <div class="section s3 section-slide section-tan">
-                <h1>Mental Health in Global Countries by Different Metrics</h1>
-                <p>
-                    Let us examine different mental health measurements globally to identify regional trends that will help us make conclusions down the road.
-                </p>
-                    <div class="col-6" style="float:left">
-                        <div id="mental-health-div" style="height: 70vh; padding-bottom: 20px; border: 2px solid white; border-radius: 5px"></div>
+            <h1>Mental Health in Global Countries by Different Metrics</h1>
+            <p>
+                Let us examine different mental health measurements globally to identify regional trends that will help us make conclusions down the road.
+            </p>
+            <div class="col-6" style="float:left">
+                <div id="mental-health-div" style="height: 70vh; padding-bottom: 20px; border: 2px solid white; border-radius: 5px"></div>
+            </div>
+            <div class="col-6" style="justify-content: center; float: right">
+                <h5 style="text-align: center">Select A Mental Health Measurement</h5>
+                <select id='categorySelector' class="custom-select align-self-center" onchange="mentalHealthMapCategoryChange()">
+                    <option value="PrevalenceAnxietydisorders" selected>Anxiety Disorders (% of pop)</option>
+                    <option value="PrevalenceDepressivedisorders">Depressive Disorders (% of pop)</option>
+                    <option value="PrevalenceAlcoholusedisorders">Alcohol Use Disorders (% of pop)</option>
+                    <option value="PrevalenceDrugusedisorders">Drug Use Disorders (% of pop)</option>
+                </select>
+                <div id="timeSelectorDiv">
+                    <input type="range" min="1990" max="2019" value="1990" class="slider" id="mentalHealthMapSlider" oninput="mentalHealthMapYearId.innerText = this.value; mentalHealthMapTimeChange()">
+                    <p id="mentalHealthMapYearId" style="text-align: center">1990</p>
+                </div>
+                <div class="row" style="height: 35vh" id="mentalHealthBarDiv">
+                    <div class="align-self-center" id="mentalHealthBarChart" style="height: 100%; width: 100%; border: 2px solid white; border-radius: 5px">
                     </div>
-                    <div class="col-6" style="justify-content: center; float: right">
-                        <h5>Select A Mental Health Measurement</h5>
-                        <select id='categorySelector' class="custom-select align-self-center" onchange="mentalHealthMapCategoryChange()">
-                            <option value="PrevalenceAnxietydisorders" selected>Anxiety Disorders (% of pop)</option>
-                            <option value="PrevalenceDepressivedisorders">Depressive Disorders (% of pop)</option>
-                            <option value="PrevalenceAlcoholusedisorders">Alcohol Use Disorders (% of pop)</option>
-                        </select>
-                        <div id="timeSelectorDiv">
-                            <input type="range" min="1990" max="2019" value="1990" class="slider" id="mentalHealthMapSlider" oninput="mentalHealthMapYearId.innerText = this.value; mentalHealthMapTimeChange()">
-                            <p id="mentalHealthMapYearId" style="text-align: center">1990</p>
-                        </div>
-                        <p>There is going to be a lot of text talking about how certain countries have trends of high rates of alcohol disorders, depression, etc. Hopefully, this will help make it clear that certain regions in the world (especially the ones where fast food is incredibly prevalent) tend to have lower mental health on average.</p>
-                        <div class="row" style="height: 40vh" id="mentalHealthBarDiv">
-                            <div class="align-self-center" id="mentalHealthBarChart" style="height: 100%; width: 100%; border: 2px solid white; border-radius: 5px; padding-bottom: 20px;">
-                            </div>
-                        </div>
-                    </div>
+                </div>
+                <div style="padding-top: 10px">
+                    <p>
+                        As you look at these visualizations, keep in mind that many of these countries have the top ten highest fast food consumption rates such as
+                        <strong>The US, Switzerland, South Korea, United Kingdom, France etc.</strong> (Source: <a href="www.therichest.com/location/countries-that-consume-the-most-fast-food-or-junk-food/">www.therichest.com/location/countries-that-consume-the-most-fast-food-or-junk-food/</a>) <br>
+                        In <strong>Sweden</strong>, over half of the population is either overweight or obese due to fast food consumption, and in <strong>France</strong>, the sale of fast food has increased by 14% in recent years.<br>
+                        Among these countries, however, the <strong>United States</strong> undisputably consumes the most fast food, and the worst fast food at that.
+                        Scroll on to see how fast food in the US differs from fast food globally.
+                    </p>
+                </div>
+            </div>
+            <div class="slide">
+                   hi this is second slide
+            </div>
         </div>
 
         <div class="section s4 section-slide section-green">

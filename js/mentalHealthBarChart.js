@@ -13,7 +13,7 @@ class MentalHealthBarChart {
 
         vis.margin = {top: 20, right: 20, bottom: 20, left: 40};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-        vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
+        vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom - 10;
 
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -72,6 +72,7 @@ class MentalHealthBarChart {
             d.PrevalenceAnxietydisorders = +d.PrevalenceAnxietydisorders;
             d.PrevalenceDepressivedisorders = +d.PrevalenceDepressivedisorders;
             d.PrevalenceAlcoholusedisorders = +d.PrevalenceAlcoholusedisorders;
+            d.PrevalenceDrugusedisorders = +d.PrevalenceDrugusedisorders;
 
             return d;
         }).then(data => {
