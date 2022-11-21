@@ -21,7 +21,7 @@ function initMainPage(dataArray) {
     barChart = new BarChart();
     mentalHealthMap = new MentalHealthMap('mental-health-div', dataArray[0]);
     mentalHealthBarChart = new MentalHealthBarChart('mentalHealthBarChart');
-    unsMap = new usMap('us-map-div', dataArray[0]);
+    unsMap = new usMap();
 }
 
 // on slider change, update the bar chart
@@ -85,3 +85,12 @@ function mentalHealthMapTimeChange() {
     mentalHealthMap.wrangleData();
     mentalHealthBarChart.wrangleData();
 }
+
+// on .myRange2 change, change the opacity of the circles
+let slider2 = unsMap.select(".myRange2")
+
+// on slider change, update the bar chart
+slider2.oninput = function() {
+    console.log(this.value);
+    d3.selectAll("#restaurant-circle").attr("opacity", this.value / 100);
+};

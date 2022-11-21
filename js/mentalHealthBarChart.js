@@ -29,6 +29,7 @@ class MentalHealthBarChart {
             .text('Top 10 Countries By Prevalence')
             .attr('transform', `translate(${vis.width / 2}, 10)`)
             .attr('text-anchor', 'middle')
+            .attr('font-weight', 'bold')
             .attr('fill', 'white');
 
         // tooltip
@@ -52,10 +53,10 @@ class MentalHealthBarChart {
 
         vis.svg.append("g")
             .attr("transform", "translate(0," + vis.height + ")")
-            .attr("class", "x-axis axis")
+            .attr("class", "x-axis axis");
 
         vis.svg.append("g")
-            .attr("class", "y-axis axis")
+            .attr("class", "y-axis axis");
 
         this.wrangleData();
     }
