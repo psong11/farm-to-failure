@@ -10,7 +10,7 @@ class MentalHealthMap {
         console.log("initializing...");
         let vis = this;
 
-        vis.margin = {top: 10, right: 10, bottom: 10, left: 10};
+        vis.margin = {top: 5, right: 5, bottom: 5, left: 5};
         console.log("Parent: ", document.getElementById(vis.parentElement).getBoundingClientRect());
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
@@ -73,24 +73,15 @@ class MentalHealthMap {
                 })
         )
 
-        // set dropdown val equal to selectedCategory
-        let drop_val = d3.select("#dropdown").property("value", selectedCategory);
         // add title to top of map
-        vis.svg.append("text")
+        vis.title = vis.svg.append("text")
             .attr("x", vis.width / 2)
             .attr("y", 40)
             .attr("text-anchor", "middle")
             .style("font-size", "16px")
             .style("font-weight", "bold")
-            .text("Prevalence of Selected Mental Health Disorder Around The World")
             .attr('fill', 'white');
-        vis.svg.append("text")
-            .attr("x", vis.width / 2)
-            .attr("y", 60)
-            .attr("text-anchor", "middle")
-            .style("font-size", "16px")
-            .text("Countries in Black = No Data")
-            .attr('fill', 'white');
+
 
         // legend group
         vis.legend = vis.svg.append("g")
@@ -106,7 +97,7 @@ class MentalHealthMap {
             .attr('y', 45)
             .attr('fill', 'white');
         vis.legendTitle = vis.legend.append('text')
-            .text('Prevalence Legend')
+            .text('Prevalence Legend (Black = No Data)')
             .attr('x', 0)
             .attr('y', -10)
             .attr('fill', 'white');
@@ -191,6 +182,25 @@ class MentalHealthMap {
     updateVis() {
         console.log("updating...");
         let vis = this;
+
+        vis.title
+            .text(translateSelectedCategory(selectedCategory) + " Around The World");
+
+        function translateSelectedCategory(selectedCategory) {
+            if (selectedCategory === "PrevalenceAnxietydisorders") {
+                return "Anxiety Disorder Prevalence";
+            }
+            else if (selectedCategory === "PrevalenceDepressivedisorders") {
+                return "Depression Disorder Prevalence";
+            }
+            else if (selectedCategory === "PrevalenceAlcoholusedisorders") {
+                return "Alcohol Disorder Prevalence";
+            }
+            else {
+                return "Drug Use Disorder Prevalence";
+            }
+        }
+
 
         document.getElementById('globalAverages').innerText =
             'Global Disorder Averages For ' + selectedTime + " |" +
