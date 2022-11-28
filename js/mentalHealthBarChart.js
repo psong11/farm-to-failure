@@ -128,6 +128,37 @@ class MentalHealthBarChart {
             .attr('y', d => vis.y(d[selectedCategory]))
             .attr('height', d => vis.height - vis.y(d[selectedCategory]))
             .attr('width', vis.x.bandwidth() - 10)
+            .on('mouseover', function(event, d) {
+                let country = vis.topTenData.find(o => o.Entity === d.Entity);
+                // console.log("COUNTRY BEING TOOLTIPPED", country);
+                d3.select(this)
+                    .attr('stroke-width', '2px')
+                    .attr('stroke', 'black')
+                    .attr('fill', 'white')
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
+                <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
+                     <h3> ${country.Entity} <h3>
+                     <h4> Prevalence of Anxiety Disorder: ${(country.PrevalenceAnxietydisorders).toFixed(2) + "%"}</h4>   
+                     <h4> Prevalence of Depressive Disorder: ${(country.PrevalenceDepressivedisorders).toFixed(2) + "%"}</h4> 
+                     <h4> Prevalence of Alcohol Use Disorder: ${(country.PrevalenceAlcoholusedisorders).toFixed(2) + "%"}</h4>
+                     <h4> Prevalence of Drug Use Disorder: ${(country.PrevalenceDrugusedisorders).toFixed(2) + "%"}</h4>
+                     <h4> Year: ${country.Year}</h4>              
+                 </div>`)
+            })
+            .on('mouseout', function(event, d) {
+                d3.select(this)
+                    .attr('stroke-width', '0px')
+                    .attr("fill", '#136D70')
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            })
             .transition()
             .duration(2000);
     }

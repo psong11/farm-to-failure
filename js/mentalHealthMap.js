@@ -84,6 +84,13 @@ class MentalHealthMap {
             .style("font-weight", "bold")
             .text("Prevalence of Selected Mental Health Disorder Around The World")
             .attr('fill', 'white');
+        vis.svg.append("text")
+            .attr("x", vis.width / 2)
+            .attr("y", 60)
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .text("Countries in Black = No Data")
+            .attr('fill', 'white');
 
         // legend group
         vis.legend = vis.svg.append("g")
@@ -103,6 +110,12 @@ class MentalHealthMap {
             .attr('x', 0)
             .attr('y', -10)
             .attr('fill', 'white');
+
+        // Global Averages group
+        vis.globalAverages = vis.svg.append("g")
+            .attr('class', 'globalAverages')
+            .attr('transform', `translate(${0}, ${60})`);
+        vis.globalAverageText = vis.globalAverages.append('div');
 
         // append tooltip
         vis.tooltip = d3.select("body").append('div')
@@ -126,6 +139,10 @@ class MentalHealthMap {
 
         vis.displayData = [];
         vis.displayDataCountryNames = [];
+        vis.anxietyAvg = 0;
+        vis.depressiveAvg = 0;
+        vis.alcAvg = 0;
+        vis.drugAvg = 0;
         console.log("loading...");
 
         d3.csv("data/prevalence-by-mental-and-substance-use-disorder.csv", d => {
@@ -145,8 +162,17 @@ class MentalHealthMap {
                 if (selectedTime.toString() === row.Year.toString()) {
                     vis.displayData.push(row);
                     // console.log("MATCHED");
+                    vis.anxietyAvg += row.PrevalenceAnxietydisorders;
+                    vis.depressiveAvg += row.PrevalenceDepressivedisorders;
+                    vis.alcAvg += row.PrevalenceAlcoholusedisorders;
+                    vis.drugAvg += row.PrevalenceDrugusedisorders;
                 }
             });
+            vis.anxietyAvg = vis.anxietyAvg / vis.displayData.length;
+            vis.depressiveAvg = vis.depressiveAvg / vis.displayData.length;
+            vis.alcAvg = vis.alcAvg / vis.displayData.length;
+            vis.drugAvg = vis.drugAvg / vis.displayData.length;
+
             // console.log("filtered mental health data", vis.displayData);
 
             Array.from(d3.group(vis.displayData, d=>d.Entity)).forEach(country => {
@@ -165,6 +191,13 @@ class MentalHealthMap {
     updateVis() {
         console.log("updating...");
         let vis = this;
+
+        document.getElementById('globalAverages').innerText =
+            'Global Disorder Averages For ' + selectedTime + " |" +
+            ' Anxiety: ' + vis.anxietyAvg.toFixed(2) + '% |' +
+            ' Depression: ' + vis.depressiveAvg.toFixed(2) + '% |' +
+            ' Alcohol: ' + vis.alcAvg.toFixed(2) + '% |' +
+            ' Drug Use: ' + vis.drugAvg.toFixed(2) + '%';
 
         vis.gradientRange = d3.range(0,
             d3.max(vis.displayData, d => d[selectedCategory]),
@@ -201,18 +234,18 @@ class MentalHealthMap {
                 d3.select(this)
                     .attr('stroke-width', '2px')
                     .attr('stroke', 'black')
-                    .attr('fill', 'white')
+                    .attr('fill', 'black')
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
                 <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
-                     <h3> ${country.Entity} <h3>
-                     <h4> Prevalence of Alcohol Use Disorder: ${country.PrevalenceAlcoholusedisorders}</h4>      
-                     <h4> Prevalence of Anxiety Disorder: ${country.PrevalenceAnxietydisorders}</h4>   
-                     <h4> Prevalence of Depressive Disorder: ${country.PrevalenceDepressivedisorders}</h4> 
-                     <h4> Prevalence of Drug Use Disorder: ${country.PrevalenceDrugusedisorders}</h4>
+                     <h3> ${country.Entity} <h3>      
+                     <h4> Prevalence of Anxiety Disorder: ${(country.PrevalenceAnxietydisorders).toFixed(2) + "%"}</h4>   
+                     <h4> Prevalence of Depressive Disorder: ${(country.PrevalenceDepressivedisorders).toFixed(2) + "%"}</h4> 
+                     <h4> Prevalence of Alcohol Use Disorder: ${(country.PrevalenceAlcoholusedisorders).toFixed(2) + "%"}</h4>
+                     <h4> Prevalence of Drug Use Disorder: ${(country.PrevalenceDrugusedisorders).toFixed(2) + "%"}</h4>
                      <h4> Year: ${country.Year}</h4>              
                  </div>`)
             })

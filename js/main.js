@@ -1,5 +1,5 @@
 let barChart, bar2, mentalHealthMap, displayData,
-unsMap, mentalHealthBarChart;
+unsMap, mentalHealthBarChart, proteinLinePlot;
 
 let selectedTime = 1990;
 let selectedState = '';
@@ -21,6 +21,7 @@ function initMainPage(dataArray) {
     barChart = new BarChart();
     mentalHealthMap = new MentalHealthMap('mental-health-div', dataArray[0]);
     mentalHealthBarChart = new MentalHealthBarChart('mentalHealthBarChart');
+    proteinLinePlot = new ProteinLinePlot('proteinSupplyScatterLinePlot')
     unsMap = new usMap();
 }
 
