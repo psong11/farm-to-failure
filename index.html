@@ -15,7 +15,7 @@
     <div id="fullpage">
         <div class="section s1 section-slide section-blue" style="background: #3f9bf2">
             <div class="container">
-                <div class="row" id="intro-part">
+                <div class="row intro-part">
                     <div class="col-md-12">
                         <img src="farm-s.png" alt="Farm to Failure" class="col-md-12" id="intro-img">
                         <h1 class="text-center">Farm to Failure</h1>
@@ -104,7 +104,7 @@
                 <div id="mental-health-div" style="height: 70vh; padding-bottom: 20px; border: 2px solid white; border-radius: 5px"></div>
             </div>
             <div class="col-6" style="justify-content: center; float: right">
-                <h5 style="text-align: center">Select A Mental Health Measurement</h5>
+                <h4 style="text-align: center">Select A Mental Health Measurement</h4>
                 <select id='categorySelector' class="custom-select align-self-center" onchange="mentalHealthMapCategoryChange()">
                     <option value="PrevalenceAnxietydisorders" selected>Anxiety Disorders (% of pop)</option>
                     <option value="PrevalenceDepressivedisorders">Depressive Disorders (% of pop)</option>
@@ -114,6 +114,8 @@
                 <div id="timeSelectorDiv">
                     <input type="range" min="1990" max="2019" value="1990" class="slider" id="mentalHealthMapSlider" oninput="mentalHealthMapYearId.innerText = this.value; mentalHealthMapTimeChange()">
                     <p id="mentalHealthMapYearId" style="text-align: center">1990</p>
+                </div>
+                <div class="row" id="globalAverages" style="justify-content: center; margin-bottom: 10px">
                 </div>
                 <div class="row" style="height: 35vh" id="mentalHealthBarDiv">
                     <div class="align-self-center" id="mentalHealthBarChart" style="height: 100%; width: 100%; border: 2px solid white; border-radius: 5px">
@@ -125,7 +127,7 @@
                         <strong>The US, Switzerland, South Korea, United Kingdom, France etc.</strong> (Source: <a href="www.therichest.com/location/countries-that-consume-the-most-fast-food-or-junk-food/">www.therichest.com/location/countries-that-consume-the-most-fast-food-or-junk-food/</a>) <br>
                         In <strong>Sweden</strong>, over half of the population is either overweight or obese due to fast food consumption, and in <strong>France</strong>, the sale of fast food has increased by 14% in recent years.<br>
                         Among these countries, however, the <strong>United States</strong> undisputably consumes the most fast food, and the worst fast food at that.
-                        Scroll on to see how fast food in the US differs from fast food globally.
+                        <strong>Scroll on</strong> to see how fast food in the US differs from fast food globally.
                     </p>
                 </div>
             </div>
@@ -136,7 +138,7 @@
 
         <div class="section s4 section-slide section-brown">
             <div class="container">
-                <div class="row" id="intro-part">
+                <div class="row intro-part">
                     <div class="col-md-12">
                         <img src="farm-s.png" alt="Farm to Failure" class="col-md-12" id="intro-img">
                         <h1 class="text-center">What can we do?</h1>
@@ -182,16 +184,25 @@
         </div>
 
         <div class="section s6 section-slide section-brown">
-            <div class="container">
-                <div class="row" id="intro-part">
-                    <div class="col-md-12">
-                        <img src="farm-s.png" alt="Farm to Failure" class="col-md-12" id="intro-img">
-                        <h1 class="text-center">What can we do?</h1>
-                        <p class="text-center">[Insert some research that may incentivize healthier eating],
-                            chetty study.</p>
+            <div class="slide">
+                <div class="container">
+                    <div class="row intro-part">
+                        <div class="col-md-12">
+                            <img src="farm-s.png" alt="Farm to Failure" class="col-md-12" id="intro-img">
+                            <h1 class="text-center">Implications for the next generation?</h1>
+                            <p class="text-center">Let's examine how poverty, thus dependence on cheap nutrition, influences upward socioeconomic mobility in America.</p>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="slide">
+                <h1>Socioeconomic Mobility in the United States</h1>
+                <p>The share of per capita dietary energy derived from protein, measured as the daily caloric supply from protein as a percentage of total caloric supply, versus GDP per capita measured in constant internation $.</p>
+                <div id="proteinSupplyScatterLinePlot" style="height: 70vh; width: 70vw; border: 2px solid white; border-radius: 5px">
+
+                </div>
+            </div>
+
         </div>
 
 
@@ -272,6 +283,7 @@
     <script src="js/barChart.js"></script>
     <script src="js/mentalHealthMap.js"></script>
     <script src="js/mentalHealthBarChart.js"></script>
+    <script src="js/proteinLinePlot.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

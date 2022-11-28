@@ -159,7 +159,7 @@ select {
     margin-top: 10px;
 }
 
-#intro-part {
+.intro-part {
     padding: 20px;
     border: white 2px solid;
     border-radius: 5px;
