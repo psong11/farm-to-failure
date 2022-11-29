@@ -23,10 +23,9 @@ class MentalHealthBarChart {
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
         // add title
-        vis.svg.append('g')
+        vis.title = vis.svg.append('g')
             .attr('class', 'title bar-title')
             .append('text')
-            .text('Top 10 Countries By Prevalence')
             .attr('transform', `translate(${vis.width / 2}, 10)`)
             .attr('text-anchor', 'middle')
             .attr('font-weight', 'bold')
@@ -110,6 +109,24 @@ class MentalHealthBarChart {
 
         vis.svg.select('.y-axis')
             .call(vis.yAxis);
+
+        vis.title
+            .text('Top 10 Countries By ' + translateSelectedCategory(selectedCategory));
+
+        function translateSelectedCategory(selectedCategory) {
+            if (selectedCategory === "PrevalenceAnxietydisorders") {
+                return "Anxiety Disorder Prevalence";
+            }
+            else if (selectedCategory === "PrevalenceDepressivedisorders") {
+                return "Depression Disorder Prevalence";
+            }
+            else if (selectedCategory === "PrevalenceAlcoholusedisorders") {
+                return "Alcohol Disorder Prevalence";
+            }
+            else {
+                return "Drug Use Disorder Prevalence";
+            }
+        }
 
         vis.bars = vis.svg.selectAll('rect')
             .data(vis.topTenData);
