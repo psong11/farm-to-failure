@@ -26,7 +26,7 @@ class MentalHealthBarChart {
         vis.title = vis.svg.append('g')
             .attr('class', 'title bar-title')
             .append('text')
-            .attr('transform', `translate(${vis.width / 2}, 0)`)
+            .attr('transform', `translate(${vis.width / 2}, 10)`)
             .attr('text-anchor', 'middle')
             .attr('font-weight', 'bold')
             .attr('fill', 'white');
