@@ -159,11 +159,14 @@ select {
     margin-top: 10px;
 }
 
+#mentalHealthMapYearId {
+    margin-bottom: 0px;
+}
+
 .intro-part {
     padding: 20px;
     border: white 2px solid;
     border-radius: 5px;
-
 }
 
 /* center and size #intro-img */
