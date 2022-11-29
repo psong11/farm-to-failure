@@ -94,7 +94,7 @@ function opacSliderChange(value) {
 function opacSliderAnimate() {
     // call opacSliderChange with from 100 to 0 in 10 seconds
     d3.transition()
-        .duration(10000)
+        .duration(3000)
         .tween("slider", function() {
             var i = d3.interpolate(100, 0);
             return function(t) {
@@ -102,6 +102,13 @@ function opacSliderAnimate() {
                 d3.select(".myRange2").property("value", i(t).toFixed(0));
                 opacSliderChange(i(t));
             };
+        })
+        .on("end", function() {
+            // set the slider value to 100
+            d3.select(".myRange2").property("value", 100);
+            opacSliderChange(100);
         });
+
 }
+
 

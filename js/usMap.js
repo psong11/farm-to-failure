@@ -66,7 +66,9 @@ class usMap{
                 .attr("stroke-width", 2)
                 .attr("class", function (d) {
                     return d.properties.name;
-                });
+                })
+                .attr("id", "state-stroke");
+
         });
 
 
@@ -92,7 +94,49 @@ class usMap{
                 d3.select("." + state
                 ).attr("fill", vis.colorScale(obesity)).attr("z-index", 2)
                     .attr("id", "state-fill")
-                    .attr("opacity", 1);
+                    .attr("opacity", 1)
+                    .on("mouseover", function (d) {
+                        // get the opacity of the state
+                        let opacity = d3.select(this).attr("opacity");
+
+                        // make the state name appear
+                        // replace dot with space
+                        let state2 = state.replace(/\./g, ' ');
+
+                        // make opacity 0.5
+                        d3.select(this).attr("opacity", opacity*0.5);
+
+                        // make #state-stroke opacity 1
+                        d3.select("#state-stroke").attr("opacity", 1);
+
+                        // make the state name appear
+                        d3.select("#state-name").text(state2);
+
+                        // make the obesity rate appear
+                        // select scatter plot dot
+                        d3.select("#"+state).attr("fill", "black")
+                            .attr("r", 10);
+
+                    })
+                    .on("mouseout", function (d) {
+                        // get the opacity of the state
+                        let opacity = d3.select(this).attr("opacity");
+                        // make the state name disappear
+                        d3.select("#state-name").text("");
+                        // make the obesity rate disappear
+                        d3.select("#obesity-rate").text("");
+                        // make opacity 1
+                        d3.select(this).attr("opacity", opacity*2);
+
+                        d3.select("#"+state)
+                            .attr("fill", "white")
+                            .attr("opacity", 0.5)
+                            .attr("r", 5);
+
+
+                        vis.svg.select("." + state)
+                            .attr("opacity", 1);
+                    });
             }
 
             // set georgia color
@@ -146,6 +190,16 @@ class usMap{
             .attr("width", 20)
             .attr("height", 20)
             .attr("fill", "#f7fbff");
+
+        // add tooltip for states
+        vis.tooltip = d3.select("#us-map-div")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+
+
+
 
 
 
@@ -315,10 +369,6 @@ class usMap{
                 let state = data[i].State;
                 let obesity = data[i].Prevalence;
 
-                console.log(state);
-                console.log(obesity);
-                console.log(stateCount[state]);
-
 
                 if((obesity !== null) && (stateCount[state] !== null)) {
 
@@ -335,7 +385,8 @@ class usMap{
                         .on("mouseover", function (d) {
                             d3.select(this)
                                 .attr("fill", "black")
-                                .attr("opacity", 1);
+                                .attr("opacity", 1)
+                                .attr("r", 10);
 
                             d3.select("#us-obesity-div")
                                 .append("text")
@@ -355,7 +406,8 @@ class usMap{
                         .on("mouseout", function (d) {
                             d3.select(this)
                                 .attr("fill", "white")
-                                .attr("opacity", 0.5);
+                                .attr("opacity", 0.5)
+                                .attr("r", 5);
 
 
                             d3.select("#us-obesity-div")
