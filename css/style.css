@@ -259,3 +259,17 @@ select {
     transform: translate(-50%, 0);
     margin-top: 10px;
 }
+
+.us-info{
+    /* center */
+    text-align: center;
+    background-color: white;
+border-radius: 5px;
+    color: black;
+    padding: 20px;
+}
+
+/* make .row not overflow */
+.row {
+    width: 100%;
+}

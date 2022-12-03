@@ -10,6 +10,7 @@ class usMap{
     initVis() {
         let vis = this;
         vis.margin = {top: 10, right: 10, bottom: 10, left: 10};
+        vis.stateCount = [];
 
         vis.wrangleData();
 
@@ -77,6 +78,12 @@ class usMap{
             .domain([24.7, 40.6])
             .range(["#f7fbff", "#08306b"]);
 
+        // add tooltip for states
+        vis.tooltip = d3.select("#us-map-div")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
 
         // use obesity by state data to fill in the states
         d3.csv("data/obesity-by-state.csv", d => {
@@ -97,14 +104,14 @@ class usMap{
                     .attr("opacity", 1)
                     .on("mouseover", function (d) {
                         // get the opacity of the state
-                        let opacity = d3.select(this).attr("opacity");
+                        vis.opac = d3.select(this).attr("opacity");
 
                         // make the state name appear
                         // replace dot with space
                         let state2 = state.replace(/\./g, ' ');
 
                         // make opacity 0.5
-                        d3.select(this).attr("opacity", opacity*0.5);
+                        d3.select(this).attr("opacity", vis.opac*0.5);
 
                         // make #state-stroke opacity 1
                         d3.select("#state-stroke").attr("opacity", 1);
@@ -117,16 +124,26 @@ class usMap{
                         d3.select("#"+state).attr("fill", "black")
                             .attr("r", 10);
 
+                        // make the tooltip appear on the state
+                        vis.tooltip.transition()
+                            .duration(200)
+                            .style("opacity", .9);
+
+                        // let number of restaurants
+                        vis.tooltip.html("State: " + state2 + "<br/>" + "Obesity Rate: " + obesity + "%"
+                            + "<br/>" + "Number of Restaurants: " + vis.stateCount[state2])
+                            .style("x", (x) + "px")
+                            .style("y", (y) + "px");
+
+
                     })
                     .on("mouseout", function (d) {
-                        // get the opacity of the state
-                        let opacity = d3.select(this).attr("opacity");
                         // make the state name disappear
                         d3.select("#state-name").text("");
                         // make the obesity rate disappear
                         d3.select("#obesity-rate").text("");
                         // make opacity 1
-                        d3.select(this).attr("opacity", opacity*2);
+                        d3.select(this).attr("opacity", vis.opac*0.5);
 
                         d3.select("#"+state)
                             .attr("fill", "white")
@@ -136,6 +153,15 @@ class usMap{
 
                         vis.svg.select("." + state)
                             .attr("opacity", 1);
+
+                        // make the tooltip disappear
+                        vis.tooltip.transition()
+                            .duration(500)
+                            .style("opacity", 0);
+
+
+
+
                     });
             }
 
@@ -191,12 +217,6 @@ class usMap{
             .attr("height", 20)
             .attr("fill", "#f7fbff");
 
-        // add tooltip for states
-        vis.tooltip = d3.select("#us-map-div")
-            .append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
-
 
 
 
@@ -247,7 +267,7 @@ class usMap{
             .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
-            .attr("transform", `translate(50,50)`);
+            .attr("transform", `translate(150,50)`);
 
         // create scales
         vis.xScale = d3.scaleLinear()
@@ -275,6 +295,23 @@ class usMap{
             .attr("class", "y-axis")
             .attr("transform", `translate(${2*vis.margin.left}, ${vis.margin.top})`)
             .call(vis.yAxis);
+
+        // add y axis label
+        vis.s.append("text")
+            .attr("x", -vis.height/2 + 40)
+            .attr("y", 9)
+            .attr("transform", "rotate(-90)")
+            .attr("fill", "white")
+            .attr("font-size", 10)
+            .text("Number of Restaurants");
+
+        // add x axis label
+        vis.s.append("text")
+            .attr("x", 380)
+            .attr("y", 496)
+            .attr("fill", "white")
+            .attr("font-size", 10)
+            .text("Obesity Prevalence (%)");
 
         // count how many observations there are for each state
         let stateCount = {};
@@ -357,12 +394,15 @@ class usMap{
             }
         }
 
+        vis.stateCount = stateCount;
+
 
         d3.csv("data/obesity-by-state.csv", d => {
             d.Prevalence = +d.Prevalence;
             return d
 
         }).then(data => {
+            vis.obesityData = data;
             console.log(data);
             // fill in the state by obesity level
             for (let i = 0; i < data.length; i++) {
@@ -370,7 +410,9 @@ class usMap{
                 let obesity = data[i].Prevalence;
 
 
-                if((obesity !== null) && (stateCount[state] !== null)) {
+                if((obesity !== null) && (stateCount[state] !== null) && (state !== "Virgin Islands")
+                    && (state !== "Puerto Rico")
+                ) {
 
                     // draw circles for each state
                     vis.s.append("circle")
@@ -402,6 +444,16 @@ class usMap{
                             vis.svg.select("." + state)
                                 .attr("opacity", 0);
 
+                            vis.tooltip.transition()
+                                .duration(200)
+                                .style("opacity", .9);
+
+
+                            vis.tooltip.html("State: " + state + "<br/>" + "Obesity Rate: " + obesity + "%" +
+                                "<br/>" + "Number of Restaurants: " + stateCount[state])
+                                .style("x", (x) + "px")
+                                .style("y", (y) + "px");
+
                         })
                         .on("mouseout", function (d) {
                             d3.select(this)
@@ -415,6 +467,10 @@ class usMap{
 
                             vis.svg.select("." + state)
                                 .attr("opacity", 1);
+
+                            vis.tooltip.transition()
+                                .duration(200)
+                                .style("opacity", 0);
                         });
                 }
 

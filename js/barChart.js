@@ -323,24 +323,24 @@ class BarChart {
         // create a new svg
         let svg = d3.select("#happy-area-graph")
             .append("svg")
-            .attr("width", 600)
-            .attr("height", 400);
+            .attr("width", 800)
+            .attr("height", 600);
 
         // make x axis by year
         let x = d3.scaleLinear()
             .domain([1975, 2016])
-            .range([0, 550]);
+            .range([0, 750]);
 
         // make y axis by values of data
         let y = d3.scaleLinear()
             .domain([0, 60])
-            .range([350, 0]);
+            .range([550, 0]);
 
         // make x axis
         let xAxis = d3.axisBottom(x);
         svg.append("g")
             .attr('class', 'x-axis')
-            .attr("transform", "translate(50, 380)")
+            .attr("transform", "translate(50, 580)")
             .call(xAxis);
 
         // make y axis
