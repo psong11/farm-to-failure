@@ -92,6 +92,7 @@ class usMap{
 
         }).then(data => {
             console.log(data);
+            // set georgia color
             // fill in the state by obesity level
             for (let i = 0; i < data.length; i++) {
                 let state = data[i].State;
@@ -131,9 +132,7 @@ class usMap{
 
                         // let number of restaurants
                         vis.tooltip.html("State: " + state2 + "<br/>" + "Obesity Rate: " + obesity + "%"
-                            + "<br/>" + "Number of Restaurants: " + vis.stateCount[state2])
-                            .style("x", (x) + "px")
-                            .style("y", (y) + "px");
+                            + "<br/>" + "Number of Restaurants: " + vis.stateCount[state2]);
 
 
                     })
@@ -158,17 +157,62 @@ class usMap{
                         vis.tooltip.transition()
                             .duration(500)
                             .style("opacity", 0);
-
-
-
-
                     });
             }
 
-            // set georgia color
             vis.svg.select(".Georgia").attr("fill", vis.colorScale(33.9)).attr("z-index", 2)
                 .attr("id", "state-fill")
-                .attr("opacity", 1);
+                .attr("opacity", 1)
+                .on("mouseover", function (d) {
+                    // get the opacity of the state
+                    vis.opac = d3.select(this).attr("opacity");
+
+                    // make the state name appear
+                    // replace dot with space
+                    let state2 = "Georgia";
+
+                    // make opacity 0.5
+                    d3.select(this).attr("opacity", vis.opac*0.5);
+
+                    // make #state-stroke opacity 1
+                    d3.select("#state-stroke").attr("opacity", 1);
+
+                    // make the state name appear
+                    d3.select("#state-name").text(state2);
+
+                    // make the obesity rate appear
+                    // select scatter plot dot
+                    d3.select("#Georgia").attr("fill", "black")
+                        .attr("r", 10);
+
+                    // make the tooltip appear on the state
+                    vis.tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+
+                    // let number of restaurants
+                    vis.tooltip.html("State: Georgia" + "<br/>" + "Obesity Rate: " + 33.9 + "%"
+                        + "<br/>" + "Number of Restaurants: 347");
+                })
+                .on("mouseout", function (d) {
+                    // make the state name disappear
+                    d3.select("#state-name").text("");
+                    // make the obesity rate disappear
+                    d3.select("#obesity-rate").text("");
+                    // make opacity 1
+                    d3.select(this).attr("opacity", 1);
+
+                    vis.tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+
+                    d3.select("#Georgia")
+                        .attr("fill", "white")
+                        .attr("opacity", 0.5)
+                        .attr("r", 5);
+
+                });
+
         });
 
         // add legend
@@ -450,9 +494,7 @@ class usMap{
 
 
                             vis.tooltip.html("State: " + state + "<br/>" + "Obesity Rate: " + obesity + "%" +
-                                "<br/>" + "Number of Restaurants: " + stateCount[state])
-                                .style("x", (x) + "px")
-                                .style("y", (y) + "px");
+                                "<br/>" + "Number of Restaurants: " + stateCount[state]);
 
                         })
                         .on("mouseout", function (d) {
