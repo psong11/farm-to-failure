@@ -224,7 +224,7 @@ class usMap{
             .attr("x", 0)
             .attr("y", 0)
             .attr("width", 230)
-            .attr("height", 100)
+            .attr("height", 90)
             .attr("fill", "white")
             .attr("opacity", 0.5);
 
