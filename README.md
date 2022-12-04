@@ -8,8 +8,7 @@ CS 171: Visualization
 October - December 2022
 
 
-# Farm to Failure 
-## The Influence of American Fast Food on Health and the Economy
+## Farm to Failure: The Influence of American Fast Food on Health and the Economy
 
 # Abstract
 As a group, we were collectively interested in the relationship between eating habits and American economic and social trends. As such, we want to specifically study the relationship between fast food, obesity, mental health, and upward mobility. Our ideal outcome is to provide our ‘audience’ with a data-backed story that alludes to fast food as a correlate to upward mobility and as a direct influence on obesity and mental health problems. There are many domains to find data that can help us answer these questions. Harvard’s own, Raj Chetty, has an open-sourced ‘Opportunity Atlas’ that allows visitors to pull mobility data by state, gender, etc. The USDA has public data on American eating habits that span throughout the 2010s. Lastly, the CDC has mental health data that will help push us toward creating mental health vs. eating habit trends. 
@@ -25,4 +24,4 @@ d3.js, fullpage.js, bootstrap
 
 # How to Run
 1. Clone the repository
-2. Open index.html in a browser or run a local server
+2. Open index.html in a browser or run a local server (ideally through WebStorm or python3 -m http.server)

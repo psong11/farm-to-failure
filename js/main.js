@@ -126,93 +126,116 @@ function finalVis() {
     svg
         .append("circle")
         .attr("class", "big-circle")
-        .attr("cx", 250)
-        .attr("cy", 250)
+        .attr("cx", 300)
+        .attr("cy", 300)
         .attr("r", 200)
         .attr("fill", "red");
 
-    // make another circle in the middle
-    svg
-        .append("circle")
+    svg.append("circle")
         .attr("class", "little-circle")
-        .attr("opacity", 0)
-        .attr("cx", 250)
-        .attr("cy", 250)
-        .attr("r", 133)
-        .attr("fill", "salmon");
+        .attr("id", "curve")
+        .attr("cx", 300)
+        .attr("cy", 300)
+        .attr("r", 200)
+        .attr("fill", "red")
+        .attr("opacity", 0);
+
+    // arc from (0, 300) to (600, 300)
+    let arc = d3.arc()
+        .innerRadius(0)
+        .outerRadius(235)
+        .startAngle(-180 * Math.PI / 180)
+        .endAngle(Math.PI);
+
+    // append the arc to the svg
+    svg.append("path")
+        .attr("d", arc)
+        .attr("id", "myArc")
+        .attr("transform", "translate(300, 300)")
+        .attr("fill", "none");
+
+
+    // add text to the circle
+    let bigtext = svg
+        .append("text")
+        .attr("class", "big-text")
+        .attr("x", 300)
+        .attr("y", 300)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("font-size", "20px")
+        .attr("fill", "white")
+        .text("With Fast Food (current): 77.3 years");
+
+    // add title to the top
+    svg
+        .append("text")
+        .attr("class", "title")
+        .attr("x", 300)
+        .attr("y", 10)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("font-size", "20px")
+        .attr("font-weight", "bold")
+        .attr("fill", "white")
+        .text("Life Expectancy in the United States");
+
+
 
     // make a button
     d3.select(".card-fin")
         .append("button")
         .attr("id", "final-button")
-        .text("Click to see the final visualization")
+        .text("View the impact of a healthy diet")
         .on("click", function() {
 
             // reset if the button is clicked again
             if (d3.select(".big-circle").attr("fill") == "rgb(250, 128, 114)") {
                 // remove text
-                d3.select(".final-vis").selectAll("text").remove();
+                d3.select(".big-text").selectAll("textPath").transition().duration(200).remove();
                 // revert
                 d3.select(".little-circle").attr("opacity", 0);
 
                 d3.select(".big-circle")
                     .transition()
-                    .duration(1000)
-                    .attr("cx", 250)
-                    .attr("cy", 250)
+                    .duration(2000)
+                    .attr("cx", 300)
+                    .attr("cy", 300)
                     .attr("r", 200)
                     .attr("fill", "red");
 
                 // change button text
-                d3.select("#final-button").text("Click to see the final visualization");
+                d3.select("#final-button").text("View the impact of a healthy diet");
 
             }
             else {
                 //change button text
-                d3.select("#final-button").text("Revert");
-                // transition the big circle to be smaller
+                d3.select("#final-button").text("Revert back to original");
+                // make circle bigger
                 d3.select(".big-circle")
                     .transition()
                     .duration(1000)
-                    .attr("fill", "salmon")
-                    .attr("r", 100)
-                    .attr("cx", 150)
-                    .attr("cy", 150);
+                    .attr("cx", 300)
+                    .attr("cy", 300)
+                    .attr("r", 270)
+                    .attr('fill', 'salmon');
 
-                // make a different circle appear next to the big circle
-                d3.select(".little-circle")
+                // make text that curves around the circle
+                d3.select(".big-text")
+                    .append("textPath")
                     .transition()
                     .duration(1000)
-                    .attr("opacity", 1)
-                    .attr("r", 149)
-                    .attr("fill", "red")
-                    .attr("cx", 350)
-                    .attr("cy", 350);
+                    .attr("xlink:href", "#myArc")
+                    .attr("startOffset", "50%")
+                    .text("With a Healthy Diet (ideal): 84.5 years");
 
-                // add text to circles
-                svg
-                    .append("text")
-                    .transition()
-                    .duration(1000)
-                    .attr("class", "big-text")
-                    .attr("x", 150)
-                    .attr("y", 150)
-                    .attr("text-anchor", "middle")
-                    .attr("font-size", "10px")
-                    .attr("fill", "white")
-                    .text("Risk of Death without Fast Food");
 
-                svg
-                    .append("text")
-                    .transition()
-                    .duration(1000)
-                    .attr("class", "little-text")
-                    .attr("x", 350)
-                    .attr("y", 350)
-                    .attr("text-anchor", "middle")
-                    .attr("font-size", "20px")
-                    .attr("fill", "white")
-                    .text("Risk of Death with Fast Food");
+
+                // after 2 second, make the little circle appear
+                setTimeout(function() {
+                    d3.select(".little-circle").attr("opacity", 1);
+                });
+
             }
 
 
