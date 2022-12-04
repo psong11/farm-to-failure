@@ -186,6 +186,7 @@ function finalVis() {
     d3.select(".card-fin")
         .append("button")
         .attr("id", "final-button")
+        .style("margin", "auto")
         .text("View the impact of a healthy diet")
         .on("click", function() {
 
