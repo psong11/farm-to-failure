@@ -204,7 +204,7 @@ class BarChart {
 
                 // get x value of this
                 let xPosition = parseFloat(d3.select(this).attr("x")) + x.bandwidth() / 2;
-                
+
                     svg.append("text")
                         .attr("class", "value")
                         .attr("x", xPosition)
@@ -374,13 +374,13 @@ class BarChart {
         // create a new svg
         let svg = d3.select("#happy-area-graph")
             .append("svg")
-            .attr("width", 800)
+            .attr("width", 650)
             .attr("height", 600);
 
         // make x axis by year
         let x = d3.scaleLinear()
             .domain([1975, 2016])
-            .range([0, 750]);
+            .range([0, 600]);
 
         // make y axis by values of data
         let y = d3.scaleLinear()

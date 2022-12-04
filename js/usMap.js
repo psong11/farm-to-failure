@@ -120,9 +120,10 @@ class usMap{
                         // make the state name appear
                         d3.select("#state-name").text(state2);
 
+                        // replace the space with a dot
+                        let state3 = state2.replace(/\s+/g, '\\ ');
                         // make the obesity rate appear
-                        // select scatter plot dot
-                        d3.select("#"+state).attr("fill", "black")
+                        d3.select("#"+state3).attr("fill", "black")
                             .attr("r", 10);
 
                         // make the tooltip appear on the state
@@ -144,7 +145,8 @@ class usMap{
                         // make opacity 1
                         d3.select(this).attr("opacity", vis.opac*0.5);
 
-                        d3.select("#"+state)
+                        let state3 = state.replace(/\.+/g, '\\ ');
+                        d3.select("#"+state3)
                             .attr("fill", "white")
                             .attr("opacity", 0.5)
                             .attr("r", 5);
@@ -304,8 +306,8 @@ class usMap{
         // create scatter plot
         let vis = this;
         vis.margin = {top: 20, right: 10, bottom: 10, left: 20};
-        vis.width = 600 - vis.margin.left - vis.margin.right;
-        vis.height = 500 - vis.margin.top - vis.margin.bottom;
+        vis.width = 500 - vis.margin.left - vis.margin.right;
+        vis.height = 400 - vis.margin.top - vis.margin.bottom;
 
         vis.s = d3.select("#scatter-div")
             .append("svg")
@@ -485,7 +487,10 @@ class usMap{
                                 .attr("fill", "black")
                                 .attr("opacity", 1);
 
-                            vis.svg.select("." + state)
+                            // let state2 have a dot for each space in state
+                            let state2 = state.replace(/\s/g, '.');
+
+                            vis.svg.select("." + state2)
                                 .attr("opacity", 0);
 
                             vis.tooltip.transition()
@@ -507,7 +512,9 @@ class usMap{
                             d3.select("#us-obesity-div")
                                 .text("");
 
-                            vis.svg.select("." + state)
+                            let state2 = state.replace(/\s/g, '.');
+
+                            vis.svg.select("." + state2)
                                 .attr("opacity", 1);
 
                             vis.tooltip.transition()
