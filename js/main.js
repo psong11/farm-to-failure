@@ -192,7 +192,7 @@ function finalVis() {
             // reset if the button is clicked again
             if (d3.select(".big-circle").attr("fill") == "rgb(250, 128, 114)") {
                 // remove text
-                d3.select(".big-text").selectAll("textPath").transition().duration(200).remove();
+                d3.select(".big-text").selectAll("textPath").remove();
                 // revert
                 d3.select(".little-circle").attr("opacity", 0);
 
@@ -220,21 +220,20 @@ function finalVis() {
                     .attr("r", 270)
                     .attr('fill', 'salmon');
 
-                // make text that curves around the circle
-                d3.select(".big-text")
-                    .append("textPath")
-                    .transition()
-                    .duration(1000)
-                    .attr("xlink:href", "#myArc")
-                    .attr("startOffset", "50%")
-                    .text("With a Healthy Diet (ideal): 84.5 years");
-
-
 
                 // after 2 second, make the little circle appear
                 setTimeout(function() {
                     d3.select(".little-circle").attr("opacity", 1);
+
                 });
+
+                setTimeout(function() {
+                    d3.select(".big-text")
+                        .append("textPath")
+                        .attr("xlink:href", "#myArc")
+                        .attr("startOffset", "50%")
+                        .text("With a Healthy Diet (ideal): 84.5 years");
+                }, 1000);
 
             }
 

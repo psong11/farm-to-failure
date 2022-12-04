@@ -186,24 +186,44 @@ class BarChart {
             .attr("class", "fry")
             .attr("x", d => x(d) + 50)
             .attr("y", d => y(useData[d]) - 150)
+            .attr("val", d => useData[d])
             .attr("width", x.bandwidth())
             .attr("height", d => 500 - y(useData[d]))
             .attr("fill", "#f5b51e");
 
         svg.selectAll("rect.fry")
             .on("mouseover", function (d) {
+                // get bar y value
+                let yValue = d3.select(this).attr("val");
+
                 d3.select(this)
                     .transition()
                     .duration(500)
                     .attr("height", d => 500 - y(useData[d]) + 150)
                     .attr("y", d => y(useData[d]) - 300);
+
+                // get x value of this
+                let xPosition = parseFloat(d3.select(this).attr("x")) + x.bandwidth() / 2;
+                
+                    svg.append("text")
+                        .attr("class", "value")
+                        .attr("x", xPosition)
+                        .attr("y", 330)
+                        .attr("text-anchor", "middle")
+                        .attr("font-size", "12px")
+                        .attr("fill", "white")
+                        .text(yValue + "%");
+
             })
             .on("mouseout", function (d) {
+                // remove text
+                svg.select(".value").remove("text");
                 d3.select(this)
                     .transition()
                     .duration(500)
                     .attr("height", d => 500 - y(useData[d]))
                     .attr("y", d => y(useData[d]) - 150);
+
             });
 
         // add title
@@ -303,6 +323,7 @@ class BarChart {
             .attr("class", "fry")
             .attr("x", d => x(d) + 50)
             .attr("y", d => y(newData[d]) - 150)
+            .attr("val", d => newData[d])
             .attr("width", x.bandwidth())
             .attr("height", d => 500 - y(newData[d]))
             .attr("fill", "#f5b51e");
@@ -310,19 +331,38 @@ class BarChart {
         // on hover make the bar longer
         svg.selectAll("rect.fry")
             .on("mouseover", function (d) {
+                // get bar y value
+                let yValue = d3.select(this).attr("val");
+
                 d3.select(this)
                     .transition()
-                    .duration(1000)
+                    .duration(500)
                     .attr("height", d => 500 - y(newData[d]) + 150)
                     .attr("y", d => y(newData[d]) - 300);
 
+                // get x value of this
+                let xPosition = parseFloat(d3.select(this).attr("x")) + x.bandwidth() / 2;
+
+                svg.append("text")
+                        .attr("class", "value")
+                        .attr("x", xPosition)
+                        .attr("y", 330)
+                        .attr("text-anchor", "middle")
+                        .attr("font-size", "12px")
+                        .attr("fill", "white")
+                        .text(yValue + "%");
+
             })
             .on("mouseout", function (d) {
+                // remove text
+                svg.select(".value").remove("text");
+
                 d3.select(this)
                     .transition()
-                    .duration(1000)
+                    .duration(500)
                     .attr("height", d => 500 - y(newData[d]))
                     .attr("y", d => y(newData[d]) - 150);
+
             });
 
         svg.select(".title")
