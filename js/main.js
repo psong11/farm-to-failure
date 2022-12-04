@@ -90,7 +90,6 @@ function mentalHealthMapTimeChange() {
 
 // on slider change, update the bar chart
 function opacSliderChange(value) {
-    console.log(value);
     d3.selectAll("#state-fill").attr("opacity", value / 100);
 }
 

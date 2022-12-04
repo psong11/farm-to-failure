@@ -132,7 +132,7 @@ class usMap{
 
                         // let number of restaurants
                         vis.tooltip.html("State: " + state2 + "<br/>" + "Obesity Rate: " + obesity + "%"
-                            + "<br/>" + "Number of Restaurants: " + vis.stateCount[state2]);
+                            + "<br/>" + "Restaurants (per 100k): " + vis.stateCount[state2]);
 
 
                     })
@@ -192,7 +192,7 @@ class usMap{
 
                     // let number of restaurants
                     vis.tooltip.html("State: Georgia" + "<br/>" + "Obesity Rate: " + 33.9 + "%"
-                        + "<br/>" + "Number of Restaurants: 347");
+                        + "<br/>" + "Restaurants (per 100k): 347");
                 })
                 .on("mouseout", function (d) {
                     // make the state name disappear
@@ -342,12 +342,12 @@ class usMap{
 
         // add y axis label
         vis.s.append("text")
-            .attr("x", -vis.height/2 + 40)
+            .attr("x", -vis.height/2 + 20)
             .attr("y", 9)
             .attr("transform", "rotate(-90)")
             .attr("fill", "white")
             .attr("font-size", 10)
-            .text("Number of Restaurants");
+            .text("Number of Restaurants per 100,000 People");
 
         // add x axis label
         vis.s.append("text")
@@ -494,7 +494,7 @@ class usMap{
 
 
                             vis.tooltip.html("State: " + state + "<br/>" + "Obesity Rate: " + obesity + "%" +
-                                "<br/>" + "Number of Restaurants: " + stateCount[state]);
+                                "<br/>" + "Restaurants (per 100k): " + stateCount[state]);
 
                         })
                         .on("mouseout", function (d) {
