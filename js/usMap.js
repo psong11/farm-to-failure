@@ -36,7 +36,7 @@ class usMap{
         vis.svg = d3.select("#us-map-div")
             .append("svg")
             .attr("width", 800)
-            .attr("height", 600)
+            .attr("height", 545)
             .attr("transform", `translate(${vis.margin.left}, ${vis.margin.top})`);
 
         vis.svg.append("rect")
@@ -448,6 +448,12 @@ class usMap{
             return d
 
         }).then(data => {
+            // regress obesity on number of restaurants
+            let x = [];
+            let y = [];
+
+
+
             vis.obesityData = data;
             console.log(data);
             // fill in the state by obesity level
