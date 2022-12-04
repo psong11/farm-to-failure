@@ -115,4 +115,113 @@ function opacSliderAnimate() {
 
 }
 
+function finalVis() {
+    // make an svg in the final-vis div
+    let svg = d3.selectAll(".final-vis")
+        .append("svg")
+        .attr("width", 600)
+        .attr("height", 600);
 
+    // color the circle red
+    svg
+        .append("circle")
+        .attr("class", "big-circle")
+        .attr("cx", 250)
+        .attr("cy", 250)
+        .attr("r", 200)
+        .attr("fill", "red");
+
+    // make another circle in the middle
+    svg
+        .append("circle")
+        .attr("class", "little-circle")
+        .attr("opacity", 0)
+        .attr("cx", 250)
+        .attr("cy", 250)
+        .attr("r", 133)
+        .attr("fill", "salmon");
+
+    // make a button
+    d3.select(".card-fin")
+        .append("button")
+        .attr("id", "final-button")
+        .text("Click to see the final visualization")
+        .on("click", function() {
+
+            // reset if the button is clicked again
+            if (d3.select(".big-circle").attr("fill") == "rgb(250, 128, 114)") {
+                // remove text
+                d3.select(".final-vis").selectAll("text").remove();
+                // revert
+                d3.select(".little-circle").attr("opacity", 0);
+
+                d3.select(".big-circle")
+                    .transition()
+                    .duration(1000)
+                    .attr("cx", 250)
+                    .attr("cy", 250)
+                    .attr("r", 200)
+                    .attr("fill", "red");
+
+                // change button text
+                d3.select("#final-button").text("Click to see the final visualization");
+
+            }
+            else {
+                //change button text
+                d3.select("#final-button").text("Revert");
+                // transition the big circle to be smaller
+                d3.select(".big-circle")
+                    .transition()
+                    .duration(1000)
+                    .attr("fill", "salmon")
+                    .attr("r", 100)
+                    .attr("cx", 150)
+                    .attr("cy", 150);
+
+                // make a different circle appear next to the big circle
+                d3.select(".little-circle")
+                    .transition()
+                    .duration(1000)
+                    .attr("opacity", 1)
+                    .attr("r", 149)
+                    .attr("fill", "red")
+                    .attr("cx", 350)
+                    .attr("cy", 350);
+
+                // add text to circles
+                svg
+                    .append("text")
+                    .transition()
+                    .duration(1000)
+                    .attr("class", "big-text")
+                    .attr("x", 150)
+                    .attr("y", 150)
+                    .attr("text-anchor", "middle")
+                    .attr("font-size", "10px")
+                    .attr("fill", "white")
+                    .text("Risk of Death without Fast Food");
+
+                svg
+                    .append("text")
+                    .transition()
+                    .duration(1000)
+                    .attr("class", "little-text")
+                    .attr("x", 350)
+                    .attr("y", 350)
+                    .attr("text-anchor", "middle")
+                    .attr("font-size", "20px")
+                    .attr("fill", "white")
+                    .text("Risk of Death with Fast Food");
+            }
+
+
+        });
+
+
+
+
+
+}
+
+finalVis();
