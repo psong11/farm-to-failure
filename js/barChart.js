@@ -205,6 +205,9 @@ class BarChart {
                 // get x value of this
                 let xPosition = parseFloat(d3.select(this).attr("x")) + x.bandwidth() / 2;
 
+                //round yValue to the 1st decimal
+                yValue = Math.round(yValue * 10) / 10;
+
                     svg.append("text")
                         .attr("class", "value")
                         .attr("x", xPosition)
@@ -342,6 +345,7 @@ class BarChart {
 
                 // get x value of this
                 let xPosition = parseFloat(d3.select(this).attr("x")) + x.bandwidth() / 2;
+                yValue = Math.round(yValue * 10) / 10;
 
                 svg.append("text")
                         .attr("class", "value")
