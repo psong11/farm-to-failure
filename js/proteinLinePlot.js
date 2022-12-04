@@ -269,13 +269,13 @@ class ProteinLinePlot {
             .style('opacity', .3)
             .style('stroke', 'black')
             .attr('cx', function(d) {
-                console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
-                console.log("type of x data", typeof(vis.x(d.GDPperCap)));
+                //console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
+                //console.log("type of x data", typeof(vis.x(d.GDPperCap)));
                 return vis.x(d.GDPperCap);
             })
             .attr('cy', function(d) {
-                console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
-                console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
+                //console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
+                //console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
                 return vis.y(d.ShareOfCalories);
             })
             .attr('r', 10);
@@ -294,13 +294,13 @@ class ProteinLinePlot {
             .style('opacity', .3)
             .style('stroke', 'black')
             .attr('cx', function(d) {
-                console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
-                console.log("type of x data", typeof(vis.x(d.GDPperCap)));
+                //console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
+                //console.log("type of x data", typeof(vis.x(d.GDPperCap)));
                 return vis.x(d.GDPperCap);
             })
             .attr('cy', function(d) {
-                console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
-                console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
+                //console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
+                //console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
                 return vis.y(d.ShareOfCalories);
             })
             .attr('r', 10);
@@ -319,13 +319,13 @@ class ProteinLinePlot {
             .style('opacity', .3)
             .style('stroke', 'black')
             .attr('cx', function(d) {
-                console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
-                console.log("type of x data", typeof(vis.x(d.GDPperCap)));
+                //console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
+                //console.log("type of x data", typeof(vis.x(d.GDPperCap)));
                 return vis.x(d.GDPperCap);
             })
             .attr('cy', function(d) {
-                console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
-                console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
+                //console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
+                //console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
                 return vis.y(d.ShareOfCalories);
             })
             .attr('r', 10);
@@ -344,13 +344,13 @@ class ProteinLinePlot {
             .style('opacity', .3)
             .style('stroke', 'black')
             .attr('cx', function(d) {
-                console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
-                console.log("type of x data", typeof(vis.x(d.GDPperCap)));
+                //console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
+                //console.log("type of x data", typeof(vis.x(d.GDPperCap)));
                 return vis.x(d.GDPperCap);
             })
             .attr('cy', function(d) {
-                console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
-                console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
+                //console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
+                //console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
                 return vis.y(d.ShareOfCalories);
             })
             .attr('r', 10);
@@ -369,13 +369,13 @@ class ProteinLinePlot {
             .style('opacity', .3)
             .style('stroke', 'black')
             .attr('cx', function(d) {
-                console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
-                console.log("type of x data", typeof(vis.x(d.GDPperCap)));
+                //console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
+                //console.log("type of x data", typeof(vis.x(d.GDPperCap)));
                 return vis.x(d.GDPperCap);
             })
             .attr('cy', function(d) {
-                console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
-                console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
+                //console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
+                //console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
                 return vis.y(d.ShareOfCalories);
             })
             .attr('r', 10);
@@ -394,13 +394,13 @@ class ProteinLinePlot {
             .style('opacity', .3)
             .style('stroke', 'black')
             .attr('cx', function(d) {
-                console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
-                console.log("type of x data", typeof(vis.x(d.GDPperCap)));
+                //console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
+                //console.log("type of x data", typeof(vis.x(d.GDPperCap)));
                 return vis.x(d.GDPperCap);
             })
             .attr('cy', function(d) {
-                console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
-                console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
+                //console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
+                //console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
                 return vis.y(d.ShareOfCalories);
             })
             .attr('r', 10);
