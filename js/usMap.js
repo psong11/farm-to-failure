@@ -359,6 +359,7 @@ class usMap{
             .attr("font-size", 10)
             .text("Obesity Prevalence (%)");
 
+
         // count how many observations there are for each state
         let stateCount = {};
 
