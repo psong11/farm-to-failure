@@ -122,13 +122,13 @@ class ProteinLinePlot {
         let continents = [
             {
                 continentName: "North America",
-                continentColor: "Green",
+                continentColor: "#7ef211",
                 active: false,
                 y: 0
             },
             {
                 continentName: "South America",
-                continentColor: "Orange",
+                continentColor: "#9b69ff",
                 active: false,
                 y: 30
             },
@@ -140,19 +140,19 @@ class ProteinLinePlot {
             },
             {
                 continentName: "Africa",
-                continentColor: "Red",
+                continentColor: "#ff4d4d",
                 active: false,
                 y: 90
             },
             {
                 continentName: "Oceania",
-                continentColor: "Blue",
+                continentColor: "#21edcf",
                 active: false,
                 y: 120
             },
             {
                 continentName: "Europe",
-                continentColor: "Magenta",
+                continentColor: "#ff26be",
                 active: false,
                 y: 150
             }
@@ -198,12 +198,12 @@ class ProteinLinePlot {
                 if (d.active === false) {
                     d.active = true;
                     d3.selectAll(`.${continentNameToClassName(d.continentName)}`)
-                        .style('opacity', .8);
+                        .style('opacity', 0.9);
                 }
                 else {
                     d.active = false;
                     d3.selectAll(`.${continentNameToClassName(d.continentName)}`)
-                        .style('opacity', .3);
+                        .style('opacity', .5);
                 }
             });
         vis.interactiveLegend.selectAll('text')
@@ -292,7 +292,7 @@ class ProteinLinePlot {
                 let correspondingCont = continents.find(cont => cont.continentName === d.Continent);
                 return correspondingCont.continentColor;
             })
-            .style('opacity', .3)
+            .style('opacity', .5)
             .attr('stroke-width', '1px')
             .style('stroke', 'black')
             .attr('r', 10)
@@ -339,10 +339,6 @@ class ProteinLinePlot {
                 if (year === 1990) {return vis.y(d.ShareOfCalories1990);}
                 else {return vis.y(d.ShareOfCalories2013)}
             });
-
-        console.log("NORTH AMERICA CIRCLES");
-
-
 
         vis.NorthAmericaCircles
             .enter()
@@ -355,7 +351,7 @@ class ProteinLinePlot {
 
                 return correspondingCont.continentColor;
             })
-            .style('opacity', .3)
+            .style('opacity', .5)
             .attr('stroke-width', '1px')
             .style('stroke', 'black')
             .attr('r', 10)
@@ -402,10 +398,6 @@ class ProteinLinePlot {
                 if (year === 1990) {return vis.y(d.ShareOfCalories1990);}
                 else {return vis.y(d.ShareOfCalories2013)}
             });
-
-        console.log("SOUTH AMERICA CIRCLES");
-
-
 
         vis.SouthAmericaCircles
             .enter()
@@ -418,7 +410,7 @@ class ProteinLinePlot {
 
                 return correspondingCont.continentColor;
             })
-            .style('opacity', .3)
+            .style('opacity', .5)
             .attr('stroke-width', '1px')
             .style('stroke', 'black')
             .attr('r', 10)
@@ -465,9 +457,6 @@ class ProteinLinePlot {
                 if (year === 1990) {return vis.y(d.ShareOfCalories1990);}
                 else {return vis.y(d.ShareOfCalories2013)}
             });
-
-        console.log("AFRICA CIRCLES");
-
 
         vis.AfricaCircles
             .enter()
@@ -480,7 +469,7 @@ class ProteinLinePlot {
 
                 return correspondingCont.continentColor;
             })
-            .style('opacity', .3)
+            .style('opacity', .5)
             .attr('stroke-width', '1px')
             .style('stroke', 'black')
             .attr('r', 10)
@@ -527,9 +516,6 @@ class ProteinLinePlot {
                 if (year === 1990) {return vis.y(d.ShareOfCalories1990);}
                 else {return vis.y(d.ShareOfCalories2013)}
             });
-
-        console.log("Oceania CIRCLES");
-
 
         vis.OceaniaCircles
             .enter()
@@ -542,7 +528,7 @@ class ProteinLinePlot {
 
                 return correspondingCont.continentColor;
             })
-            .style('opacity', .3)
+            .style('opacity', .5)
             .attr('stroke-width', '1px')
             .style('stroke', 'black')
             .attr('r', 10)
@@ -590,8 +576,6 @@ class ProteinLinePlot {
                 else {return vis.y(d.ShareOfCalories2013)}
             });
 
-        console.log("EUROPEAN CIRCLES");
-
         vis.EuropeCircles
             .enter()
             .append('circle')
@@ -603,7 +587,7 @@ class ProteinLinePlot {
 
                 return correspondingCont.continentColor;
             })
-            .style('opacity', .3)
+            .style('opacity', .5)
             .attr('stroke-width', '1px')
             .style('stroke', 'black')
             .attr('r', 10)
