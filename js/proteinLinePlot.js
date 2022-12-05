@@ -469,7 +469,6 @@ class ProteinLinePlot {
         console.log("AFRICA CIRCLES");
 
 
-
         vis.AfricaCircles
             .enter()
             .append('circle')
@@ -530,7 +529,6 @@ class ProteinLinePlot {
             });
 
         console.log("Oceania CIRCLES");
-
 
 
         vis.OceaniaCircles
@@ -594,8 +592,6 @@ class ProteinLinePlot {
 
         console.log("EUROPEAN CIRCLES");
 
-
-
         vis.EuropeCircles
             .enter()
             .append('circle')
@@ -653,7 +649,7 @@ class ProteinLinePlot {
             .attr('cy', function(d) {
                 if (year === 1990) {return vis.y(d.ShareOfCalories1990);}
                 else {return vis.y(d.ShareOfCalories2013)}
-            });;
+            });
 
     }
 

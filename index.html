@@ -19,7 +19,10 @@
                     <div class="col-md-12">
                         <img src="farm-s.png" alt="Farm to Failure" class="col-md-12" id="intro-img">
                         <h1 class="text-center">Farm to Failure</h1>
-                        <p class="text-center">A data story uncovering the relationship between food, health, and geography</p>
+                        <p class="text-center">A data story uncovering the relationship between food, health, and geography
+                            <br>
+                            <br>
+                            <i style="font-size: 8px; content-align: center;">For the best experience, use full screen. Refresh on window resize.</i></p>
                     </div>
                 </div>
             </div>
@@ -28,7 +31,7 @@
 
         <div class="section s2 section-slide">
                 <div class="slide">
-                    <div class="col-6" id="first-slide">
+                    <div class="col-5" id="first-slide">
                         <h3>
                             Where does obesity persist in the world?
                         </h3>
@@ -50,7 +53,7 @@
                         <br>
                         Click the next slide button on the bottom right to continue.
                     </div>
-                    <div class="col-6" style="float:right">
+                    <div class="col-6" style="float:left">
                         <div id="happy-meal-graph">
                         </div>
                         <div class="slide-container">
@@ -65,13 +68,13 @@
                         </div>
                         <button id="us-button" onclick="selectUS();">Highlight the United States</button>
                     </div>
-                    <div class="col-6" id="first-slide">
+                    <div class="col-6" id="first-slide" style="float:right">
                         <h3>
                             How does obesity trends vary by country?
                         </h3>
                         <div id="country-info">
                             <p>
-                            <li id="country-name"></li></li>
+                            <li id="country-name" style="font-size: 30px;"></li></li>
                             <li id="country-obesity">Obesity Level in 2016: </li>
                             <li id="country-initial">Obesity Level in 1975: </li>
                             <li id="country-change">Change in Obesity Level: </li>
@@ -80,17 +83,26 @@
                         </div>
                         <br>
                         <p>
-                            By using the slide you will see that the Oceanian country Nauru maintains the highest
-                            obesity rate in the world from 1975 to 2016. Most of the other top 10 countries are also in Oceania, which highlights
-                            the importance of geography in the obesity epidemic.
+                            <b>Hover over any line to see the obesity statistics.</b>
+                            <br>
                             <br>
 
-                            According to the World Health Organization, the advent of fast food and the rise of sedentary lifestyles are
-                            the main causes of the obesity epidemic.
+                            The obesity trend over time is clear. There is not a single country in the world that has not seen an increase in obesity rates
+                            from 1975 to 2016. It persists that many countries in Oceania have the highest obesity rates, and
+                            highest percent change in obesity rates. This is likely due to the fact that many of these countries are island nations
+                            that are not as accessible as other countries. This makes it easier for people to eat unhealthy foods and not exercise. <b> Around
+                            the 1970s, fast food companies started to take advantage of the fact that many families
+                            needed affordable meals and needed to eat them quickly. </b> We can see the subsequent, quick rise in obesity rates worldwide.
+                            <br>
+                            <br>
+
+                            In the next view, we will look at the relationship between geography and various mental health disorders.
+                            It follows that the same countries that have the highest obesity rates also have the highest rates of depression and anxiety.
+
                         </p>
 
                         <br>
-                        Click the next slide button on the bottom right to continue.
+                        <b> Scroll down to continue. </b>
                     </div>
                 </div>
         </div>
@@ -140,9 +152,11 @@
                 <div class="row intro-part">
                     <div class="col-md-12">
                         <img src="farm-s.png" alt="Farm to Failure" class="col-md-12" id="intro-img">
-                        <h1 class="text-center">What can we do?</h1>
-                        <p class="text-center">[Insert some research that may incentivize healthier eating],
-                            chetty study.</p>
+                        <h1 class="text-center">What may cause these problems?</h1>
+                        <p class="text-center">From the last two sections, we can see that obesity and mental health
+                            issues are a persistent problem in our world, with the obesity rate rising at staggering rates
+                            <b>in every single country</b>. We will, hereafter, show the correlation between fast food consumption and obesity rates in the United States.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -158,7 +172,7 @@
                     <!-- make a slider that changes opacity -->
                         <div class="slider-button">
                             <!-- make a button -->
-                            <button id="us-map-button" onclick="opacSliderAnimate();">Play Animation</button>
+                            <button id="us-map-button" onclick="opacSliderAnimate(); ">Play Animation</button>
                         </div>
                         <div class="slide-container">
                             <input type="range" min="0" max="100" value="100" class="myRange2" onchange="opacSliderChange(this.value)">
@@ -168,14 +182,12 @@
                     <div class="col-6">
                         <div id="scatter-div">
                         </div>
-                        <div id="us-obesity-div">
-                        </div>
-                        <p style="margin-top: 60px;">In this section, we visualize and discuss fast food restaurant by geography along with
+                        <p class="us-info" style="margin-top: 60px; float: left;">In this section, we visualize and discuss fast food restaurant by geography along with
                             obesity rates by state. There is a clear positive correlation between
                             fast food and obesity within the United States. <b>Hover over a dot in the scatter plot to reveal the
-                                fast food restaurants in that given state. Use the animation or slider below to uncover the correlation between obesity and fast food in the United States.</b>
+                                fast food restaurants (per 100k people) in that given state. Use the animation or slider below to uncover the correlation between obesity and fast food in the United States.</b>
                         </p>
-                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -189,7 +201,9 @@
                         <div class="col-md-12">
                             <img src="farm-s.png" alt="Farm to Failure" class="col-md-12" id="intro-img">
                             <h1 class="text-center">Implications for the next generation?</h1>
-                            <p class="text-center">Let's examine how dependence on cheap nutrition can influence the well-being of individuals around the globe.</p>
+                            <p class="text-center">Let's examine how dependence on cheap nutrition can influence the well-being of individuals around the globe.
+                                <b>Click the right arrow below to move on.</b>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -224,9 +238,37 @@
 
 
         <div class="section s7 section-slide section-grey">
-            <h1>Resolution</h1>
-            <p>In the end, we just want to reiterate our message that fast food has negative effects on society, albeit very tasty to eat once in a while. It is important that society is aware of the effects that it has and the correlations it implies with other health factors like mental health. Long story short, if we care about our future generations, we need to change the way we look at fast food.</p>
-            <p>All visualization designs are located in the Process Book</p>
+            <div class="row">
+                <div class="col-5" style="float:right;">
+                    <div class="final-vis">
+
+                    </div>
+                </div>
+
+            <div class="col-6 card-fin" style="float:right;">
+            <h3>What happens if we cut fast and processed foods out?</h3>
+            <p>
+                <i style="font-size: 6px;">(1): Fadnes LT, Økland JM, Haaland ØA, Johansson KA (2022) Correction: Estimating impact of food choices on life expectancy: A modeling study. PLOS Medicine 19(3): e1003962. https://doi.org/10.1371/journal.pmed.1003962 </i>
+                <br>
+                In the end, we just want to reiterate our message that fast food has negative effects on society, albeit very tasty to eat once in a while.
+                It is important that society is aware of the effects that it has and the correlations it implies with other health factors like mental health.
+                 <br>
+                <br>
+                High blood pressure is the leading cause of death in the world with millions of deaths each year.
+                It is crucial to be aware of the effects of fast food and eating out on your health. If we care about our health, we should care about what we eat.
+                If we care about our future generations, we need to change the way we look at fast food.
+                <br>
+                <br>
+                Based on data from the Global Burden of Disease study, researchers have estimated (with statistical significance)
+                that reducing the consumption of fast food and eating out has significant implications on
+                death rates from cardiovascular disease, cancer, and diabetes, and subsequently life expectancy.
+                <br>
+                <br>
+                <b>Click the button below to see how the switch to an optimal diet would impact the life expectancy
+                    of the average adult in the United States </b>
+            </p>
+            </div>
+        </div>
         </div>
 
         <div class="section s8 section-slide section-blue">
@@ -254,10 +296,12 @@
             </div>
             <div class="slide">
                 <h1>Data credit</h1>
-                <p>World Health Organization</p>
-                <p>World Bank</p>
-                <p>World Obesity Federation</p>
+                <p>Opportunity Atlas</p>
+                <p>Center for Disease and Control</p>
+                <p>Kaggle: ProgrammerDai</p>
                 <p>World Economic Forum</p>
+                <p>World Health Organization</p>
+                <p>Images and Icons: Adobe Images</p>
             </div>
         </div>
     </div>
@@ -281,8 +325,8 @@
             easing: 'linear',
             scrollingSpeed: 1000,
             scrollOverflow: true,
-            navigationTooltips: ['Introduction', 'Obesity', 'Mental Health', 'Fast and Fried Food', 'America',
-                'What to Do?', 'Team Members'],
+            navigationTooltips: ['Introduction', 'Obesity', 'Mental Health', 'Problem Outline', 'America', 'Next Generation',
+                'Resolution', 'Team Members'],
             showActiveTooltip: true,
         });
     </script>
