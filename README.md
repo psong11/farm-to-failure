@@ -6,6 +6,9 @@ Bristol Fales-Hill, Paul Song, and Noah List
 Link to website:
 https://psong11.github.io/farm-to-failure/
 
+Link to video:
+https://www.youtube.com/watch?v=PWgxv4mgVJ0
+
 October - December 2022
 
 # Abstract
