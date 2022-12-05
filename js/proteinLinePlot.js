@@ -6,7 +6,6 @@ class ProteinLinePlot {
     }
 
     initVis() {
-        console.log("INITIALIZING PROTEIN LINE PLOT")
         let vis = this;
 
         vis.margin = {top: 40, right: 40, bottom: 40, left: 40};
@@ -104,12 +103,12 @@ class ProteinLinePlot {
 
             // potentially wrangle data according to continent
 
-            console.log("Asia Data: ", vis.AsiaData);
+            /*console.log("Asia Data: ", vis.AsiaData);
             console.log("NA Data: ", vis.NorthAmericaData);
             console.log("SA Data: ", vis.SouthAmericaData);
             console.log("Africa Data: ", vis.AfricaData);
             console.log("Oceania Data: ", vis.OceaniaData);
-            console.log("Europe Data: ", vis.EuropeData);
+            console.log("Europe Data: ", vis.EuropeData);*/
 
             vis.updateVis(year);
         })

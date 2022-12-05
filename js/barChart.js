@@ -25,7 +25,7 @@ class BarChart {
             return d.Sex === "Both sexes" ? d : null;
 
         }).then(data => {
-            console.log(data);
+            // console.log(data);
 
             // convert the data into an array of dictionaries by year with country name and obesity
             displayData = [];
@@ -40,7 +40,7 @@ class BarChart {
                 });
                 displayData.push(yearData);
             });
-            console.log("data here", displayData);
+            // console.log("data here", displayData);
             this.data = displayData;
 
             this.createBarChart(displayData, year);
@@ -67,7 +67,7 @@ class BarChart {
 
         // append the values
         let topTenValues = topTen.map(d => useData[d]);
-        console.log(topTenValues);
+        // console.log(topTenValues);
 
         // build dictionary of country and values
         let topTenData = {};
@@ -374,7 +374,7 @@ class BarChart {
     }
 
     createAreaChart(data) {
-        console.log(data);
+        // console.log(data);
         // create a new svg
         let svg = d3.select("#happy-area-graph")
             .append("svg")
@@ -418,14 +418,14 @@ class BarChart {
 
         // iterate through data[0]
         let keys = Object.keys(data[0]).filter(d => d !== "Year");
-        console.log(keys);
+        // console.log(keys);
 
         // for each key make a dictionary of value
         let dataDict = {};
         for (let i = 0; i < keys.length; i++) {
             dataDict[keys[i]] = data.map(d => d[keys[i]]);
         };
-        console.log(dataDict);
+        // console.log(dataDict);
 
         // make an array from 1975 to 2016
         let years = [];
