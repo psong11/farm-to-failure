@@ -1,5 +1,5 @@
 let barChart, bar2, mentalHealthMap, displayData,
-unsMap, mentalHealthBarChart, proteinLinePlot;
+unsMap, mentalHealthBarChart, proteinScatterPlot;
 
 let selectedTime = 1990;
 let selectedState = '';
@@ -21,7 +21,7 @@ function initMainPage(dataArray) {
     barChart = new BarChart();
     mentalHealthMap = new MentalHealthMap('mental-health-div', dataArray[0]);
     mentalHealthBarChart = new MentalHealthBarChart('mentalHealthBarChart');
-    proteinLinePlot = new ProteinLinePlot('proteinSupplyScatterLinePlot')
+    proteinScatterPlot = new ProteinScatterPlot('proteinSupplyScatterLinePlot')
     unsMap = new usMap();
 }
 
@@ -86,8 +86,8 @@ function mentalHealthMapTimeChange() {
     mentalHealthBarChart.wrangleData();
 }
 
-function proteinLinePlotTimeChange(year) {
-    proteinLinePlot.wrangleData(year);
+function proteinScatterPlotTimeChange(year) {
+    proteinScatterPlot.wrangleData(year);
 }
 
 
