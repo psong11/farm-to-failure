@@ -1,0 +1,26 @@
+Description of our data and their respective fields.
+
+Paul's Visualizations
+---------------------
+Mental Health Map: This visualization utilized the prevalence by mental and substance use disorder csv.
+Here are the fields explained:
+Entity: Name of country
+Year: Year that the data represents
+PrevalenceAnxietydisorders: Percentage of population that has an anxiety disorder.
+PrevalenceDrugusedisorders: Percentage of population that has a drug use disorder.
+PrevalenceDepressivedisorders: Percentage of population that has a depressive disorder.
+PrevalenceAlcoholusedisorders: Percentage of population that has an alcohol use disorder.
+
+Protein vs GDP Line Plot: This visualization utilized the share of dietary energy derived from protein vs gdp per capita csv.
+Here are the fields explained:
+Entity: Name of country
+ShareOfCalories1990: Percentage of caloric intake that is protein of one individual from said country in 1990.
+GDPperCap1990: GDP per capita of said country in 1990.
+Continent: Continent that said country is a part of.
+ShareOfCalories2013: Percentage of caloric intake that is protein of one individual from said country in 2013 to compare against 1990 data.
+GDPperCap2013: GDP per capita of said country in 1990.
+
+
+Noah's Visualizations
+---------------------
+
