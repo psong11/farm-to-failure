@@ -23,7 +23,7 @@ class usMap{
             return d
 
         }).then(data => {
-            console.log(data);
+            // console.log(data);
             this.data = data;
             this.updateVis();
             this.makeScatter();
@@ -91,7 +91,7 @@ class usMap{
             return d
 
         }).then(data => {
-            console.log(data);
+            // console.log(data);
             // set georgia color
             // fill in the state by obesity level
             for (let i = 0; i < data.length; i++) {
@@ -455,7 +455,7 @@ class usMap{
 
 
             vis.obesityData = data;
-            console.log(data);
+            // console.log(data);
             // fill in the state by obesity level
             for (let i = 0; i < data.length; i++) {
                 let state = data[i].State;

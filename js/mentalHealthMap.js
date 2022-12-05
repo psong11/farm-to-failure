@@ -7,11 +7,10 @@ class MentalHealthMap {
     }
 
     initVis() {
-        console.log("initializing...");
         let vis = this;
 
         vis.margin = {top: 5, right: 5, bottom: 5, left: 5};
-        console.log("Parent: ", document.getElementById(vis.parentElement).getBoundingClientRect());
+        // console.log("Parent: ", document.getElementById(vis.parentElement).getBoundingClientRect());
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -37,8 +36,8 @@ class MentalHealthMap {
             .attr("stroke","rgba(129,129,129,0.35)")
             .attr("d", vis.path);
 
-        console.log("vis.geoData: ", vis.geoData);
-        console.log("vis.geoData.objects: ", vis.geoData.objects);
+        // console.log("vis.geoData: ", vis.geoData);
+        // console.log("vis.geoData.objects: ", vis.geoData.objects);
 
         vis.world = topojson.feature(vis.geoData, vis.geoData.objects.countries).features;
 
@@ -117,7 +116,6 @@ class MentalHealthMap {
     }
 
     wrangleData() {
-        console.log("wrangling...");
         let vis = this;
 
         vis.countryNames = [];
@@ -126,7 +124,7 @@ class MentalHealthMap {
             vis.countryNames.push(country[0]);
         });
 
-        console.log("countries on map: ", vis.countryNames);
+        // console.log("countries on map: ", vis.countryNames);
 
         vis.displayData = [];
         vis.displayDataCountryNames = [];
@@ -134,7 +132,7 @@ class MentalHealthMap {
         vis.depressiveAvg = 0;
         vis.alcAvg = 0;
         vis.drugAvg = 0;
-        console.log("loading...");
+        // console.log("loading...");
 
         d3.csv("data/prevalence-by-mental-and-substance-use-disorder.csv", d => {
             d.Year = +d.Year;
@@ -172,7 +170,7 @@ class MentalHealthMap {
             // console.log("displayDataCountryNames in wrangle: ", vis.displayDataCountryNames);
 
             vis.colors.domain([0, d3.max(vis.displayData, d => d[selectedCategory])]);
-            console.log("done loading...");
+            // console.log("done loading...");
             vis.updateVis();
         })
 
@@ -180,7 +178,7 @@ class MentalHealthMap {
     }
 
     updateVis() {
-        console.log("updating...");
+        // console.log("updating...");
         let vis = this;
 
         vis.title
