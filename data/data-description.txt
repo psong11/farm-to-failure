@@ -1,0 +1,25 @@
+Here is a description of the data that we obtained and used for our project.
+
+Paul's Visualizations
+---------------------
+Global Mental Health Map Data
+This visualization utilized the prevalence-by-mental-and-substance-use-disorder.csv and here are the fields explained:
+Entity: Country Name
+Year: Year that is represented by the data
+PrevalenceAnxietydisorders: Percentage of population with an anxiety disorder
+PrevalenceDrugusedisorders: Percentage of population with a drug use disorder
+PrevalenceDepressivedisorders: Percentage of population with a depression disorder
+PrevalenceAlcoholusedisorders: Percentage of population with a alcohol use disorder
+
+Protein and Economy Scatter Plot
+This visualization utlilized the shareofdietaryenergyderivedfromproteinvsgdppercapita.csv and here are the fields explained:
+Entity: Country Name
+ShareOfCalories1990: The percentage of diet calories that are proteins collected in said country in year 1990.
+GDPperCap1990: The GDP per capita of said country in 1990.
+Continent: The continent that the country can be found in.
+ShareOfCalories2013: The percentage of diet calories that are proteins collected in said country in year 2013 in order to show change over time.
+GDPperCap2013: The GDP per capita of said country in 2013.
+
+
+Noah's Visualizations
+---------------------

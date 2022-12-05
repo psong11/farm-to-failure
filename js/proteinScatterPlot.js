@@ -1,4 +1,4 @@
-class ProteinLinePlot {
+class ProteinScatterPlot {
     constructor(parentElement) {
         this.parentElement = parentElement;
 
