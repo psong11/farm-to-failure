@@ -354,7 +354,7 @@ class usMap{
         // add x axis label
         vis.s.append("text")
             .attr("x", 380)
-            .attr("y", 496)
+            .attr("y", 396)
             .attr("fill", "white")
             .attr("font-size", 10)
             .text("Obesity Prevalence (%)");
