@@ -86,6 +86,10 @@ function mentalHealthMapTimeChange() {
     mentalHealthBarChart.wrangleData();
 }
 
+function proteinLinePlotTimeChange(year) {
+    proteinLinePlot.wrangleData(year);
+}
+
 
 
 // on slider change, update the bar chart

@@ -201,8 +201,7 @@
                         <div class="col-md-12">
                             <img src="farm-s.png" alt="Farm to Failure" class="col-md-12" id="intro-img">
                             <h1 class="text-center">Implications for the next generation?</h1>
-                            <p class="text-center">Let's examine how poverty, thus dependence on cheap nutrition,
-                                influences upward socioeconomic mobility in America.
+                            <p class="text-center">Let's examine how dependence on cheap nutrition can influence the well-being of individuals around the globe.
                                 <b>Click the right arrow below to move on.</b>
                             </p>
                         </div>
@@ -210,9 +209,28 @@
                 </div>
             </div>
             <div class="slide">
-                <h1>Socioeconomic Mobility in the United States</h1>
-                <p>The share of per capita dietary energy derived from protein, measured as the daily caloric supply from protein as a percentage of total caloric supply, versus GDP per capita measured in constant international $.</p>
-                <div id="proteinSupplyScatterLinePlot" style="height: 70vh; width: 70vw; border: 2px solid white; border-radius: 5px">
+                <h1>The Globally Observable Relationship between Protein and Economy</h1>
+                <p>This visualization displays the share of per capita dietary energy derived from protein, measured as the daily caloric supply from protein as a percentage of total caloric supply, versus GDP per capita measured in constant international $.</p>
+                <div class="row" style="justify-content: center; margin-bottom: 10px">
+                    <button type="button" onclick="proteinLinePlotTimeChange(1990)" style="margin-right: 10px">1990</button>
+                    <button type="button" onclick="proteinLinePlotTimeChange(2013)" style="margin-left: 10px">2013</button>
+                </div>
+                <div class="row">
+                    <div id="proteinSupplyScatterLinePlot" style="height: 70vh; width: 65vw"></div>
+                    <div style="height: 70vh; width: 27vw; margin-left: 20px">
+                        <h3>As you interact with the visualization, <strong>notice 2 things.</strong></h3>  <br>
+                        <strong>1.</strong> There is a generally <strong>positive</strong>, although subtle, relationship between GDP per capita and the share of calories based on protein %. <br>
+                        For example, countries with higher GDP such as in Europe tend to have higher percentages of protein calories than countries with lower GDP. <br><br>
+                        <strong>2.</strong> If you focus on one country and toggle from 1990 to 2013, you will notice that many countries whose GDP per capita has increased over time also has seen
+                        a rise in their share of calories based on protein percentage. <br><br>
+                        It is difficult to draw a causal relationship simply by looking at this visualization, but a correlation is clear. Perhaps one explanation is that countries
+                        whose residents have a relatively high income will be able to buy/cook protein-rich foods and meats from their grocery store, whereas their less fortunate
+                        counterparts may resort to eating cheap and convenient fast food which usually tends to be fatty and low in protein. <br><br>
+
+                        Reducing fast food consumption and promoting protein rich diets is a hallmark characteristic of well-off countries. By promoting this pattern in the US and around the globe,
+                        we can promote a larger generational shift towards healthier bodies, healthier minds, and healthier economic societies.
+
+                    </div>
                 </div>
             </div>
 

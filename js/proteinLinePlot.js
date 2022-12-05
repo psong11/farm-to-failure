@@ -48,13 +48,18 @@ class ProteinLinePlot {
 
         vis.interactiveLegend = vis.svg.append('g')
             .attr("class", "interactiveLegend")
-            .attr("style", "outline: thin solid black;")
+            .attr("style", "outline: thin solid white;")
             .attr("transform", `translate(${vis.width - 112}, ${vis.height - 200})`);
 
-        this.wrangleData();
+        vis.title = vis.svg.append('g')
+            .attr('class', 'title')
+            .attr("transform", `translate(${(vis.width / 2)-170}, 0)`)
+            .append('text');
+
+        this.wrangleData(1990);
     }
 
-    wrangleData() {
+    wrangleData(year) {
         let vis = this;
 
         vis.displayData = [];
@@ -67,9 +72,11 @@ class ProteinLinePlot {
         vis.EuropeData = [];
 
         d3.csv("data/shareofdietaryenergyderivedfromproteinvsgdppercapita.csv", d => {
-            d.Year = +d.Year;
-            d.ShareOfCalories = +d.ShareOfCalories;
-            d.GDPperCap = +d.GDPperCap;
+
+            d.GDPperCap2013 = +d.GDPperCap2013;
+            d.ShareOfCalories2013 = +d.ShareOfCalories2013;
+            d.ShareOfCalories1990 = +d.ShareOfCalories1990;
+            d.GDPperCap1990 = +d.GDPperCap1990;
 
             return d;
         }).then(data => {
@@ -104,12 +111,12 @@ class ProteinLinePlot {
             console.log("Oceania Data: ", vis.OceaniaData);
             console.log("Europe Data: ", vis.EuropeData);
 
-            vis.updateVis();
+            vis.updateVis(year);
         })
 
     }
 
-    updateVis() {
+    updateVis(year) {
         let vis = this;
 
         let continents = [
@@ -145,7 +152,7 @@ class ProteinLinePlot {
             },
             {
                 continentName: "Europe",
-                continentColor: "Brown",
+                continentColor: "Magenta",
                 active: false,
                 y: 150
             }
@@ -153,9 +160,9 @@ class ProteinLinePlot {
 
         vis.svg.append('text')
             .text('Click Box to Highlight Data by Continent')
-            .attr('font-size', 12)
-            .attr('fill', 'black')
-            .attr("transform", `translate(${vis.width - 227}, ${vis.height - 215})`);
+            .attr('font-size', 15)
+            .attr('fill', 'white')
+            .attr("transform", `translate(${vis.width - 280}, ${vis.height - 215})`);
 
         function continentNameToClassName(continentName) {
             if (continentName === 'Asia') {
@@ -178,39 +185,6 @@ class ProteinLinePlot {
             }
         }
 
-        /*
-        continents.forEach((continent,i) => {
-            console.log("CONTINENT: ", continent, "i: ", i);
-            vis.interactiveLegend.append('rect')
-                .attr('width', 20)
-                .attr('height', 20)
-                .attr('x', 0)
-                .attr('y', 30*i)
-                .attr('fill', continent.continentColor)
-                .on('click', function(event, d) {
-                    let activeContinent = continents.find(cont => cont.continentName === continent);
-                    console.log("Active Continent: ", activeContinent);
-                    if (activeContinent.active === false) {
-                        activeContinent.active = true;
-                        d3.selectAll(`.${continentNameToClassName(continent.continentName)}`)
-                            .style('opacity', .8);
-                    }
-                    else {
-                        activeContinent.active = false;
-                        d3.selectAll(`.${continentNameToClassName(continent.continentName)}`)
-                            .style('opacity', .3);
-                    }
-                });
-
-            vis.interactiveLegend.append('text')
-                .attr('x', 30)
-                .attr('y', 30*i+15)
-                .attr('font-size', 12)
-                .attr('fill', 'black')
-                .text(continent.continentName);
-        })
-         */
-
         vis.interactiveLegend.selectAll('rect')
             .data(continents)
             .enter()
@@ -221,7 +195,6 @@ class ProteinLinePlot {
             .attr('y', d => d.y)
             .attr('fill', d => d.continentColor)
             .on('click', function(event, d) {
-                console.log('d:', d);
                 if (d.active === false) {
                     d.active = true;
                     d3.selectAll(`.${continentNameToClassName(d.continentName)}`)
@@ -240,50 +213,141 @@ class ProteinLinePlot {
             .attr('x', 30)
             .attr('y', d => (d.y)+15)
             .attr('font-size', 12)
-            .attr('fill', 'black')
+            .attr('fill', 'white')
             .text(d => d.continentName);
 
+        /*if (year === 1990) {
+            vis.x
+                .domain(d3.extent(vis.displayData, d=>d.GDPperCap1990));
+            vis.y
+                .domain([0, d3.max(vis.displayData, d => d.ShareOfCalories1990)]);
+        }
+        else if (year === 2013) {
+            vis.x
+                .domain(d3.extent(vis.displayData, d=>d.GDPperCap2013));
+            vis.y
+                .domain([0, d3.max(vis.displayData, d => d.ShareOfCalories2013)]);
+        }*/
         vis.x
-            .domain(d3.extent(vis.displayData, d=>d.GDPperCap));
-
+            .domain(d3.extent(vis.displayData, d=>d.GDPperCap1990));
         vis.y
-            .domain([0, d3.max(vis.displayData, d => d.ShareOfCalories)]);
+            .domain([0, d3.max(vis.displayData, d => d.ShareOfCalories1990)]);
 
         vis.svg.select('.x-axis')
-            .call(vis.xAxis);
+            .transition().duration(2000).call(vis.xAxis);
+        vis.svg.select('.x-axis')
+            .append('text')
+            .text('GDP PER CAPITA IN INTL $')
+            .attr('x', (vis.width / 2))
+            .attr('y', 27)
+            .attr('fill', 'white')
+            .attr('font-size', 12);
 
         vis.svg.select('.y-axis')
-            .call(vis.yAxis);
+            .transition().duration(2000).call(vis.yAxis);
+        vis.svg.select('.y-axis')
+            .append('text')
+            .text('SHARE OF CALORIES BASED ON PROTEIN IN %')
+            .attr('x', 260)
+            .attr('y', -10)
+            .attr('fill', 'white')
+            .attr('font-size', 12);
+
+        vis.title
+            .text(`Effect of GDP on Protein Intake (${year})`)
+            .attr('fill', 'white');
 
         vis.AsiaCircles = vis.svg.selectAll('.asia')
-            .data(vis.AsiaData)
+            .data(vis.AsiaData);
+        vis.NorthAmericaCircles = vis.svg.selectAll('.northamerica')
+            .data(vis.NorthAmericaData);
+        vis.SouthAmericaCircles = vis.svg.selectAll('.southamerica')
+            .data(vis.SouthAmericaData);
+        vis.AfricaCircles = vis.svg.selectAll('.africa')
+            .data(vis.AfricaData);
+        vis.OceaniaCircles = vis.svg.selectAll('.oceania')
+            .data(vis.OceaniaData);
+        vis.EuropeCircles = vis.svg.selectAll('.europe')
+            .data(vis.EuropeData);
+
+        vis.AsiaCircles.exit().remove().transition().duration(2000)
+
+        vis.NorthAmericaCircles.exit().remove().transition().duration(2000)
+
+        vis.SouthAmericaCircles.exit().remove().transition().duration(2000)
+
+        vis.AfricaCircles.exit().remove().transition().duration(2000)
+
+        vis.OceaniaCircles.exit().remove().transition().duration(2000)
+
+        vis.EuropeCircles.exit().remove().transition().duration(2000)
+
+
+        vis.AsiaCircles
             .enter()
             .append('circle')
+            .merge(vis.AsiaCircles)
             .attr('class', 'circle asia')
             .style('fill', function(d) {
                 let correspondingCont = continents.find(cont => cont.continentName === d.Continent);
-                // TODO find out why all of the data circles arent showing up
-
                 return correspondingCont.continentColor;
             })
             .style('opacity', .3)
+            .attr('stroke-width', '1px')
             .style('stroke', 'black')
+            .attr('r', 10)
+            .on('mouseover', function(event, d) {
+                // console.log("Country BEING TOOLTIPPED", d);
+                d3.select(this)
+                    .attr('stroke-width', '4px')
+                    .attr('fill', 'white')
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
+                <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
+                     <h3> ${d.Entity} <h3>
+                     <h4> Continent: ${d.Continent} </h4>
+                     <h4> GDP Per Capita (1990): ${"$"+d.GDPperCap1990.toFixed(2)} </h4>
+                     <h4> GDP Per Capita (2013): ${"$"+d.GDPperCap2013.toFixed(2)} </h4>
+                     <h4> Share of Dietary Calories Derived From Protein (1990): ${d.ShareOfCalories1990.toFixed(2)+"%"}</h4>
+                     <h4> Share of Dietary Calories Derived From Protein (2013): ${d.ShareOfCalories2013.toFixed(2)+"%"}</h4>
+                 </div>`)
+            })
+            .on('mouseout', function(event, d){
+                d3.select(this)
+                    .attr('stroke-width', '1px')
+                    .attr("fill", function(d){
+                        let correspondingCont = continents.find(cont => cont.continentName === d.Continent);
+                        // TODO find out why all of the data circles arent showing up
+                        return correspondingCont.continentColor;
+                    })
+
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            })
+            .transition().duration(2000)
             .attr('cx', function(d) {
-                //console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
-                //console.log("type of x data", typeof(vis.x(d.GDPperCap)));
-                return vis.x(d.GDPperCap);
+                if (year === 1990) {return vis.x(d.GDPperCap1990);}
+                else {return vis.x(d.GDPperCap2013);}
             })
             .attr('cy', function(d) {
-                //console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
-                //console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
-                return vis.y(d.ShareOfCalories);
-            })
-            .attr('r', 10);
+                if (year === 1990) {return vis.y(d.ShareOfCalories1990);}
+                else {return vis.y(d.ShareOfCalories2013)}
+            });
 
-        vis.NorthAmericaCircles = vis.svg.selectAll('.northamerica')
-            .data(vis.NorthAmericaData)
+        console.log("NORTH AMERICA CIRCLES");
+
+
+
+        vis.NorthAmericaCircles
             .enter()
             .append('circle')
+            .merge(vis.NorthAmericaCircles)
             .attr('class', 'circle northamerica')
             .style('fill', function(d) {
                 let datumContinent = d.Continent;
@@ -292,23 +356,61 @@ class ProteinLinePlot {
                 return correspondingCont.continentColor;
             })
             .style('opacity', .3)
+            .attr('stroke-width', '1px')
             .style('stroke', 'black')
+            .attr('r', 10)
+            .on('mouseover', function(event, d) {
+                // console.log("Country BEING TOOLTIPPED", d);
+                d3.select(this)
+                    .attr('stroke-width', '4px')
+                    .attr('fill', 'white')
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
+                <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
+                     <h3> ${d.Entity} <h3>
+                     <h4> Continent: ${d.Continent} </h4>
+                     <h4> GDP Per Capita (1990): ${"$"+d.GDPperCap1990.toFixed(2)} </h4>
+                     <h4> GDP Per Capita (2013): ${"$"+d.GDPperCap2013.toFixed(2)} </h4>
+                     <h4> Share of Dietary Calories Derived From Protein (1990): ${d.ShareOfCalories1990.toFixed(2)+"%"}</h4>
+                     <h4> Share of Dietary Calories Derived From Protein (2013): ${d.ShareOfCalories2013.toFixed(2)+"%"}</h4>
+                 </div>`)
+            })
+            .on('mouseout', function(event, d){
+                d3.select(this)
+                    .attr('stroke-width', '1px')
+                    .attr("fill", function(d){
+                        let correspondingCont = continents.find(cont => cont.continentName === d.Continent);
+                        // TODO find out why all of the data circles arent showing up
+                        return correspondingCont.continentColor;
+                    })
+
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            })
+            .transition().duration(2000)
             .attr('cx', function(d) {
-                //console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
-                //console.log("type of x data", typeof(vis.x(d.GDPperCap)));
-                return vis.x(d.GDPperCap);
+                if (year === 1990) {return vis.x(d.GDPperCap1990);}
+                else {return vis.x(d.GDPperCap2013);}
             })
             .attr('cy', function(d) {
-                //console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
-                //console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
-                return vis.y(d.ShareOfCalories);
-            })
-            .attr('r', 10);
+                if (year === 1990) {return vis.y(d.ShareOfCalories1990);}
+                else {return vis.y(d.ShareOfCalories2013)}
+            });
 
-        vis.SouthAmericaData = vis.svg.selectAll('.southamerica')
-            .data(vis.SouthAmericaData)
+        console.log("SOUTH AMERICA CIRCLES");
+
+
+
+        vis.SouthAmericaCircles
             .enter()
             .append('circle')
+            .merge(vis.SouthAmericaCircles)
             .attr('class', 'circle southamerica')
             .style('fill', function(d) {
                 let datumContinent = d.Continent;
@@ -317,23 +419,60 @@ class ProteinLinePlot {
                 return correspondingCont.continentColor;
             })
             .style('opacity', .3)
+            .attr('stroke-width', '1px')
             .style('stroke', 'black')
+            .attr('r', 10)
+            .on('mouseover', function(event, d) {
+                // console.log("Country BEING TOOLTIPPED", d);
+                d3.select(this)
+                    .attr('stroke-width', '4px')
+                    .attr('fill', 'white')
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
+                <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
+                     <h3> ${d.Entity} <h3>
+                     <h4> Continent: ${d.Continent} </h4>
+                     <h4> GDP Per Capita (1990): ${"$"+d.GDPperCap1990.toFixed(2)} </h4>
+                     <h4> GDP Per Capita (2013): ${"$"+d.GDPperCap2013.toFixed(2)} </h4>
+                     <h4> Share of Dietary Calories Derived From Protein (1990): ${d.ShareOfCalories1990.toFixed(2)+"%"}</h4>
+                     <h4> Share of Dietary Calories Derived From Protein (2013): ${d.ShareOfCalories2013.toFixed(2)+"%"}</h4>
+                 </div>`)
+            })
+            .on('mouseout', function(event, d){
+                d3.select(this)
+                    .attr('stroke-width', '1px')
+                    .attr("fill", function(d){
+                        let correspondingCont = continents.find(cont => cont.continentName === d.Continent);
+                        // TODO find out why all of the data circles arent showing up
+                        return correspondingCont.continentColor;
+                    })
+
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            })
+            .transition().duration(2000)
             .attr('cx', function(d) {
-                //console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
-                //console.log("type of x data", typeof(vis.x(d.GDPperCap)));
-                return vis.x(d.GDPperCap);
+                if (year === 1990) {return vis.x(d.GDPperCap1990);}
+                else {return vis.x(d.GDPperCap2013);}
             })
             .attr('cy', function(d) {
-                //console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
-                //console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
-                return vis.y(d.ShareOfCalories);
-            })
-            .attr('r', 10);
+                if (year === 1990) {return vis.y(d.ShareOfCalories1990);}
+                else {return vis.y(d.ShareOfCalories2013)}
+            });
 
-        vis.AfricaData = vis.svg.selectAll('.africa')
-            .data(vis.AfricaData)
+        console.log("AFRICA CIRCLES");
+
+
+        vis.AfricaCircles
             .enter()
             .append('circle')
+            .merge(vis.AfricaCircles)
             .attr('class', 'circle africa')
             .style('fill', function(d) {
                 let datumContinent = d.Continent;
@@ -342,23 +481,60 @@ class ProteinLinePlot {
                 return correspondingCont.continentColor;
             })
             .style('opacity', .3)
+            .attr('stroke-width', '1px')
             .style('stroke', 'black')
+            .attr('r', 10)
+            .on('mouseover', function(event, d) {
+                // console.log("Country BEING TOOLTIPPED", d);
+                d3.select(this)
+                    .attr('stroke-width', '4px')
+                    .attr('fill', 'white')
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
+                <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
+                     <h3> ${d.Entity} <h3>
+                     <h4> Continent: ${d.Continent} </h4>
+                     <h4> GDP Per Capita (1990): ${"$"+d.GDPperCap1990.toFixed(2)} </h4>
+                     <h4> GDP Per Capita (2013): ${"$"+d.GDPperCap2013.toFixed(2)} </h4>
+                     <h4> Share of Dietary Calories Derived From Protein (1990): ${d.ShareOfCalories1990.toFixed(2)+"%"}</h4>
+                     <h4> Share of Dietary Calories Derived From Protein (2013): ${d.ShareOfCalories2013.toFixed(2)+"%"}</h4>
+                 </div>`)
+            })
+            .on('mouseout', function(event, d){
+                d3.select(this)
+                    .attr('stroke-width', '1px')
+                    .attr("fill", function(d){
+                        let correspondingCont = continents.find(cont => cont.continentName === d.Continent);
+                        // TODO find out why all of the data circles arent showing up
+                        return correspondingCont.continentColor;
+                    })
+
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            })
+            .transition().duration(2000)
             .attr('cx', function(d) {
-                //console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
-                //console.log("type of x data", typeof(vis.x(d.GDPperCap)));
-                return vis.x(d.GDPperCap);
+                if (year === 1990) {return vis.x(d.GDPperCap1990);}
+                else {return vis.x(d.GDPperCap2013);}
             })
             .attr('cy', function(d) {
-                //console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
-                //console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
-                return vis.y(d.ShareOfCalories);
-            })
-            .attr('r', 10);
+                if (year === 1990) {return vis.y(d.ShareOfCalories1990);}
+                else {return vis.y(d.ShareOfCalories2013)}
+            });
 
-        vis.OceaniaData = vis.svg.selectAll('.oceania')
-            .data(vis.OceaniaData)
+        console.log("Oceania CIRCLES");
+
+
+        vis.OceaniaCircles
             .enter()
             .append('circle')
+            .merge(vis.OceaniaCircles)
             .attr('class', 'circle oceania')
             .style('fill', function(d) {
                 let datumContinent = d.Continent;
@@ -367,23 +543,59 @@ class ProteinLinePlot {
                 return correspondingCont.continentColor;
             })
             .style('opacity', .3)
+            .attr('stroke-width', '1px')
             .style('stroke', 'black')
+            .attr('r', 10)
+            .on('mouseover', function(event, d) {
+                // console.log("Country BEING TOOLTIPPED", d);
+                d3.select(this)
+                    .attr('stroke-width', '4px')
+                    .attr('fill', 'white')
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
+                <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
+                     <h3> ${d.Entity} <h3>
+                     <h4> Continent: ${d.Continent} </h4>
+                     <h4> GDP Per Capita (1990): ${"$"+d.GDPperCap1990.toFixed(2)} </h4>
+                     <h4> GDP Per Capita (2013): ${"$"+d.GDPperCap2013.toFixed(2)} </h4>
+                     <h4> Share of Dietary Calories Derived From Protein (1990): ${d.ShareOfCalories1990.toFixed(2)+"%"}</h4>
+                     <h4> Share of Dietary Calories Derived From Protein (2013): ${d.ShareOfCalories2013.toFixed(2)+"%"}</h4>
+                 </div>`)
+            })
+            .on('mouseout', function(event, d){
+                d3.select(this)
+                    .attr('stroke-width', '1px')
+                    .attr("fill", function(d){
+                        let correspondingCont = continents.find(cont => cont.continentName === d.Continent);
+                        // TODO find out why all of the data circles arent showing up
+                        return correspondingCont.continentColor;
+                    })
+
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            })
+            .transition().duration(2000)
             .attr('cx', function(d) {
-                //console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
-                //console.log("type of x data", typeof(vis.x(d.GDPperCap)));
-                return vis.x(d.GDPperCap);
+                if (year === 1990) {return vis.x(d.GDPperCap1990);}
+                else {return vis.x(d.GDPperCap2013);}
             })
             .attr('cy', function(d) {
-                //console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
-                //console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
-                return vis.y(d.ShareOfCalories);
-            })
-            .attr('r', 10);
+                if (year === 1990) {return vis.y(d.ShareOfCalories1990);}
+                else {return vis.y(d.ShareOfCalories2013)}
+            });
 
-        vis.EuropeData = vis.svg.selectAll('.europe')
-            .data(vis.EuropeData)
+        console.log("EUROPEAN CIRCLES");
+
+        vis.EuropeCircles
             .enter()
             .append('circle')
+            .merge(vis.EuropeCircles)
             .attr('class', 'circle europe')
             .style('fill', function(d) {
                 let datumContinent = d.Continent;
@@ -392,18 +604,52 @@ class ProteinLinePlot {
                 return correspondingCont.continentColor;
             })
             .style('opacity', .3)
+            .attr('stroke-width', '1px')
             .style('stroke', 'black')
+            .attr('r', 10)
+            .on('mouseover', function(event, d) {
+                // console.log("Country BEING TOOLTIPPED", d);
+                d3.select(this)
+                    .attr('stroke-width', '4px')
+                    .attr('fill', 'white')
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(`
+                <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
+                     <h3> ${d.Entity} <h3>
+                     <h4> Continent: ${d.Continent} </h4>
+                     <h4> GDP Per Capita (1990): ${"$"+d.GDPperCap1990.toFixed(2)} </h4>
+                     <h4> GDP Per Capita (2013): ${"$"+d.GDPperCap2013.toFixed(2)} </h4>
+                     <h4> Share of Dietary Calories Derived From Protein (1990): ${d.ShareOfCalories1990.toFixed(2)+"%"}</h4>
+                     <h4> Share of Dietary Calories Derived From Protein (2013): ${d.ShareOfCalories2013.toFixed(2)+"%"}</h4>
+                 </div>`)
+            })
+            .on('mouseout', function(event, d){
+                d3.select(this)
+                    .attr('stroke-width', '1px')
+                    .attr("fill", function(d){
+                        let correspondingCont = continents.find(cont => cont.continentName === d.Continent);
+                        // TODO find out why all of the data circles arent showing up
+                        return correspondingCont.continentColor;
+                    })
+
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            })
+            .transition().duration(2000)
             .attr('cx', function(d) {
-                //console.log("X DATA FOR POINT: ", d.GDPperCap, ", ", vis.x(d.GDPperCap));
-                //console.log("type of x data", typeof(vis.x(d.GDPperCap)));
-                return vis.x(d.GDPperCap);
+                if (year === 1990) {return vis.x(d.GDPperCap1990);}
+                else {return vis.x(d.GDPperCap2013);}
             })
             .attr('cy', function(d) {
-                //console.log("Y DATA FOR POINT: ", d.ShareOfCalories, ", ", vis.y(d.ShareOfCalories));
-                //console.log("type of y data", typeof(vis.y(d.ShareOfCalories)));
-                return vis.y(d.ShareOfCalories);
-            })
-            .attr('r', 10);
+                if (year === 1990) {return vis.y(d.ShareOfCalories1990);}
+                else {return vis.y(d.ShareOfCalories2013)}
+            });
 
     }
 
