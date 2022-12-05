@@ -25,14 +25,27 @@ Noah's Visualizations
 ---------------------
 FastFoodRestaurants.csv -- has the data of all fast food restaurants in the US, used for the US fast food/obesity
 slide to proxy fast food restaurant by state
+ - Columns are geographical data citing locations and name of restaurant, we utilized the state column to
+   create a map of the US with the number of fast food restaurants in each state
 
 obesity.csv -- has obesity rates for each country with the columns being each year of the data,
 used for the obesity rates by country slide
+- Columns are by year, and the rows are each country, we utilized the columns to create a line graph
+  of the obesity rates over time for each country
 
 obesity-by-state.csv -- has obesity rates for each state, which is used in the us map and specifically usMap.js
+- Prevalence: the obesity rate for each state
+- State: state name
+- 95% CI: 95% confidence interval for the obesity rate
 
 obesity-cleaned.csv -- is cleaned obesity data that is used in the obesity rates by country slide
+- Country: country name
+- Year: year of data
+- Obesity: obesity rate for that country in that year
+- Sex: gender of the data
 
 us-states.json -- used to draw the state map in the US obesity slide
+- has the data for each state in the US, used to draw the map
 
 state_names.js -- used for translating state abbreviations to full state names in usMap.js
+- has the data for each state abbreviation and its full name
