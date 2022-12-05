@@ -27,3 +27,11 @@ d3.js, fullpage.js, bootstrap
 
 # Data Sources
 As outlined on the 'Data Sources' slide of our presentation
+
+# File functions
+1. barChart.js: dynamically builds the first slide: french fry chart and line chart
+2. main.js: controls the javascript functions of the webpage
+3. mentalHealthBarChart.js: builds the bar chart on the mental health slide
+4. mentalHealthMap.js: builds the map on the mental health slide
+5. proteinLinePlot.js: builds the GDP protein plot
+6. usMap.js: builds the US obesity and ff restaurants scatter and map

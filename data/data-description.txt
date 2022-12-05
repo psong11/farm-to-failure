@@ -23,4 +23,16 @@ GDPperCap2013: GDP per capita of said country in 1990.
 
 Noah's Visualizations
 ---------------------
+FastFoodRestaurants.csv -- has the data of all fast food restaurants in the US, used for the US fast food/obesity
+slide to proxy fast food restaurant by state
 
+obesity.csv -- has obesity rates for each country with the columns being each year of the data,
+used for the obesity rates by country slide
+
+obesity-by-state.csv -- has obesity rates for each state, which is used in the us map and specifically usMap.js
+
+obesity-cleaned.csv -- is cleaned obesity data that is used in the obesity rates by country slide
+
+us-states.json -- used to draw the state map in the US obesity slide
+
+state_names.js -- used for translating state abbreviations to full state names in usMap.js
